@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
            
                 $table->string('name')->nullable();
-                $table->string('department_location')->nullable();
+                $table->string('department')->nullable();
+                $table->string('location')->nullable();
+                $table->string('hod')->nullable();
+
                 $table->date('startdate')->nullable();
                 $table->date('enddate')->nullable();
     

@@ -170,7 +170,7 @@
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="employee_name">Employee Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="employee_name" required>
+                                    <input type="text" name="name" required>
                                 </div>
                             </div>
                             <div class="col-lg-6">

@@ -1,7 +1,11 @@
 @extends('frontend.layout.main')
 @section('container')
-    @php
-        $users = DB::table('users')->get();
+@php
+        $users = DB::table('users')->select('id', 'name')->get();
+        $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
+        $departments = DB::table('departments')->select('id', 'name')->get();
+        $employees = DB::table('employees')->select('id', 'name')->get();
+
     @endphp
     <style>
         textarea.note-codable {
@@ -74,23 +78,56 @@
                                 </div> --}}
                                 <div class="col-lg-6">
                                     <div class="group-input">
-                                        <label for="RLS Record Number">Name <span class="text-danger">*</span></label>
-                                        <input  type="text" name="name" id="name_employee"
-                                            value="" required>
+                                        <label for="select-state">Emp Name <span class="text-danger">*</span></label>
+                                        <select id="select-state" placeholder="Select..." name="name" required>
+                                            <option value="">Select an employee</option>
+                                            @foreach ($employees as $data)
+                                                <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('name')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="group-input">
-                                        <label for="Division Code">Department & Location</label>
+                                        <label for="Department">Department</label>
+                                        <select name="department">
+                                            <option value="">-- Select Dept --</option>
+                                            @foreach ($departments as $department)
+                                                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="group-input">
+                                        <label for="Division Code">Location</label>
                                         {{--    value="{{ Helpers::getDivisionName(session()->get('division')) }}" --}}
-                                        <input type="text" name="department_location">
+                                        <input type="text" name="location">
                                         {{-- <input type="hidden" name="division_id" value="{{ session()->get('division') }}"> --}}
                                         {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}</div> --}}
                                     </div>
                                 </div>
+
+                                <div class="col-lg-6">
+                                    <div class="group-input">
+                                        <label for="HOD Persons">HOD </label>
+                                        
+                                        <select   name="hod" placeholder="Select HOD" data-search="false"
+                                            data-silent-initial-value-set="true" id="hod" >
+                                            <option value="">-- Select Hod --</option>
+                                            @foreach ($users as $value)
+                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                               
                                 
-                                <div class="col-md-6 new-date-data-field">
+                                <!-- <div class="col-md-6 new-date-data-field">
                                     <div class="group-input input-date">
                                         <label for="due-date">Start Date of Training</label>
                                         <div class="calenderauditee">                                     
@@ -112,7 +149,7 @@
                                             oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 
                                 
                                
@@ -129,6 +166,8 @@
                                                         <th>Reference Document No.</th>
                                                         <th>Trainee Name</th>
                                                         <th>Trainer </th>
+                                                        <th>Start Date of Training</th>
+                                                        <th>End Date of Training</th>
                                                        
 
 
@@ -150,9 +189,11 @@
                                                         <td>
                                                            <input type="text" name="subject_1">
                                                         </td>
+    
                                                         <td>
                                                           <input type="text" name="type_of_training_1">
                                                         </td>
+                                                        
                                                         <td>
                                                            <input type="text" name="reference_document_no_1">
                                                          </td>
@@ -172,6 +213,13 @@
                                                                 @endforeach
                                                             </select>
                                                         </td>
+                                                        <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+
+                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td>2</td>
@@ -200,6 +248,14 @@
                                                                 @endforeach
                                                             </select>
                                                         </td>
+
+                                                        <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+
+                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
         
                                                     </tr>
                                                     <tr>
@@ -230,6 +286,13 @@
                                                              </select>
                                                          </td>
         
+                                                         <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+
+                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td>4</td>
@@ -259,6 +322,13 @@
                                                              </select>
                                                          </td>
         
+                                                         <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+
+                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
                                                     </tr>
                                                     <tr>
                                                         <td>5</td>
@@ -287,6 +357,14 @@
                                                                 @endforeach
                                                             </select>
                                                         </td>
+
+                                                        <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+
+                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
+                                            class="hide-input"
+                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

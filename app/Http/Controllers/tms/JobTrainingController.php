@@ -24,10 +24,12 @@ class JobTrainingController extends Controller
         $jobTraining = new JobTraining();
 
         $jobTraining->name = $request->input('name');
-        $jobTraining->department_location = $request->input('department_location');
+        $jobTraining->department = $request->input('department');
+        $jobTraining->location = $request->input('location');
+
         $jobTraining->startdate = $request->input('startdate');
         $jobTraining->enddate = $request->input('enddate');
-        // $jobTraining->trainee = $request->input('subject');
+        $jobTraining->hod = $request->input('hod');
        
         for ($i = 1; $i <= 5; $i++) {
             $jobTraining->{"subject_$i"} = $request->input("subject_$i");

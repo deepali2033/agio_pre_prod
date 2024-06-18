@@ -263,7 +263,7 @@
                             @foreach ($employees->sortbyDesc('id') as $employee)
                                 <tr>
                                     <td><a href="{{ url('employee_view', $employee->id) }}">{{ $employee->employee_id }}</a></td>
-                                    <td>{{ $employee->employee_name ? $employee->employee_name : 'NA' }}</td>
+                                    <td>{{ $employee->name ? $employee->name : 'NA' }}</td>
                                     <td>{{ $employee->department_record ? $employee->department_record->name : 'NA' }}</td>
                                     <td>{{ $employee->job_title ? $employee->job_title : 'NA' }}</td>
                                     <td>{{ $employee->user_assigned ? $employee->user_assigned->name : 'NA' }}</td>
@@ -311,7 +311,8 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Department & Location</th>
+                                    <th>Department</th>
+                                    <th>Location</th>
                                     <th>Start Date of Training</th>
                                     <th>End Date of Training</th>
 
@@ -325,7 +326,8 @@
                                 @foreach ($jobTrainings as $job_training)
                                 <tr>
                                     <td>{{ $job_training->name }}</td>
-                                    <td>{{ $job_training->department_location }}</td>
+                                    <td>{{ $job_training->department}}</td>
+                                    <td>{{ $job_training->location}}</td>
                                     <td>{{ Helpers::getdateFormat($job_training->startdate) }}</td>
                                     <td>{{ Helpers::getdateFormat($job_training->enddate )}}</td>
                                     <td>

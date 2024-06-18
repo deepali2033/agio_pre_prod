@@ -38,6 +38,7 @@ class ManagementReviewController extends Controller
        // $old_record = ManagementReview::select('id', 'division_id', 'record')->get();
         $record_number = ((RecordNumber::first()->value('counter')) + 1);
         $record_number = str_pad($record_number, 4, '0', STR_PAD_LEFT);
+
         $currentDate = Carbon::now();
         $formattedDate = $currentDate->addDays(30);
         $due_date = $formattedDate->format('Y-m-d');
@@ -66,7 +67,6 @@ class ManagementReviewController extends Controller
          $management->production_service_provision= $request->production_service_provision;
          $management->release_product_services = $request->release_product_services;
         $management->control_nonconforming_outputs = $request->control_nonconforming_outputs;
-        $management->risk_opportunities = $request->risk_opportunities;
         $management->initiator_group_code= $request->initiator_group_code;
         $management->initiator_Group= $request->initiator_Group;
        // $management->type = $request->type;
@@ -718,6 +718,7 @@ class ManagementReviewController extends Controller
         $management->control_externally_provide_services = $request->control_externally_provide_services;
         $management->production_service_provision= $request->production_service_provision;
         $management->release_product_services = $request->release_product_services;
+        $management->risk_opportunities = $request->risk_opportunities;
        $management->control_nonconforming_outputs = $request->control_nonconforming_outputs;
          $management->external_supplier_performance = $request->external_supplier_performance;
          $management->customer_satisfaction_level = $request->customer_satisfaction_level;
@@ -1309,7 +1310,14 @@ class ManagementReviewController extends Controller
         $detail_data = ManagementAuditTrial::where('activity_type', $detail->activity_type)->where('ManagementReview_id', $detail->ManagementReview_id)->latest()->get();
         $doc = ManagementReview::where('id', $detail->ManagementReview_id)->first();
         $doc->origiator_name = User::find($doc->initiator_id);
-        return view('frontend.management-review.audit-trial-inner', compact('detail', 'doc', 'detail_data'));
+
+        $agenda = ManagementReviewDocDetails::where('review_id', $detail->ManagementReview_id)
+        ->where('type', 'agenda')
+        ->first();
+        $agendaData = $agenda ? unserialize($agenda->data) : [];
+        $agenda = ManagementReviewDocDetails::where('review_id',$detail->id)->where('type',"agenda")->first();
+
+        return view('frontend.management-review.audit-trial-inner', compact('detail', 'doc', 'detail_data','agenda'));
     }
 
     public function manageshow($id)
@@ -1459,15 +1467,17 @@ class ManagementReviewController extends Controller
         $parent_id = $id;
         $parent_initiator_id = ManagementReview::where('id', $id)->value('initiator_id');
         $parent_type = "Action-Item";
-        $record_number = ((RecordNumber::first()->value('counter')) + 1);
-        $record_number = str_pad($record_number, 4, '0', STR_PAD_LEFT);
-        $parent_record = $record_number;
+        // $record_number = ((RecordNumber::first()->value('counter')) + 1);
+        $record = ((RecordNumber::first()->value('counter')) + 1);
+
+        $record = str_pad($record, 4, '0', STR_PAD_LEFT);
+        $parent_record = $record;
         $currentDate = Carbon::now();
         $parent_intiation_date = $currentDate;
         $formattedDate = $currentDate->addDays(30);
         $due_date = $formattedDate->format('d-M-Y');
         $old_record = ManagementReview::select('id', 'division_id', 'record')->get();
-        return view('frontend.forms.action-item', compact('parent_intiation_date','parent_initiator_id','parent_record', 'record_number', 'due_date', 'parent_id', 'parent_type','old_record'));
+        return view('frontend.action-item.action-item', compact('parent_intiation_date','parent_initiator_id','parent_record', 'record', 'due_date', 'parent_id', 'parent_type','old_record'));
     }
 
     public static function managementReviewReport($id)

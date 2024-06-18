@@ -535,7 +535,7 @@
                                 </div> --}}
 
 
-                                <div class="col-lg-6">
+                                <!-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="external_agencies">External Agencies</label>
                                         <select name="external_agencies"
@@ -550,6 +550,19 @@
                                             <option value="local_fda">Local FDA</option>
                                             <option value="tga">TGA</option>
                                             <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+                                <div class="col-lg-6">
+                                    <div class="group-input">
+                                        <label for="HOD Persons">HOD </label>
+                                        
+                                        <select   name="hod" placeholder="Select HOD" data-search="false"
+                                            data-silent-initial-value-set="true" id="hod" >
+                                            <option value="">-- Select Hod --</option>
+                                            @foreach ($users as $value)
+                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -608,7 +621,7 @@
 
                                 <div class="">
                                     <div class="group-input">
-                                        <label for="trainingQualificationStatus">Trainer</label>
+                                        <label for="trainingQualificationStatus">Qualification Status</label>
                                         <select name="trainer" id="trainingQualificationStatus">
                                             <option value="">-- Select --</option>
                                             <option value="Qualified">Qualified</option>
