@@ -557,7 +557,7 @@
                                     <div class="group-input">
                                         <label for="HOD Persons">HOD </label>
                                         
-                                        <select   name="hod" placeholder="Select HOD" data-search="false"
+                                        <select name="hod" placeholder="Select HOD" data-search="false"
                                             data-silent-initial-value-set="true" id="hod" >
                                             <option value="">-- Select Hod --</option>
                                             @foreach ($users as $value)

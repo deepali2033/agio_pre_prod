@@ -38,7 +38,7 @@ class TrainerController extends Controller
             $trainer->designation = $request->designation;
             $trainer->department = $request->department;
             $trainer->experience = $request->experience;
-            $trainer->external_agencies = $request->external_agencies;
+            $trainer->hod = $request->hod;
             $trainer->trainer = $request->trainer;
             $trainer->evaluation_criteria_1 = $request->evaluation_criteria_1;
             $trainer->evaluation_criteria_2 = $request->evaluation_criteria_2;
@@ -108,7 +108,7 @@ class TrainerController extends Controller
             $trainer->designation = $request->designation;
             $trainer->department = $request->department;
             $trainer->experience = $request->experience;
-            $trainer->external_agencies = $request->external_agencies;
+            $trainer->hod = $request->hod;
             $trainer->trainer = $request->trainer;
             $trainer->evaluation_criteria_1 = $request->evaluation_criteria_1;
             $trainer->evaluation_criteria_2 = $request->evaluation_criteria_2;

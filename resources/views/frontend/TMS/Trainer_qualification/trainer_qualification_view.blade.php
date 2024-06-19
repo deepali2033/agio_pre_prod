@@ -615,7 +615,7 @@
                                 </div> --}}
 
 
-                                <div class="col-lg-6">
+                                <!-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="external_agencies">External Agencies</label>
                                         <select name="external_agencies"
@@ -630,6 +630,21 @@
                                             <option value="local_fda" @if ($trainer->external_agencies == "local_fda") selected @endif>Local FDA</option>
                                             <option value="tga" @if ($trainer->external_agencies == "tga") selected @endif>TGA</option>
                                             <option value="others" @if ($trainer->external_agencies == "others") selected @endif>Others</option>
+                                        </select>
+                                    </div>
+                                </div> -->
+
+
+                                <div class="col-lg-6">
+                                    <div class="group-input">
+                                        <label for="HOD Persons">HOD</label>
+                                        <select name="hod" id="hod">
+                                            <option value="">-- Select HOD --</option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}" {{ $user->id == old('hod', $trainer->hod) ? 'selected' : '' }}>
+                                                    {{ $user->name }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -714,7 +729,7 @@
 
                                 <div class="">
                                     <div class="group-input">
-                                        <label for="trainingQualificationStatus">Trainer</label>
+                                        <label for="trainingQualificationStatus">Qualification Status</label>
                                         <select name="trainer" id="trainingQualificationStatus">
                                             <option>-- Select --</option>
                                             <option value="Qualified" @if ($trainer->trainer == "Qualified") selected @endif>Qualified</option>
