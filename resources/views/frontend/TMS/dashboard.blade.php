@@ -328,9 +328,9 @@
                                     <td>{{ $job_training->name }}</td>
                                     <td>{{ $job_training->department}}</td>
                                     <td>{{ $job_training->location}}</td>
-                                    @for ($i = 1; $i <= 2; $i++)
-                                        <td>{{ \Carbon\Carbon::parse($job_training->{"startdate_$i"})->format('Y-m-d') }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($job_training->{"enddate_$i"})->format('Y-m-d') }}</td>
+                                    @for ($i = 1; $i <= 1; $i++)
+                                        <td>{{ ($job_training->{"startdate_$i"}) }}</td>
+                                        <td>{{ ($job_training->{"enddate_$i"}) }}</td>
                                     @endfor
                                     
                                     <td>
