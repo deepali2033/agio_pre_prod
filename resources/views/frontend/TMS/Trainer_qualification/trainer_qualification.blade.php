@@ -358,12 +358,12 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                               {{-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="RLS Record Number"><b>Record Number</b></label>
                                         <input disabled type="text" name="record_number" value="">
                                     </div>
-                                </div>
+                                </div>--}}
                                 {{-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Division Code"><b>Site/Location Code </b></label>

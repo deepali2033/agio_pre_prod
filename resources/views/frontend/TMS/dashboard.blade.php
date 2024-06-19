@@ -71,7 +71,6 @@
         <div class="container-fluid">
             <div class="dashboard-container">
 
-
                 <div class="inner-block main-block">
                     <div class="top">
                         <div class="d-flex align-items-center">
@@ -320,13 +319,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-
-
                                 @foreach ($jobTrainings as $job_training)
                                 <tr>
-                                    <td>{{ $job_training->name }}</td>
-                                    <td>{{ $job_training->department}}</td>
+                                    <td>{{ DB::table('employees')->where('id', $job_training->name)->value('employee_name') }}</td>
+                                    <td>{{ DB::table('departments')->where('id', $job_training->department)->value('name') }}</td>
                                     <td>{{ $job_training->location}}</td>
                                     @for ($i = 1; $i <= 1; $i++)
                                         <td>{{ ($job_training->{"startdate_$i"}) }}</td>
