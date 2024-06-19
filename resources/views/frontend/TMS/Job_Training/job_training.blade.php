@@ -4,7 +4,7 @@
         $users = DB::table('users')->select('id', 'name')->get();
         $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
         $departments = DB::table('departments')->select('id', 'name')->get();
-        $employees = DB::table('employees')->select('id', 'name')->get();
+        $employees = DB::table('employees')->select('id', 'employee_name')->get();
 
     @endphp
     <style>
@@ -82,7 +82,7 @@
                                         <select id="select-state" placeholder="Select..." name="name" required>
                                             <option value="">Select an employee</option>
                                             @foreach ($employees as $data)
-                                                <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                                <option value="{{ $data->id }}">{{ $data->employee_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('name')
@@ -179,7 +179,6 @@
                                                         // Fetch the trainers' IDs
                                                         $trainerIds = DB::table('user_roles')->where('q_m_s_roles_id', 6)->pluck('user_id');
                                                         $usersDetails = DB::table('users')->select('id', 'name')->get();
-                                                        // Fetch the user details using those trainer IDs
                                                         $trainers = DB::table('users')->whereIn('id', $trainerIds)->select('id', 'name')->get();
                                                     @endphp
                                                     <tr>
@@ -213,13 +212,14 @@
                                                                 @endforeach
                                                             </select>
                                                         </td>
-                                                        <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
 
-                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+                                                        <td>
+                                                            <input type="date" name="startdate_1" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="startdate" value="" class="hide-input" oninput="handleDateInput(this, 'startdate');checkDate('startdate','enddate')">
+                                                        </td>
+                                                        <td>
+                                                            <input type="date" name="enddate_1" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="enddate" value="" class="hide-input" oninput="handleDateInput(this, 'enddate');checkDate('startdate','enddate')">
+                                                        </td>
+
                                                     </tr>
                                                     <tr>
                                                         <td>2</td>
@@ -249,13 +249,12 @@
                                                             </select>
                                                         </td>
 
-                                                        <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
-
-                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+                                                        <td>
+                                                            <input type="date" name="startdate_2" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="startdate" value="" class="hide-input" oninput="handleDateInput(this, 'startdate');checkDate('startdate','enddate')">
+                                                        </td>
+                                                        <td>
+                                                            <input type="date" name="enddate_2" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="enddate" value="" class="hide-input" oninput="handleDateInput(this, 'enddate');checkDate('startdate','enddate')">
+                                                        </td>
         
                                                     </tr>
                                                     <tr>
@@ -286,13 +285,12 @@
                                                              </select>
                                                          </td>
         
-                                                         <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
-
-                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+                                                         <td>
+                                                            <input type="date" name="startdate_3" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="startdate" value="" class="hide-input" oninput="handleDateInput(this, 'startdate');checkDate('startdate','enddate')">
+                                                        </td>
+                                                        <td>
+                                                            <input type="date" name="enddate_3" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="enddate" value="" class="hide-input" oninput="handleDateInput(this, 'enddate');checkDate('startdate','enddate')">
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>4</td>
@@ -322,13 +320,12 @@
                                                              </select>
                                                          </td>
         
-                                                         <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
-
-                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+                                                         <td>
+                                                            <input type="date" name="startdate_4" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="startdate" value="" class="hide-input" oninput="handleDateInput(this, 'startdate');checkDate('startdate','enddate')">
+                                                        </td>
+                                                        <td>
+                                                            <input type="date" name="enddate_4" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="enddate" value="" class="hide-input" oninput="handleDateInput(this, 'enddate');checkDate('startdate','enddate')">
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>5</td>
@@ -357,14 +354,12 @@
                                                                 @endforeach
                                                             </select>
                                                         </td>
-
-                                                        <td><input type="date" name="stardate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
-
-                                            <td><input type="date" name="enddate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="end_date_checkdate" value=""
-                                            class="hide-input"
-                                            oninput="handleDateInput(this, 'enddate');checkDate('start_date_checkdate','end_date_checkdate')"/></td>
+                                                        <td>
+                                                            <input type="date" name="startdate_5" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="startdate" value="" class="hide-input" oninput="handleDateInput(this, 'startdate');checkDate('startdate}','enddate')">
+                                                        </td>
+                                                        <td>
+                                                            <input type="date" name="enddate_5" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" id="enddate" value="" class="hide-input" oninput="handleDateInput(this, 'enddate');checkDate('startdate','enddate')">
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>

@@ -263,7 +263,7 @@
                             @foreach ($employees->sortbyDesc('id') as $employee)
                                 <tr>
                                     <td><a href="{{ url('employee_view', $employee->id) }}">{{ $employee->employee_id }}</a></td>
-                                    <td>{{ $employee->name ? $employee->name : 'NA' }}</td>
+                                    <td>{{ $employee->employee_name ? $employee->employee_name : 'NA' }}</td>
                                     <td>{{ $employee->department_record ? $employee->department_record->name : 'NA' }}</td>
                                     <td>{{ $employee->job_title ? $employee->job_title : 'NA' }}</td>
                                     <td>{{ $employee->user_assigned ? $employee->user_assigned->name : 'NA' }}</td>
@@ -328,8 +328,11 @@
                                     <td>{{ $job_training->name }}</td>
                                     <td>{{ $job_training->department}}</td>
                                     <td>{{ $job_training->location}}</td>
-                                    <td>{{ Helpers::getdateFormat($job_training->startdate) }}</td>
-                                    <td>{{ Helpers::getdateFormat($job_training->enddate )}}</td>
+                                    @for ($i = 1; $i <= 2; $i++)
+                                        <td>{{ \Carbon\Carbon::parse($job_training->{"startdate_$i"})->format('Y-m-d') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($job_training->{"enddate_$i"})->format('Y-m-d') }}</td>
+                                    @endfor
+                                    
                                     <td>
                                         <a href="{{ route('job_training_view', $job_training->id) }}">
                                         <i class="fa-solid fa-pencil"></i>
