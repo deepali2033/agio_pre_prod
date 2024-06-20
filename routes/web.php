@@ -324,7 +324,8 @@ Route::get("new-change-control", [CCController::class, "changecontrol"]);
 Route::view('audit-pdf', 'frontend.documents.audit-pdf');
 
 Route::view('employee_new', 'frontend.TMS.Employee.employee_new')->name('employee_new');
-Route::view('trainer_qualification', 'frontend.TMS.Trainer_qualification.trainer_qualification')->name('trainer_qualification');
+// Route::view('trainer_qualification', 'frontend.TMS.Trainer_qualification.trainer_qualification')->name('trainer_qualification');
+
 
 // ====================induction training =================
 
@@ -555,10 +556,12 @@ Route::post('/tms/trainer', [TrainerController::class, 'store'])->name('trainer.
 Route::post('/tms/employee/{id}', [EmployeeController::class, 'update'])->name('employee.update');
 Route::post('/tms/trainer/{id}', [TrainerController::class, 'update'])->name('trainer.update');
 Route::get('employee_view/{id}', [EmployeeController::class, 'show']);
+Route::get('trainer_qualification', [TrainerController::class, 'index'])->name('trainer_qualification');
 Route::get('trainer_qualification_view/{id}', [TrainerController::class, 'show']);
 Route::post('/tms/employee/sendstage/{id}', [EmployeeController::class, 'sendStage']);
 Route::post('/tms/trainer/sendstage/{id}', [TrainerController::class, 'sendStage']);
 Route::post('/tms/trainer/rejectStage/{id}', [TrainerController::class, 'rejectStage']);
+
 // =======
 Route::post('errata/create{id}', [ErrataController::class, 'create'])->name('errata.create');
 Route::post('errata/store', [ErrataController::class, 'store'])->name('errata.store');

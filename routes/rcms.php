@@ -28,6 +28,7 @@ use App\Http\Controllers\RiskManagementController;
 use App\Http\Controllers\rcms\DeviationController;
 use App\Http\Controllers\rcms\LogController;
 use App\Http\Controllers\rcms\OOCController;
+use App\Http\Controllers\tms\TrainerController;
 use App\Models\EffectivenessCheck;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,16 @@ Route::group(['prefix' => 'rcms'], function () {
     Route::middleware(['rcms'])->group(
         function () {
             Route::resource('CC', CCController::class);
+
+            
+            Route::get('traineraudittrail/{id}', [TrainerController::class, 'AuditTrial'])->name('audittrail');
+            Route::get('auditDetailsTrainer/{id}', [TrainerController::class, 'auditDetailstrainer'])->name('trainerauditDetails');
+            Route::get('TrainerAuditReport/{id}', [TrainerController::class, 'auditReport'])->name('TrainerAuditReport');
+            Route::get('TrainerauditTrailPdf/{id}', [TrainerController::class, 'auditTrailPdf'])->name('TrainerauditTrailPdf');
+            Route::post('TrainerComplaintC_AChild/{id}', [TrainerController::class, 'TrainerComplaintCapa_ActionChild'])->name('capa_action_child');
+            Route::post('TrainerComplaintRCA_ActionChild/{id}', [TrainerController::class, 'TrainerComplaintRca_actionChild'])->name('rca_action_child');
+            Route::post('TrainerComplaintRegul_Effec_Child/{id}', [TrainerController::class, 'TrainerComplaintRegu_Effec_Child'])->name('Regu_Effec_child');
+
 
             Route::post('send-initiator/{id}', [CCController::class, 'sendToInitiator']);
             Route::post('send-hod/{id}', [CCController::class, 'sendToHod']);
@@ -344,6 +355,9 @@ Route::group(['prefix' => 'rcms'], function () {
              * market coplaint
              */
             Route::group(['prefix' => 'marketcomplaint', 'as' => 'marketcomplaint.'], function() {
+
+
+
                 Route::get('/market_complaint_new',[MarketComplaintController::class, 'index'])->name('market_complaint_new');
                 Route::post('/marketcomplaint/store', [MarketComplaintController::class, 'store'])->name('mcstore');
                 Route::get('/marketcomplaint_view/{id}', [MarketComplaintController::class, 'show'])->name('marketcomplaint_view');
@@ -386,6 +400,19 @@ Route::group(['prefix' => 'rcms'], function () {
                 Route::get('single_report/{id}', [OOSController::class, 'singleReport'])->name('single_report');
     
                 });
+
+
+            /********************* Trainer Qualifications Routes Starts *******************/
+            // Route::group(['prefix' => 'trainer', 'as' => 'trainer.'], function() {
+    
+            // });
+
+            Route::get('/audit_trainer', [TrainerController::class, 'audit']);
+
+            // Route::get('demo', function () {
+            //     echo 'hello';
+            // });
+
 
             /********************* Incident Routes Starts *******************/
 
