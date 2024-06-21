@@ -632,7 +632,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
 
                     <!-- <div class="col-lg-6">
-                                    <div class="group-input">
+                                   <div class="group-input">
                                         <label for="external_agencies">External Agencies</label>
                                         <select name="external_agencies"
                                             onchange="otherController(this.value, 'others', 'external_agencies_req')">
@@ -648,7 +648,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                             <option value="others" @if ($trainer->external_agencies == "others") selected @endif>Others</option>
                                         </select>
                                     </div>
-                                </div> -->
+                    </div> -->
 
 
                     <div class="col-lg-6">
@@ -689,7 +689,6 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                         <td><input type="text" name="trainer_skill[{{ $loop->index }}][Trainer_skill_set]" value=" {{ array_key_exists('Trainer_skill_set', $skill) ? $skill['Trainer_skill_set'] : '' }}"></td>
                                         <td><input type="text" name="trainer_skill[{{ $loop->index }}][remarks]" value=" {{ array_key_exists('remarks', $skill) ? $skill['remarks'] : '' }}"></td>
                                         <td><button type="button" class="removeRowBtn">Remove</button></td>
-
                                     </tr>
                                     @endforeach
                                     @else
@@ -754,6 +753,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                             </select>
                         </div>
                     </div>
+
                     <div class="sub-head">Evaluation Criteria</div>
 
                     <div class="col-12">
@@ -767,7 +767,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                             <th>Rating</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody> 
                                         <tr>
                                             <td>1</td>
                                             <td>Clarity Of Objectives</td>
@@ -777,10 +777,8 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                                     <option value="1" @if ($trainer->evaluation_criteria_1 == "1") selected @endif> 1</option>
                                                     <option value="2" @if ($trainer->evaluation_criteria_1 == "2") selected @endif> 2</option>
                                                     <option value="3" @if ($trainer->evaluation_criteria_1 == "3") selected @endif> 3</option>
-
                                                 </select>
                                             </td>
-
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -794,8 +792,6 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
                                                 </select>
                                             </td>
-
-
                                         </tr>
                                         <tr>
                                             <td>3</td>
@@ -810,8 +806,6 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
                                                 </select>
                                             </td>
-
-
                                         </tr>
                                         <tr>
                                             <td>4</td>
@@ -825,8 +819,6 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
                                                 </select>
                                             </td>
-
-
                                         </tr>
                                         <tr>
                                             <td>5</td>

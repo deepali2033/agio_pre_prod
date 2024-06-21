@@ -54,12 +54,7 @@ Route::group(['prefix' => 'rcms'], function () {
             
             Route::get('traineraudittrail/{id}', [TrainerController::class, 'AuditTrial'])->name('audittrail');
             Route::get('auditDetailsTrainer/{id}', [TrainerController::class, 'auditDetailstrainer'])->name('trainerauditDetails');
-            Route::get('TrainerAuditReport/{id}', [TrainerController::class, 'auditReport'])->name('TrainerAuditReport');
-            Route::get('TrainerauditTrailPdf/{id}', [TrainerController::class, 'auditTrailPdf'])->name('TrainerauditTrailPdf');
-            Route::post('TrainerComplaintC_AChild/{id}', [TrainerController::class, 'TrainerComplaintCapa_ActionChild'])->name('capa_action_child');
-            Route::post('TrainerComplaintRCA_ActionChild/{id}', [TrainerController::class, 'TrainerComplaintRca_actionChild'])->name('rca_action_child');
-            Route::post('TrainerComplaintRegul_Effec_Child/{id}', [TrainerController::class, 'TrainerComplaintRegu_Effec_Child'])->name('Regu_Effec_child');
-
+          
 
             Route::post('send-initiator/{id}', [CCController::class, 'sendToInitiator']);
             Route::post('send-hod/{id}', [CCController::class, 'sendToHod']);

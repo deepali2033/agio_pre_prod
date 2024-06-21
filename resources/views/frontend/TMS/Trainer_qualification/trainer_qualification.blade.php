@@ -532,6 +532,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
 
                     <!-- <div class="col-lg-6">
+
                                     <div class="group-input">
                                         <label for="external_agencies">External Agencies</label>
                                         <select name="external_agencies"
@@ -549,6 +550,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                         </select>
                                     </div>
                                 </div> -->
+
 
                     <div class="col-lg-6">
                         <div class="group-input">
@@ -740,7 +742,6 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                                 </select>
                                             </td>
 
-
                                         </tr>
                                         <tr>
                                             <td>8</td>
@@ -816,15 +817,15 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                         let newReference = document.createElement('div');
                         newReference.classList.add('row', 'reference-data-' + referenceCount);
                         newReference.innerHTML = `
-            <div class="col-lg-6">
-                <input type="text" name="reference-text">
-            </div>
-            <div class="col-lg-6">
-                <input type="file" name="references" class="myclassname">
-            </div><div class="col-lg-6">
-                <input type="file" name="references" class="myclassname">
-            </div>
-        `;
+                            <div class="col-lg-6">
+                                <input type="text" name="reference-text">
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="file" name="references" class="myclassname">
+                            </div><div class="col-lg-6">
+                                <input type="file" name="references" class="myclassname">
+                            </div>
+                        `;
                         let referenceContainer = document.querySelector('.reference-data');
                         referenceContainer.parentNode.insertBefore(newReference, referenceContainer.nextSibling);
                     }
@@ -840,7 +841,8 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
 
 
-                {{-- <div class="col-12">
+               
+                            {{-- <div class="col-12">
                                 <div class="group-input">
                                     <label for="Inv Attachments">Initial Attachment</label>
                                     <div><small class="text-primary">Please Attach all relevant or supporting
@@ -857,70 +859,71 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
                                 </div>
                             </div> --}}
-            </div>
-            <div class="button-block">
-                <button type="submit" id="ChangesaveButton" class="saveButton">Save</button>
-                <button type="button" id="ChangeNextButton" class="nextButton">Next</button>
-                <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-                        Exit </a> </button>
+
+                <div class="button-block">
+                    <button type="submit" id="ChangesaveButton" class="saveButton">Save</button>
+                    <button type="button" id="ChangeNextButton" class="nextButton">Next</button>
+                    <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
+                            Exit </a> </button>
+                </div>
+
             </div>
     </div>
-</div>
 
 
 
-<!-- Activity Log content -->
-<div id="CCForm6" class="inner-block cctabcontent">
-    <div class="inner-block-content">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="group-input">
-                    <label for="Submitted On">Submitted By</label>
-                    <div class="static"></div>
+    <!-- Activity Log content -->
+    <div id="CCForm6" class="inner-block cctabcontent">
+        <div class="inner-block-content">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="group-input">
+                        <label for="Submitted On">Submitted By</label>
+                        <div class="static"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="group-input">
-                    <label for="Submitted On">Submitted On</label>
-                    <div class="static"></div>
+                <div class="col-lg-6">
+                    <div class="group-input">
+                        <label for="Submitted On">Submitted On</label>
+                        <div class="static"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="group-input">
-                    <label for="Qualified By">Qualified By</label>
-                    <div class="static"></div>
+                <div class="col-lg-6">
+                    <div class="group-input">
+                        <label for="Qualified By">Qualified By</label>
+                        <div class="static"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="group-input">
-                    <label for="Qualified On">Qualified On</label>
-                    <div class="static"></div>
+                <div class="col-lg-6">
+                    <div class="group-input">
+                        <label for="Qualified On">Qualified On</label>
+                        <div class="static"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="group-input">
-                    <label for=" Rejected By">Rejected By</label>
-                    <div class="static"></div>
+                <div class="col-lg-6">
+                    <div class="group-input">
+                        <label for=" Rejected By">Rejected By</label>
+                        <div class="static"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="group-input">
-                    <label for="Rejected On">Rejected On</label>
-                    <div class="static"></div>
+                <div class="col-lg-6">
+                    <div class="group-input">
+                        <label for="Rejected On">Rejected On</label>
+                        <div class="static"></div>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-        {{-- <div class="button-block">
+            </div>
+            {{-- <div class="button-block">
                             <button type="submit" class="saveButton">Save</button>
                             <a href="/rcms/qms-dashboard">
                                 <button type="button" class="backButton">Back</button>
                             </a>
                             <button type="submit">Submit</button>
                             <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-        Exit </a> </button>
-    </div> --}}
-</div>
+            Exit </a> </button>
+        </div> --}}
+    </div>
 </div>
 
 </div>

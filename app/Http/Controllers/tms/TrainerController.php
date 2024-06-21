@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\RecordNumber;
 use App\Models\RoleGroup;
 use App\Models\TrainerGrid;
-use App\Models\TrainerQualification;
+use App\Models\TrainerQualification;  
 use App\Models\TrainerQualificationAuditTrial;
 use App\Models\User;
 use Carbon\Carbon;
@@ -671,7 +671,6 @@ class TrainerController extends Controller
                     $trainer->sbmitted_on = Carbon::now()->format('d-m-Y');
                     $trainer->sbmitted_comment = $request->comment;
 
-                    $trainer->status = "Opened";
                     $history = new TrainerQualificationAuditTrial();
                     $history->trainer_id = $id;
                     $history->activity_type = 'Activity Log';
@@ -681,7 +680,8 @@ class TrainerController extends Controller
                     $history->user_name = Auth::user()->name;
                     $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                     $history->origin_state = $lastEmployee->status;
-                    $history->change_to = "Opened";
+                    $history->action = 'submit';
+                    $history->change_to = "Pending HOD Review";
                     $history->change_from = $lastEmployee->status;
                     $history->stage = 'Submited';
                     $history->save();
@@ -697,7 +697,6 @@ class TrainerController extends Controller
                     $trainer->qualified_on = Carbon::now()->format('d-m-Y');
                     $trainer->qualified_comment = $request->comment;
 
-                    $trainer->status = "Pending HOD Review";
                     $history = new TrainerQualificationAuditTrial();
                     $history->trainer_id = $id;
                     $history->activity_type = 'Activity Log';
@@ -706,8 +705,8 @@ class TrainerController extends Controller
                     $history->user_id = Auth::user()->id;
                     $history->user_name = Auth::user()->name;
                     $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
-                    $history->origin_state = $lastEmployee->status;
-                    $history->change_to = "Opened";
+                    // $history->origin_state = $lastEmployee->status;
+                    $history->change_to = "Closed-Done";
                     $history->change_from = $lastEmployee->status;
                     $history->stage = 'Qualified';
                     $history->save();
@@ -764,7 +763,7 @@ class TrainerController extends Controller
         
         $detail = TrainerQualificationAuditTrial::find($id);
 
-        $detail_data = TrainerQualificationAuditTrial::where('Activity_type', $detail->activity_type)->where('trainer_id', $detail->trainer_id)->latest()->get();
+        $detail_data = TrainerQualificationAuditTrial::where('activity_type', $detail->activity_type)->where('trainer_id', $detail->trainer_id)->latest()->get();
 
         $doc = TrainerQualification::where('id', $detail->trainer_id)->first();
 
@@ -772,5 +771,7 @@ class TrainerController extends Controller
         
         return view('frontend.TMS.Trainer_qualification.trainerQualification_auditTrailDetails', compact('detail', 'doc', 'detail_data'));
     }
+
+
 }
 

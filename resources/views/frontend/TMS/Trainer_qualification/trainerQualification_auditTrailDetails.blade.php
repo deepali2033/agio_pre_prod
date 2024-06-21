@@ -9,7 +9,7 @@
                     <div class="col-lg-12">
                         <div class="inner-block">
                             <div class="main-head">
-                                Record -{{ str_pad($doc->record, 4, '0', STR_PAD_LEFT) }}
+                                Record -{{ str_pad($doc->record_number, 4, '0', STR_PAD_LEFT) }}
                             </div>
                             <div class="info-list">
 
