@@ -1,38 +1,38 @@
 @extends('frontend.layout.main')
 @section('container')
-    @php
-        $users = DB::table('users')->select('id', 'name')->where('active', 1)->get();
-        $userRoles = DB::table('user_roles')->select('user_id')->where('q_m_s_roles_id', 4)->distinct()->get();
-        $departments = DB::table('departments')->select('id', 'name')->get();
-        $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
+@php
+$users = DB::table('users')->select('id', 'name')->where('active', 1)->get();
+$userRoles = DB::table('user_roles')->select('user_id')->where('q_m_s_roles_id', 4)->distinct()->get();
+$departments = DB::table('departments')->select('id', 'name')->get();
+$divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
 
-        $userIds = DB::table('user_roles')
-            ->where('q_m_s_roles_id', 4)
-            ->distinct()
-            ->pluck('user_id');
+$userIds = DB::table('user_roles')
+->where('q_m_s_roles_id', 4)
+->distinct()
+->pluck('user_id');
 
-        // Step 3: Use the plucked user_id values to get the names from the users table
-        $userNames = DB::table('users')
-            ->whereIn('id', $userIds)
-            ->pluck('name');
+// Step 3: Use the plucked user_id values to get the names from the users table
+$userNames = DB::table('users')
+->whereIn('id', $userIds)
+->pluck('name');
 
-        // If you need both id and name, use the select method and get
-        $userDetails = DB::table('users')
-            ->whereIn('id', $userIds)
-            ->select('id', 'name')
-            ->get();
-        // dd ($userIds,$userNames, $userDetails);
-    @endphp
-    <style>
-        textarea.note-codable {
-            display: none !important;
-        }
+// If you need both id and name, use the select method and get
+$userDetails = DB::table('users')
+->whereIn('id', $userIds)
+->select('id', 'name')
+->get();
+// dd ($userIds,$userNames, $userDetails);
+@endphp
+<style>
+    textarea.note-codable {
+        display: none !important;
+    }
 
-        header {
-            display: none;
-        }
-    </style>
-  <style>
+    header {
+        display: none;
+    }
+</style>
+<style>
     .progress-bars div {
         flex: 1 1 auto;
         border: 1px solid grey;
@@ -62,52 +62,56 @@
 
     }
 </style>
-    <script>
-        $(document).ready(function() {
-            $('#ObservationAdd').click(function(e) {
-                function generateTableRow(serialNumber) {
+<script>
+    $(document).ready(function() {
+        $('#ObservationAdd').click(function(e) {
+            function generateTableRow(serialNumber) {
 
-                    var html =
-                        '<tr>' +
-                        '<td><input disabled type="text" name="jobResponsibilities[' + serialNumber +
-                        '][serial]" value="' + serialNumber +
-                        '"></td>' +
-                        '<td><input type="text" name="jobResponsibilities[' + serialNumber +
-                        '][job]"></td>' +
-                        '<td><input type="text" class="Document_Remarks" name="jobResponsibilities[' +
-                        serialNumber + '][remarks]"></td>' +
+                var html =
+                    '<tr>' +
+                    '<td><input disabled type="text" name="jobResponsibilities[' + serialNumber +
+                    '][serial]" value="' + serialNumber +
+                    '"></td>' +
+                    '<td><input type="text" name="jobResponsibilities[' + serialNumber +
+                    '][job]"></td>' +
+                    '<td><input type="text" class="Document_Remarks" name="jobResponsibilities[' +
+                    serialNumber + '][remarks]"></td>' +
 
 
-                        '</tr>';
+                    '</tr>';
 
-                    return html;
-                }
+                return html;
+            }
 
-                var tableBody = $('#job-responsibilty-table tbody');
-                var rowCount = tableBody.children('tr').length;
-                var newRow = generateTableRow(rowCount + 1);
-                tableBody.append(newRow);
-            });
+            var tableBody = $('#job-responsibilty-table tbody');
+            var rowCount = tableBody.children('tr').length;
+            var newRow = generateTableRow(rowCount + 1);
+            tableBody.append(newRow);
         });
-    </script>
-    <script>
-        function handleDateInput(input, targetId) {
-            const target = document.getElementById(targetId);
-            const date = new Date(input.value);
-            const options = { day: '2-digit', month: 'short', year: 'numeric' };
-            const formattedDate = date.toLocaleDateString('en-US', options).replace(/ /g, '-');
-            target.value = formattedDate;
-        }
-        </script>
-    <div class="form-field-head">
-        <div class="pr-id">
-            Manage Employee
-        </div>
-        {{-- <div class="division-bar">
+    });
+</script>
+<script>
+    function handleDateInput(input, targetId) {
+        const target = document.getElementById(targetId);
+        const date = new Date(input.value);
+        const options = {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        };
+        const formattedDate = date.toLocaleDateString('en-US', options).replace(/ /g, '-');
+        target.value = formattedDate;
+    }
+</script>
+<div class="form-field-head">
+    <div class="pr-id">
+        Manage Employee
+    </div>
+    {{-- <div class="division-bar">
             <strong>Site Division/Project</strong> :
             Plant
         </div> --}}
-        {{-- <div class="button-bar">
+    {{-- <div class="button-bar">
             <button type="button">Save</button>
             <button type="button">Cancel</button>
             <button type="button">New</button>
@@ -116,70 +120,76 @@
             <button type="button">Check Spelling</button>
             <button type="button">Change Project</button>
         </div> --}}
-    </div>
+</div>
 
 
 
 
-    {{-- ======================================
+{{-- ======================================
                     DATA FIELDS
     ======================================= --}}
-    <div id="change-control-fields">
-        <div class="container-fluid">
+<div id="change-control-fields">
+    <div class="container-fluid">
 
-            <div class="inner-block state-block">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="main-head">Record Workflow </div>
+        <div class="inner-block state-block">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="main-head">Record Workflow </div>
 
-                    <div class="d-flex" style="gap:20px;">
-                        @php
-                            $userRoles = DB::table('user_roles')->where(['user_id' => Auth::user()->id, 'q_m_s_divisions_id' => $employee->division_id])->get();
-                            $userRoleIds = $userRoles->pluck('q_m_s_roles_id')->toArray();
-                            // dd($employee->division_id);
-                        @endphp
-                        @if ($employee->stage == 1 && (in_array(3, $userRoleIds) || in_array(18, $userRoleIds)))
-                            <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
-                                Activate
-                            </button>
-                        @elseif($employee->stage == 2 && (in_array(4, $userRoleIds) || in_array(18, $userRoleIds)))
-                            <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
-                                Retire
-                            </button>
-                        @endif
-                        <button class="button_theme1"> <a class="text-white" href="{{ url('TMS') }}"> Exit
-                            </a> </button>
+                <div class="d-flex" style="gap:20px;">
+                    @php
+                    $userRoles = DB::table('user_roles')->where(['user_id' => Auth::user()->id, 'q_m_s_divisions_id' => $employee->division_id])->get();
+                    $userRoleIds = $userRoles->pluck('q_m_s_roles_id')->toArray();
+                    // dd($employee->division_id);
+                    @endphp
 
+                    <button class="button_theme1">
+                        <a class="text-white" href="{{ route('audittrail', $employee->id) }}"> Audit Trail
+                        </a>
+                    </button>
 
-                    </div>
+                    @if ($employee->stage == 1 && (in_array(3, $userRoleIds) || in_array(18, $userRoleIds)))
+                    <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
+                        Activate
+                    </button>
+                    @elseif($employee->stage == 2 && (in_array(4, $userRoleIds) || in_array(18, $userRoleIds)))
+                    <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
+                        Retire
+                    </button>
+                    @endif
+                    <button class="button_theme1"> <a class="text-white" href="{{ url('TMS') }}"> Exit
+                        </a> </button>
+
 
                 </div>
-                <div class="status">
-                    <div class="head">Current Status</div>
-                    {{-- ------------------------------By Pankaj-------------------------------- --}}
-                    {{-- @if ($data->stage == 0) --}}
-                        {{-- <div class="progress-bars ">
-                            <div class="bg-danger">Closed-Cancelled</div>
-                        </div> --}}
-                    {{-- @else --}}
-                        <div class="progress-bars d-flex">
-                            @if ($employee->stage >= 1)
-                                <div class="active">Opened</div>
-                            @else
-                                <div class="">Opened</div>
-                            @endif
 
-                            @if ($employee->stage >= 2)
-                                <div class="active">Active </div>
-                            @else
-                                <div class="">Active</div>
-                            @endif
+            </div>
+            <div class="status">
+                <div class="head">Current Status</div>
+                {{-- ------------------------------By Pankaj-------------------------------- --}}
+                @if ($employee->stage == 0)
+                <div class="progress-bars ">
+                    <div class="bg-danger">Closed-Cancelled</div>
+                </div>
+                @else
+                <div class="progress-bars d-flex">
+                    @if ($employee->stage >= 1)
+                    <div class="active">Opened</div>
+                    @else
+                    <div class="">Opened</div>
+                    @endif
 
-                            @if ($employee->stage >= 3)
-                                <div class="bg-danger">Closed - Done</div>
-                            @else
-                                <div class="">Closed - Retired</div>
-                            @endif
-                    {{-- @endif --}}
+                    @if ($employee->stage >= 2)
+                    <div class="active">Active </div>
+                    @else
+                    <div class="">Active</div>
+                    @endif
+
+                    @if ($employee->stage >= 3)
+                    <div class="bg-danger">Closed - Done</div>
+                    @else
+                    <div class="">Closed - Retired</div>
+                    @endif
+                    @endif
 
 
                 </div>
@@ -187,23 +197,23 @@
                 {{-- ---------------------------------------------------------------------------------------- --}}
             </div>
         </div>
-            <!-- Tab links -->
-            <div class="cctab">
+        <!-- Tab links -->
+        <div class="cctab">
 
-                <button class="cctablinks active" onclick="openCity(event, 'CCForm1')">Employee</button>
-                <button class="cctablinks " onclick="openCity(event, 'CCForm2')">External Training</button>
-                <button class="cctablinks" onclick="openCity(event, 'CCForm3')">Activity Log</button>
+            <button class="cctablinks active" onclick="openCity(event, 'CCForm1')">Employee</button>
+            <button class="cctablinks " onclick="openCity(event, 'CCForm2')">External Training</button>
+            <button class="cctablinks" onclick="openCity(event, 'CCForm3')">Activity Log</button>
 
-            </div>
-            <script>
-                $(document).ready(function() {
-                    <?php if ($employee->stage == 3): ?>
-                        $("#target :input").prop("disabled", true);
-                    <?php endif; ?>
-                });
-            </script>
+        </div>
+        <script>
+            $(document).ready(function() {
+                <?php if ($employee->stage == 3) : ?>
+                    $("#target :input").prop("disabled", true);
+                <?php endif; ?>
+            });
+        </script>
 
-            <form id="target" action="{{ route('employee.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
+        <form id="target" action="{{ route('employee.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Tab content -->
             <div id="step-form">
@@ -218,7 +228,7 @@
                                     <select name="division_id" id="division_id">
                                         <option value="{{ $employee->division_id }}">-- Select --</option>
                                         @foreach ($divisions as $division)
-                                            <option value="{{ $division->id }}" @if ($division->id == $employee->division_id) selected @endif>{{ $division->name }}</option>
+                                        <option value="{{ $division->id }}" @if ($division->id == $employee->division_id) selected @endif>{{ $division->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -229,7 +239,7 @@
                                     <select name="assigned_to">
                                         <option value="">-- Select --</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" @if ($user->id == $employee->assigned_to) selected @endif>{{ $user->name }}</option>
+                                        <option value="{{ $user->id }}" @if ($user->id == $employee->assigned_to) selected @endif>{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -239,10 +249,7 @@
                                     <label for="Actual Start Date">Actual Start Date</label>
                                     <div class="calenderauditee">
                                         <input type="text" id="start_date" readonly placeholder="DD-MMM-YYYY" value="{{ $employee->start_date ? \Carbon\Carbon::parse($employee->start_date)->format('d-M-Y') : '' }}" />
-                                        <input type="date" name="start_date"
-                                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
-                                            value="{{ $employee->start_date ?? '' }}" class="hide-input"
-                                            oninput="handleDateInput(this, 'start_date')" />
+                                        <input type="date" name="start_date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" value="{{ $employee->start_date ?? '' }}" class="hide-input" oninput="handleDateInput(this, 'start_date')" />
                                     </div>
                                 </div>
                             </div>
@@ -251,10 +258,7 @@
                                     <label for="Joining Date">Joining Date</label>
                                     <div class="calenderauditee">
                                         <input type="text" id="joining_date" readonly placeholder="DD-MMM-YYYY" value="{{ $employee->joining_date ? \Carbon\Carbon::parse($employee->joining_date)->format('d-M-Y') : '' }}" />
-                                        <input type="date" name="joining_date"
-                                            min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
-                                            value="{{ $employee->joining_date ?? '' }}" class="hide-input"
-                                            oninput="handleDateInput(this, 'joining_date')" />
+                                        <input type="date" name="joining_date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" value="{{ $employee->joining_date ?? '' }}" class="hide-input" oninput="handleDateInput(this, 'joining_date')" />
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +290,7 @@
                                     <select name="department">
                                         <option>-- Select --</option>
                                         @foreach ($departments as $department)
-                                            <option value="{{ $department->id }}" @if ($department->id == $employee->department) selected @endif>{{ $department->name }}</option>
+                                        <option value="{{ $department->id }}" @if ($department->id == $employee->department) selected @endif>{{ $department->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -350,8 +354,7 @@
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="Country">Country</label>
-                                    <select name="country" class="form-select country" aria-label="Default select example"
-                                        onchange="loadStates()">
+                                    <select name="country" class="form-select country" aria-label="Default select example" onchange="loadStates()">
                                         <option value="{{ $employee->country }}" selected>{{ $employee->country }}</option>
                                     </select>
                                 </div>
@@ -359,8 +362,7 @@
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="City">State</label>
-                                    <select name="state" class="form-select state" aria-label="Default select example"
-                                        onchange="loadCities()">
+                                    <select name="state" class="form-select state" aria-label="Default select example" onchange="loadCities()">
                                         <option value="{{ $employee->state }}" selected>{{ $employee->state }}</option>
                                     </select>
                                 </div>
@@ -515,9 +517,7 @@
                                 <label for="audit-agenda-grid">
                                     Job Responsibilities
                                     <button type="button" name="audit-agenda-grid" id="ObservationAdd">+</button>
-                                    <span class="text-primary" data-bs-toggle="modal"
-                                        data-bs-target="#observation-field-instruction-modal"
-                                        style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
+                                    <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
                                         (Launch Instruction)
                                     </span>
                                 </label>
@@ -532,19 +532,19 @@
                                         </thead>
                                         <tbody>
                                             @if ($employee_grid_data && is_array($employee_grid_data->data))
-                                                @foreach ($employee_grid_data->data as $index => $employee_grid)
-                                                    <tr>
-                                                        <td><input disabled type="text" name="jobResponsibilities[{{ $loop->index }}][serial]" value="{{ $loop->index+1 }}"></td>
-                                                        <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][job]" value=" {{ array_key_exists('job', $employee_grid) ? $employee_grid['job'] : '' }}"></td>
-                                                        <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][remarks]" value=" {{ array_key_exists('remarks', $employee_grid) ? $employee_grid['remarks'] : '' }}"></td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach ($employee_grid_data->data as $index => $employee_grid)
+                                            <tr>
+                                                <td><input disabled type="text" name="jobResponsibilities[{{ $loop->index }}][serial]" value="{{ $loop->index+1 }}"></td>
+                                                <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][job]" value=" {{ array_key_exists('job', $employee_grid) ? $employee_grid['job'] : '' }}"></td>
+                                                <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][remarks]" value=" {{ array_key_exists('remarks', $employee_grid) ? $employee_grid['remarks'] : '' }}"></td>
+                                            </tr>
+                                            @endforeach
                                             @else
-                                                <tr>
-                                                    <td><input disabled type="text" name="jobResponsibilities[0][serial]" value="1"></td>
-                                                    <td><input type="text" name="jobResponsibilities[0][job]"></td>
-                                                    <td><input type="text" name="jobResponsibilities[0][remarks]" ></td>
-                                                </tr>
+                                            <tr>
+                                                <td><input disabled type="text" name="jobResponsibilities[0][serial]" value="1"></td>
+                                                <td><input type="text" name="jobResponsibilities[0][job]"></td>
+                                                <td><input type="text" name="jobResponsibilities[0][remarks]"></td>
+                                            </tr>
                                             @endif
                                         </tbody>
                                     </table>
@@ -553,21 +553,19 @@
                             <div class="col-6">
                                 <div class="group-input">
                                     <label for="Facility Name">HOD </label>
-                                    <select multiple name="hod[]" placeholder="Select HOD" data-search="false"
-                                        data-silent-initial-value-set="true" id="hod">
+                                    <select multiple name="hod[]" placeholder="Select HOD" data-search="false" data-silent-initial-value-set="true" id="hod">
                                         @foreach ($userDetails as $userRole)
-                                            <option value="{{ $userRole->id }}" @if ($userRole->id == $employee->hod) selected @endif>{{ $userRole->name }}</option>
-                                            @endforeach
+                                        <option value="{{ $userRole->id }}" @if ($userRole->id == $employee->hod) selected @endif>{{ $userRole->name }}</option>
+                                        @endforeach
 
-                                        </select>
-                                    </div>
+                                    </select>
                                 </div>
-                                {{-- <option value="{{ $userRole->id }}" {{ strpos($employee->designee, $userRole->id) !== false ? 'selected' : '' }}>{{ $userRole->name }}</option> --}}
+                            </div>
+                            {{-- <option value="{{ $userRole->id }}" {{ strpos($employee->designee, $userRole->id) !== false ? 'selected' : '' }}>{{ $userRole->name }}</option> --}}
                             <div class="col-6">
                                 <div class="group-input">
                                     <label for="Facility Name">Designee </label>
-                                    <select multiple name="designee[]" placeholder="Select Designee Name" data-search="false"
-                                        data-silent-initial-value-set="true" id="designee">
+                                    <select multiple name="designee[]" placeholder="Select Designee Name" data-search="false" data-silent-initial-value-set="true" id="designee">
                                         <option value="QA Head" {{ strpos($employee->designee, 'QA Head') !== false ? 'selected' : '' }}>QA Head</option>
                                         <option value="QC Head" {{ strpos($employee->designee, "QC Head") !== false ? 'selected' : '' }}>QC Head</option>
 
@@ -610,15 +608,12 @@
                             <label for="audit-agenda-grid">
                                 External Training Details
                                 <button type="button" name="audit-agenda-grid" id="details-grid">+</button>
-                                <span class="text-primary" data-bs-toggle="modal"
-                                    data-bs-target="#observation-field-instruction-modal"
-                                    style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
+                                <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
                                     (Launch Instruction)
                                 </span>
                             </label>
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="external-training-table"
-                                    style="width: 100%;">
+                                <table class="table table-bordered" id="external-training-table" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th style="width: 50px;">Sr. No.</th>
@@ -635,54 +630,49 @@
 
                                     <tbody>
                                         @if ($external_grid_data && is_array($external_grid_data->data))
-                                            @foreach ($external_grid_data->data as $index => $external_grid)
-                                            <tr>
-                                                <td><input disabled type="text" name="external_training[{{ $loop->index }}][serial]" value="{{ $loop->index+1 }}"></td>
-                                                <td><input type="text" name="external_training[{{ $loop->index }}][topic]" value="{{ $external_grid['topic'] ?? '' }}"></td>
-                                                <td>
-                                                    <div class="new-date-data-field">
-                                                        <div class="group-input input-date">
-                                                            <div class="calenderauditee">
-                                                                <input
-                                                                class="click_date"
-                                                                id="date_{{ $loop->index }}_external_training_date" type="text" name="external_training[{{ $loop->index }}][external_training_date]" placeholder="DD-MMM-YYYY" value="{{ array_key_exists('external_training_date', $external_grid) ? \Carbon\Carbon::parse($external_grid['external_training_date'])->format('d-M-Y') : '' }}" />
-                                                                <input type="date" name="external_training[{{ $loop->index }}][external_training_date]"
-                                                                min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" value="{{ array_key_exists('external_training_date', $external_grid) ? \Carbon\Carbon::parse($external_grid['external_training_date'])->format('Y-m-d') : '' }}"
-                                                                id="date_{{ $loop->index }}_external_training_date"
-                                                                class="hide-input show_date" style="position: absolute; top: 0; left: 0; opacity: 0;" oninput="handleDateInput(this, 'date_{{ $loop->index }}_external_training_date')" />
+                                        @foreach ($external_grid_data->data as $index => $external_grid)
+                                        <tr>
+                                            <td><input disabled type="text" name="external_training[{{ $loop->index }}][serial]" value="{{ $loop->index+1 }}"></td>
+                                            <td><input type="text" name="external_training[{{ $loop->index }}][topic]" value="{{ $external_grid['topic'] ?? '' }}"></td>
+                                            <td>
+                                                <div class="new-date-data-field">
+                                                    <div class="group-input input-date">
+                                                        <div class="calenderauditee">
+                                                            <input class="click_date" id="date_{{ $loop->index }}_external_training_date" type="text" name="external_training[{{ $loop->index }}][external_training_date]" placeholder="DD-MMM-YYYY" value="{{ array_key_exists('external_training_date', $external_grid) ? \Carbon\Carbon::parse($external_grid['external_training_date'])->format('d-M-Y') : '' }}" />
+                                                            <input type="date" name="external_training[{{ $loop->index }}][external_training_date]" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" value="{{ array_key_exists('external_training_date', $external_grid) ? \Carbon\Carbon::parse($external_grid['external_training_date'])->format('Y-m-d') : '' }}" id="date_{{ $loop->index }}_external_training_date" class="hide-input show_date" style="position: absolute; top: 0; left: 0; opacity: 0;" oninput="handleDateInput(this, 'date_{{ $loop->index }}_external_training_date')" />
 
-                                                            </div>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td><input type="text" name="external_training[{{ $loop->index }}][external_trainer]" value="{{ $external_grid['external_trainer'] ?? '' }}"></td>
-                                                <td><input type="text" name="external_training[{{ $loop->index }}][external_agency]" value="{{ $external_grid['external_agency'] ?? '' }}"></td>
-                                                <td>
-                                                    <input type="file" name="external_training[{{ $loop->index }}][certificate]" value="{{ $external_grid['certificate'] ?? '' }}">
-                                                    @if (isset($external_grid['certificate']))
-                                                        <a href="{{ asset($external_grid['certificate']) }}" target="_blank">View Certificate</a>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    {{-- <input type="file" id="myfile" name="attached_cv" value="{{ $employee->attached_cv }}">
-                                                    <a href="{{ asset('upload/' . $employee->attached_cv) }}" target="_blank">{{ $employee->attached_cv }}</a> --}}
-                                                    <input type="file" id="myfile" name="external_training[{{ $loop->index }}][supporting_documents]" value="{{ $external_grid['supporting_documents'] ?? '' }}">
-                                                    @if (isset($external_grid['supporting_documents']))
-                                                        <a href="{{ asset('upload/' . $external_grid['supporting_documents']) }}" target="_blank">View Document</a>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                            @endforeach
+                                                </div>
+                                            </td>
+                                            <td><input type="text" name="external_training[{{ $loop->index }}][external_trainer]" value="{{ $external_grid['external_trainer'] ?? '' }}"></td>
+                                            <td><input type="text" name="external_training[{{ $loop->index }}][external_agency]" value="{{ $external_grid['external_agency'] ?? '' }}"></td>
+                                            <td>
+                                                <input type="file" name="external_training[{{ $loop->index }}][certificate]" value="{{ $external_grid['certificate'] ?? '' }}">
+                                                @if (isset($external_grid['certificate']))
+                                                <a href="{{ asset($external_grid['certificate']) }}" target="_blank">View Certificate</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{-- <input type="file" id="myfile" name="attached_cv" value="{{ $employee->attached_cv }}">
+                                                <a href="{{ asset('upload/' . $employee->attached_cv) }}" target="_blank">{{ $employee->attached_cv }}</a> --}}
+                                                <input type="file" id="myfile" name="external_training[{{ $loop->index }}][supporting_documents]" value="{{ $external_grid['supporting_documents'] ?? '' }}">
+                                                @if (isset($external_grid['supporting_documents']))
+                                                <a href="{{ asset('upload/' . $external_grid['supporting_documents']) }}" target="_blank">View Document</a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                         @else
-                                            <tr>
-                                                <td><input disabled type="text" name="external_training[0][serial]" value="1"></td>
-                                                <td><input type="text" name="external_training[0][topic]"></td>
-                                                <td><input type="date" name="external_training[0][external_training_date]"></td>
-                                                <td><input type="text" name="external_training[0][external_trainer]"></td>
-                                                <td><input type="text" name="external_training[0][external_agency]"></td>
-                                                <td><input type="file" name="external_training[0][certificate]"></td>
-                                                <td><input type="file" name="external_training[0][supporting_documents]"></td>
-                                            </tr>
+                                        <tr>
+                                            <td><input disabled type="text" name="external_training[0][serial]" value="1"></td>
+                                            <td><input type="text" name="external_training[0][topic]"></td>
+                                            <td><input type="date" name="external_training[0][external_training_date]"></td>
+                                            <td><input type="text" name="external_training[0][external_trainer]"></td>
+                                            <td><input type="text" name="external_training[0][external_agency]"></td>
+                                            <td><input type="file" name="external_training[0][certificate]"></td>
+                                            <td><input type="file" name="external_training[0][supporting_documents]"></td>
+                                        </tr>
                                         @endif
                                     </tbody>
                                 </table>
@@ -713,17 +703,17 @@
                                             '<td><input disabled type="text" name="external_training[' + serialNumber + '][serial]" value="' + serialNumber +
                                             '"></td>' +
                                             '<td><input type="text" name="external_training[' + serialNumber +
-                        '][topic]"></td>' +
+                                            '][topic]"></td>' +
                                             '<td><input type="date" name="external_training[' + serialNumber +
-                        '][external_training_date]"></td>' +
+                                            '][external_training_date]"></td>' +
                                             '<td><input type="text" name="external_training[' + serialNumber +
-                        '][external_trainer]"></td>' +
+                                            '][external_trainer]"></td>' +
                                             '<td><input type="text" name="external_training[' + serialNumber +
-                        '][external_agency]"></td>' +
+                                            '][external_agency]"></td>' +
                                             '<td><input type="file" name="external_training[' + serialNumber +
-                        '][certificate]"></td>' +
+                                            '][certificate]"></td>' +
                                             '<td><input type="file" name="external_training[' + serialNumber +
-                        '][supproting_documents]"></td>' +
+                                            '][supproting_documents]"></td>' +
                                             '</tr>';
 
                                         // for (var i = 0; i < users.length; i++) {
@@ -754,8 +744,8 @@
                     </div>
                 </div>
             </div>
-             <!-- Activity Log content -->
-             <div id="CCForm3" class="inner-block cctabcontent">
+            <!-- Activity Log content -->
+            <div id="CCForm3" class="inner-block cctabcontent">
                 <div class="inner-block-content">
                     <div class="row">
                         <div class="col-lg-6">
@@ -790,77 +780,76 @@
                         </a>
                         <button type="submit">Submit</button>
                         <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-                                Exit </a> </button>
-                    </div> --}}
-                </div>
+                    Exit </a> </button>
+                </div> --}}
             </div>
+    </div>
+    </form>
+</div>
+</div>
+
+<div class="modal fade" id="signature-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">E-Signature</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ url('tms/employee/sendstage', $employee->id) }}" method="POST" id="signatureModalForm">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3 text-justify">
+                        Please select a meaning and a outcome for this task and enter your username
+                        and password for this task. You are performing an electronic signature,
+                        which is legally binding equivalent of a hand written signature.
+                    </div>
+                    <div class="group-input">
+                        <label for="username">Username <span class="text-danger">*</span></label>
+                        <input type="text" name="username" required>
+                    </div>
+                    <div class="group-input">
+                        <label for="password">Password <span class="text-danger">*</span></label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <div class="group-input">
+                        <label for="comment">Comment</label>
+                        <input type="comment" name="comment">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="signatureModalButton">
+                        <div class="spinner-border spinner-border-sm signatureModalSpinner" style="display: none" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        Submit
+                    </button>
+                    <button type="button" data-bs-dismiss="modal">Close</button>
+                </div>
             </form>
         </div>
     </div>
-
-    <div class="modal fade" id="signature-modal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">E-Signature</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <form action="{{ url('tms/employee/sendstage', $employee->id) }}" method="POST" id="signatureModalForm">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="mb-3 text-justify">
-                            Please select a meaning and a outcome for this task and enter your username
-                            and password for this task. You are performing an electronic signature,
-                            which is legally binding equivalent of a hand written signature.
-                        </div>
-                        <div class="group-input">
-                            <label for="username">Username <span class="text-danger">*</span></label>
-                            <input type="text" name="username" required>
-                        </div>
-                        <div class="group-input">
-                            <label for="password">Password <span class="text-danger">*</span></label>
-                            <input type="password" name="password" required>
-                        </div>
-                        <div class="group-input">
-                            <label for="comment">Comment</label>
-                            <input type="comment" name="comment">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="signatureModalButton">
-                            <div class="spinner-border spinner-border-sm signatureModalSpinner" style="display: none"
-                                role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                            Submit
-                        </button>
-                        <button type="button" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script>
-        function openCity(evt, cityName) {
-            var i, cctabcontent, cctablinks;
-            cctabcontent = document.getElementsByClassName("cctabcontent");
-            for (i = 0; i < cctabcontent.length; i++) {
-                cctabcontent[i].style.display = "none";
-            }
-            cctablinks = document.getElementsByClassName("cctablinks");
-            for (i = 0; i < cctablinks.length; i++) {
-                cctablinks[i].className = cctablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
+</div>
+<script>
+    function openCity(evt, cityName) {
+        var i, cctabcontent, cctablinks;
+        cctabcontent = document.getElementsByClassName("cctabcontent");
+        for (i = 0; i < cctabcontent.length; i++) {
+            cctabcontent[i].style.display = "none";
         }
+        cctablinks = document.getElementsByClassName("cctablinks");
+        for (i = 0; i < cctablinks.length; i++) {
+            cctablinks[i].className = cctablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
 
-        const saveButtons = document.querySelectorAll('.saveButton1');
-        const form = document.getElementById('step-form');
-    </script>
-    <script>
-        VirtualSelect.init({
-            ele: '#Facility, #Group, #Audit, #Auditee ,#reference_record, #designee, #hod'
-        });
-    </script>
+    const saveButtons = document.querySelectorAll('.saveButton1');
+    const form = document.getElementById('step-form');
+</script>
+<script>
+    VirtualSelect.init({
+        ele: '#Facility, #Group, #Audit, #Auditee ,#reference_record, #designee, #hod'
+    });
+</script>
 @endsection
