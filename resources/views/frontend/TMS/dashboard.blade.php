@@ -311,19 +311,21 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <th>Department</th>
                                 <th>Qualification Status</th>
                                 <th>Certificate</th>
-                                <th>Status</th>
+                                <!-- <th>Status</th> -->
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($trainers->sortbyDesc('id') as $trainer)
-                            @if ($trainer->trainer=='Qualified')
+                            <!-- @if ($trainer->trainer=='Qualified') -->
 
                             <tr>
                                 <td><a href="{{ url('trainer_qualification_view', $trainer->id) }}">000{{ $trainer->id }}</a></td>
                                 <td>{{ $trainer->trainer_name ? $trainer->trainer_name : 'NA' }}</td>
                                 <td>{{ $trainer->designation ? $trainer->designation : 'NA' }}</td>
                                 <td>{{ $trainer->department_record ? $trainer->department_record->name : 'NA' }}</td>
-                                <td>{{ $trainer->trainer ? $trainer->trainer: 'NA' }}</td>
+                                <!-- <td>{{ $trainer->trainer ? $trainer->trainer: 'NA' }}</td> -->
+                                <td>{{ $trainer->status }}</td>
+
                                 <td>
                                     @if($employee->certification)
                                     <a href="{{ asset('upload/' . $employee->certification) }}" target="_blank" download>
@@ -333,9 +335,9 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                     NA
                                     @endif
                                 </td>
-                                <td>{{ $trainer->status }}</td>
+                                <!-- <td>{{ $trainer->status }}</td> -->
                             </tr>
-                            @endif
+                            <!-- @endif -->
                             @endforeach
 
                         </tbody>
