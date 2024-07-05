@@ -16,7 +16,7 @@ use App\Http\Controllers\rcms\DesktopController;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\MytaskController;
 use App\Http\Controllers\CabinateController;
-use App\Http\Controllers\rcms\{CCController,DeviationController, IncidentController};
+use App\Http\Controllers\rcms\{CCController, DeviationController, IncidentController};
 use App\Http\Controllers\rcms\EffectivenessCheckController;
 use App\Http\Controllers\rcms\ObservationController;
 use App\Http\Controllers\DashboardController;
@@ -331,8 +331,8 @@ Route::view('employee_new', 'frontend.TMS.Employee.employee_new')->name('employe
 
 // // Route::view('induction_training', 'frontend.TMS.Induction_training.induction_training')->name('induction_training');
 // Route::view('job_training', 'frontend.TMS.Job_Training.job_training')->name('job_training');
-Route::get('job_training',[JobTrainingController::class ,'index'])->name('job_training');
-Route::get('job_training/show/{id}',[JobTrainingController::class ,'edit'])->name('job_training_view');
+Route::get('job_training', [JobTrainingController::class, 'index'])->name('job_training');
+Route::get('job_training/show/{id}', [JobTrainingController::class, 'edit'])->name('job_training_view');
 
 Route::post('job_trainingcreate', [JobTrainingController::class, 'store'])->name('job_trainingcreate');
 Route::put('job_trainingupdate/{id}', [JobTrainingController::class, 'update'])->name('job_trainingupdate');
@@ -486,12 +486,12 @@ Route::get('out_of_calibration_ooc', [OOCController::class, 'ooc']);
 
 Route::get('oos_micro', [OOSMicroController::class, 'index'])->name('oos_micro.index');
 Route::post('oos_micro_store', [OOSMicroController::class, 'store'])->name('oos_micro.store');
-Route::get('oos_micro_edit/{id}',[OOSMicroController::class, 'edit'])->name('oos_micro.edit');
-Route::post('oos_micro_update/{id}',[OOSMicroController::class, 'update'])->name('oos_micro.update');
+Route::get('oos_micro_edit/{id}', [OOSMicroController::class, 'edit'])->name('oos_micro.edit');
+Route::post('oos_micro_update/{id}', [OOSMicroController::class, 'update'])->name('oos_micro.update');
 
-Route::post('oos_micro/sendstage/{id}',[OOSMicroController::class,'send_stage'])->name('send_stage');
-Route::post('oos_micro/requestmoreinfo_back_stage/{id}',[OOSMicroController::class,'requestmoreinfo_back_stage'])->name('requestmoreinfo_back_stage');
-Route::post('oos_micro/assignable_send_stage/{id}',[OOSMicroController::class,'assignable_send_stage'])->name('assignable_send_stage');
+Route::post('oos_micro/sendstage/{id}', [OOSMicroController::class, 'send_stage'])->name('send_stage');
+Route::post('oos_micro/requestmoreinfo_back_stage/{id}', [OOSMicroController::class, 'requestmoreinfo_back_stage'])->name('requestmoreinfo_back_stage');
+Route::post('oos_micro/assignable_send_stage/{id}', [OOSMicroController::class, 'assignable_send_stage'])->name('assignable_send_stage');
 Route::post('oos_micro/cancel_stage/{id}', [OOSMicroController::class, 'cancel_stage'])->name('cancel_stage');;
 Route::post('oos_micro/thirdStage/{id}', [OOSMicroController::class, 'stageChange'])->name('thirdStage');
 Route::post('oos_micro/reject_stage/{id}', [OOSMicroController::class, 'reject_stage'])->name('reject_stage');
@@ -555,12 +555,13 @@ Route::post('/tms/employee', [EmployeeController::class, 'store'])->name('employ
 Route::post('/tms/trainer', [TrainerController::class, 'store'])->name('trainer.store');
 Route::post('/tms/employee/{id}', [EmployeeController::class, 'update'])->name('employee.update');
 Route::post('/tms/trainer/{id}', [TrainerController::class, 'update'])->name('trainer.update');
-Route::get('employee_view/{id}', [EmployeeController::class, 'show']);
+Route::get('employee_view/{id}', [EmployeeController::class, 'show'])->name('employee.show');
 Route::get('trainer_qualification', [TrainerController::class, 'index'])->name('trainer_qualification');
-Route::get('trainer_qualification_view/{id}', [TrainerController::class, 'show']);
+Route::get('trainer_qualification_view/{id}', [TrainerController::class, 'show'])->name('trainer_qualification.show');
 Route::post('/tms/employee/sendstage/{id}', [EmployeeController::class, 'sendStage']);
 Route::post('/tms/trainer/sendstage/{id}', [TrainerController::class, 'sendStage']);
 Route::post('/tms/trainer/rejectStage/{id}', [TrainerController::class, 'rejectStage']);
+Route::post('/tms/job_trainer/sendstage/{id}', [JobTrainingController::class, 'sendStage']);
 
 // =======
 Route::post('errata/create{id}', [ErrataController::class, 'create'])->name('errata.create');

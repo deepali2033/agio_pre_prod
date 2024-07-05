@@ -29,7 +29,9 @@ use App\Http\Controllers\rcms\DeviationController;
 use App\Http\Controllers\rcms\LogController;
 use App\Http\Controllers\rcms\OOCController;
 use App\Http\Controllers\tms\EmployeeController;
+use App\Http\Controllers\tms\JobTrainingController;
 use App\Http\Controllers\tms\TrainerController;
+use App\Http\Controllers\InductionTrainingController;
 use App\Models\EffectivenessCheck;
 use Illuminate\Support\Facades\Route;
 
@@ -53,12 +55,18 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::resource('CC', CCController::class);
 
 
-            Route::get('traineraudittrail/{id}', [TrainerController::class, 'AuditTrial'])->name('audittrail');
+            Route::get('traineraudittrail/{id}', [TrainerController::class, 'trainerAuditTrial'])->name('traineraudittrail');
             Route::get('auditDetailsTrainer/{id}', [TrainerController::class, 'auditDetailstrainer'])->name('trainerauditDetails');
 
 
             Route::get('employeeaudittrail/{id}', [EmployeeController::class, 'AuditTrial'])->name('audittrail');
             Route::get('auditDetailsEmployee/{id}', [EmployeeController::class, 'auditDetailsEmployee'])->name('employeeauditDetails');
+
+            Route::get('job_traineeaudittrail/{id}', [JobTrainingController::class, 'jobAuditTrial'])->name('job_audittrail');
+            Route::get('auditDetailsEmployee/{id}', [JobTrainingController::class, 'auditDetailsJobTrainee'])->name('jobTraineeauditDetails');
+
+            Route::get('induction_traineeaudittrail/{id}', [InductionTrainingController::class, 'inductionAuditTrial'])->name('induction_audittrail');
+            Route::get('auditDetailsEmployee/{id}', [InductionTrainingController::class, 'auditDetailsInduction'])->name('InductionauditDetails');
 
 
             Route::post('send-initiator/{id}', [CCController::class, 'sendToInitiator']);

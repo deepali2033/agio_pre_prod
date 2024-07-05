@@ -188,14 +188,19 @@
                             Audit Trail
                         </div>
 
-                        <div> <strong>Record ID.</strong> {{ str_pad($document->record_number, 4, '0', STR_PAD_LEFT) }}</div>
+                        <div> <strong>ID.</strong> {{ $document->employee_id }}</div>
                         <div style="margin-bottom: 5px;  font-weight: bold;"> Originator
-                            :{{ $document->initiator ? $document->initiator : '' }}</div>
+                            <!-- :{{ $document->initiator ? $document->initiator : '' }}</div> -->
+                            :{{ $document->employee_name ? $document->employee_name : '' }}
+                        </div>
                         <div style="margin-bottom: 5px; font-weight: bold;">Short Description :
                             {{ $document->short_description }}
                         </div>
                         <div style="margin-bottom: 5px;  font-weight: bold;">Due Date : {{ $document->due_date }}</div>
-
+                        <div class="" style="display:flex; justify-content:flex-end">
+                            <button type="button"> <a class="text-white" href="{{ route('employee.show', $employee->id) }}">
+                                    Exit </a> </button>
+                        </div>
                     </div>
     </div>
     </table>
@@ -267,7 +272,7 @@
                                 :</strong>{{ $dataDemo->user_name ? $dataDemo->user_name : 'Not Applicable' }}
                         </div>
                         <div style="margin-top: 5px;"> <strong>Performed On
-                                :</strong>{{ $dataDemo->created_at ? $dataDemo->created_at : 'Not Applicable' }}
+                                :</strong>{{ \Carbon\Carbon::parse($dataDemo->created_at )->format('d-M-Y h:i A') }}
                         </div>
                         <div style="margin-top: 5px;"><strong> Comments
                                 :</strong>{{ $dataDemo->comment ? $dataDemo->comment : 'Not Applicable' }}</div>

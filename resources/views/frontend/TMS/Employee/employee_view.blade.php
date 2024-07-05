@@ -111,6 +111,7 @@ $userDetails = DB::table('users')
             <strong>Site Division/Project</strong> :
             Plant
         </div> --}}
+
     {{-- <div class="button-bar">
             <button type="button">Save</button>
             <button type="button">Cancel</button>

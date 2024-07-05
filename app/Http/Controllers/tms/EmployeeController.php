@@ -143,9 +143,9 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
-            $validation2->comment = "Not Applicable";
+            // $validation2->comment = "Not Applicable";
             $validation2->save();
         }
 
@@ -162,7 +162,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
             $validation2->save();
         }
@@ -179,7 +179,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -196,7 +196,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -214,7 +214,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -232,7 +232,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -250,7 +250,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -268,7 +268,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -286,7 +286,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -304,7 +304,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -322,7 +322,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -340,7 +340,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -358,7 +358,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -376,7 +376,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -394,7 +394,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -412,7 +412,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -430,7 +430,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -448,7 +448,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -466,7 +466,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -484,7 +484,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -502,7 +502,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -520,7 +520,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -538,7 +538,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -556,7 +556,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -574,7 +574,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -592,7 +592,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -611,7 +611,7 @@ class EmployeeController extends Controller
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
             $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiator";
+            $validation2->change_from = "Initiation";
             $validation2->action_name = 'Create';
 
             $validation2->save();
@@ -753,7 +753,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->short_description) || $lastDocument->short_description === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -771,7 +775,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->assign_to) || $lastDocument->assign_to === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -788,10 +796,14 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->start_date) || $lastDocument->start_date === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
+
         if ($lastDocument->joining_date != $request->joining_date) {
             $validation2 = new EmployeeAudit();
             $validation2->emp_id = $employee->id;
@@ -805,8 +817,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->joining_date) || $lastDocument->joining_date === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -823,16 +838,19 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->emp_id) || $lastDocument->emp_id === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
-        if ($lastDocument->employee != $request->employee_name) {
+        if ($lastDocument->employee_name != $request->employee_name) {
             $validation2 = new EmployeeAudit();
             $validation2->emp_id = $employee->id;
             $validation2->activity_type = 'Employee Name';
-            $validation2->previous = $lastDocument->employee;
+            $validation2->previous = $lastDocument->employee_name;
             $validation2->current = $request->employee_name;
             $validation2->comment = "NA";
             $validation2->user_id = Auth::user()->id;
@@ -841,8 +859,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->employee_name) || $lastDocument->employee_name === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -859,8 +880,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->gender) || $lastDocument->gender === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -877,8 +901,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->department) || $lastDocument->department === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -895,8 +922,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->job_title) || $lastDocument->job_title === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
         if ($lastDocument->attached_cv != $request->attached_cv) {
@@ -912,7 +942,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->attached_cv) || $lastDocument->attached_cv === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -930,7 +964,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->certification) || $lastDocument->certification === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -948,7 +986,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->zone) || $lastDocument->zone === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -966,8 +1008,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->country) || $lastDocument->country === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -984,8 +1029,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->state) || $lastDocument->state === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -1002,8 +1050,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->city) || $lastDocument->city === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -1020,7 +1071,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->site_name) || $lastDocument->site_name === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1038,7 +1093,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->building) || $lastDocument->building === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1056,7 +1115,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->floor) || $lastDocument->floor === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1074,7 +1137,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->room) || $lastDocument->room === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1092,7 +1159,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->picture) || $lastDocument->picture === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1110,7 +1181,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->specimen_signature) || $lastDocument->specimen_signature === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1128,7 +1203,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->hod) || $lastDocument->hod === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1146,7 +1225,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->designee) || $lastDocument->designee === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1164,7 +1247,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->comment) || $lastDocument->comment === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1182,7 +1269,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+            if (is_null($lastDocument->file_attachment) || $lastDocument->file_attachment === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1200,8 +1291,11 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
-
+            if (is_null($lastDocument->external_comment) || $lastDocument->external_comment === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
             $validation2->save();
         }
 
@@ -1219,7 +1313,12 @@ class EmployeeController extends Controller
 
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
-            $validation2->action_name = 'Update';
+
+            if (is_null($lastDocument->external_attachment) || $lastDocument->external_attachment === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
 
             $validation2->save();
         }
@@ -1279,11 +1378,12 @@ class EmployeeController extends Controller
 
     public function AuditTrial($id)
     {
+        $employee = Employee::find($id);
         $audit = EmployeeAudit::where('emp_id', $id)->orderByDESC('id')->paginate();
         $today = Carbon::now()->format('d-m-y');
         $document = Employee::where('id', $id)->first();
         $document->initiator = User::where('id', $document->initiator_id)->value('name');
 
-        return view('frontend.TMS.Employee.employee_audit', compact('audit', 'document', 'today'));
+        return view('frontend.TMS.Employee.employee_audit', compact('audit', 'document', 'employee', 'today'));
     }
 }

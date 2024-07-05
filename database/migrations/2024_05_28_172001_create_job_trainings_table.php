@@ -20,15 +20,10 @@ return new class extends Migration
                 $table->string('department')->nullable();
                 $table->string('location')->nullable();
                 $table->string('hod')->nullable();
-
-                // $table->date('startdate')->nullable();
-                // $table->date('enddate')->nullable();
-    
     
     
                 for($i=1; $i<=5 ; $i++)
                {
-               
                 $table->longText("subject_$i")->nullable();
                 $table->longText("type_of_training_$i")->nullable();
                 $table->longText("reference_document_no_$i")->nullable();

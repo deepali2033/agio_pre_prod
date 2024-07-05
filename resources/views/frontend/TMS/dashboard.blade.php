@@ -298,14 +298,13 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                     </table>
                 </div>
                 <br>
-
                 <!-- second table for qualification trainer -->
                 <div>
                     <table class="table table-bordered">
                         <h4>Qualified Trainer</h4>
                         <thead>
                             <tr>
-                                <th>Sr. No</th>
+                                <th>Sr.No</th>
                                 <th>Qualified Trainer Name</th>
                                 <th>Designation</th>
                                 <th>Department</th>
@@ -316,8 +315,8 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                         </thead>
                         <tbody>
                             @foreach ($trainers->sortbyDesc('id') as $trainer)
-                            <!-- @if ($trainer->trainer=='Qualified') -->
 
+                            <!-- @if ($trainer->trainer=='Qualified') -->
                             <tr>
                                 <td><a href="{{ url('trainer_qualification_view', $trainer->id) }}">000{{ $trainer->id }}</a></td>
                                 <td>{{ $trainer->trainer_name ? $trainer->trainer_name : 'NA' }}</td>
@@ -327,9 +326,9 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <td>{{ $trainer->status }}</td>
 
                                 <td>
-                                    @if($employee->certification)
-                                    <a href="{{ asset('upload/' . $employee->certification) }}" target="_blank" download>
-                                        {{ $employee->certification }} <i class="fas fa-download"></i>
+                                    @if($trainer->initial_attachment)
+                                    <a href="{{ asset('upload/' . $trainer->initial_attachment) }}" target="_blank" download>
+                                        {{ $trainer->initial_attachment }} <i class="fas fa-download"></i>
                                     </a>
                                     @else
                                     NA

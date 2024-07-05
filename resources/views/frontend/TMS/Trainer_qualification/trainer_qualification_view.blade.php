@@ -268,11 +268,11 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-        $(document).ready(function() {
-            $('.removeRowBtn').on('click', function() {
-                $(this).closest('tr').remove();
-            });
+    $(document).ready(function() {
+        $('.removeRowBtn').on('click', function() {
+            $(this).closest('tr').remove();
         });
+    });
 </script>
 
 <style>
@@ -360,10 +360,9 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                     $userRoleIds = $userRoles->pluck('q_m_s_roles_id')->toArray();
                     @endphp
 
-                    <button class="button_theme1"> 
-                        <a class="text-white"
-                            href="{{ route('audittrail', $trainer->id) }}"> Audit Trail
-                        </a> 
+                    <button class="button_theme1">
+                        <a class="text-white" href="{{ route('traineraudittrail', $trainer->id) }}"> Audit Trail
+                        </a>
                     </button>
 
                     @if ($trainer->stage == 1 && (in_array(3, $userRoleIds) || in_array(18, $userRoleIds)))
@@ -688,7 +687,10 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                         </td>
                                         <td><input type="text" name="trainer_skill[{{ $loop->index }}][Trainer_skill_set]" value=" {{ array_key_exists('Trainer_skill_set', $skill) ? $skill['Trainer_skill_set'] : '' }}"></td>
                                         <td><input type="text" name="trainer_skill[{{ $loop->index }}][remarks]" value=" {{ array_key_exists('remarks', $skill) ? $skill['remarks'] : '' }}"></td>
-                                        <td><button type="button" class="removeRowBtn">Remove</button></td>
+                                        <!-- <td><button type="button" class="removeRowBtn">Remove</button></td> -->
+                                        <td>
+                                            <button type="button" onclick="removeRow(this)">Remove</button>
+                                        </td>
                                     </tr>
                                     @endforeach
                                     @else
@@ -702,6 +704,12 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                 </tbody>
                             </table>
                         </div>
+                        <script>
+                            function removeRow(button) {
+                                var row = button.closest('tr');
+                                row.parentNode.removeChild(row);
+                            }
+                        </script>
 
                         <div class="group-input">
                             <label for="audit-agenda-grid">
@@ -767,7 +775,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                             <th>Rating</th>
                                         </tr>
                                     </thead>
-                                    <tbody> 
+                                    <tbody>
                                         <tr>
                                             <td>1</td>
                                             <td>Clarity Of Objectives</td>
