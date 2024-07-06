@@ -54,8 +54,8 @@ Route::group(['prefix' => 'rcms'], function () {
         function () {
             Route::resource('CC', CCController::class);
 
+            Route::get('traineraudittrail/{id}', [TrainerController::class, 'trainerAuditTrial'])->name('trainer.audittrail');
 
-            Route::get('traineraudittrail/{id}', [TrainerController::class, 'trainerAuditTrial'])->name('traineraudittrail');
             Route::get('auditDetailsTrainer/{id}', [TrainerController::class, 'auditDetailstrainer'])->name('trainerauditDetails');
 
 

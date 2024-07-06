@@ -361,7 +361,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                     @endphp
 
                     <button class="button_theme1">
-                        <a class="text-white" href="{{ route('traineraudittrail', $trainer->id) }}"> Audit Trail
+                        <a class="text-white" href="{{ route('trainer.audittrail', $trainer->id) }}"> Audit Trail
                         </a>
                     </button>
 

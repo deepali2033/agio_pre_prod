@@ -84,7 +84,7 @@ $users = DB::table('users')->get();
 
                 <div class="d-flex" style="gap:20px;">
                     @php
-                    $userRoles = DB::table('user_roles')->where(['user_id' => Auth::user()->id, 'q_m_s_divisions_id' => 4])->get();
+                    $userRoles = DB::table('user_roles')->where(['user_id' => Auth::user()->id, 'q_m_s_divisions_id' => $inductionTraining->division_id])->get();
                     $userRoleIds = $userRoles->pluck('q_m_s_roles_id')->toArray();
                     // dd($jobTraining->division_id);
                     @endphp
@@ -174,13 +174,13 @@ $users = DB::table('users')->get();
                         <div class="col-lg-6">
                             <div class="group-input">
                                 <label for="RLS Record Number">Name of Employee <span class="text-danger">*</span></label>
-                                <input type="text" name="name_employee" id="name_employee" value="{{ $inductionTraining->name_employee }}">
+                                <input type="text" name="name_employee" id="name_employee" maxlength="255" value="{{ $inductionTraining->name_employee }}">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="group-input">
                                 <label for="Division Code">Department & Location <span class="text-danger">*</span></label>
-                                <input type="text" name="department_location" value="{{ $inductionTraining->department_location }}">
+                                <input type="text" name="department_location" maxlength="255" value="{{ $inductionTraining->department_location }}">
                                 {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}
                             </div> --}}
                         </div>
@@ -189,21 +189,21 @@ $users = DB::table('users')->get();
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Initiator Group Code">Designation <span class="text-danger">*</span></label>
-                            <input type="text" name="designation" id="designation" value="{{ $inductionTraining->designation }}">
+                            <input type="text" name="designation" id="designation" maxlength="255" value="{{ $inductionTraining->designation }}">
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="group-input">
                             <label for="Short Description">Qualification <span class="text-danger">*</span><span class="text-danger">
-                                    <input id="docname" type="text" name="qualification" value="{{ $inductionTraining->qualification }}">
+                                    <input id="docname" type="text" name="qualification" maxlength="255" value="{{ $inductionTraining->qualification }}">
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="group-input" id="repeat_nature">
                             <label for="repeat_nature">Experience (if any)<span class="text-danger d-none">*</span></label>
-                            <input type="text" name="experience_if_any" value="{{ $inductionTraining->experience_if_any }}">
+                            <input type="text" name="experience_if_any" maxlength="255" value="{{ $inductionTraining->experience_if_any }}">
                         </div>
                     </div>
 
