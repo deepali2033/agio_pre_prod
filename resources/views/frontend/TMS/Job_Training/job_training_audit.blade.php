@@ -181,8 +181,15 @@
                 <table>
                     <div class="heading">
 
-                        <div class="heading-new">
-                            Audit Trail
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="heading-new">
+                                Audit Trail
+                            </div>
+                            <div class="d-flex" style="gap:15px; margin-right: 20px;"><button type="button"> <a class="text-white" href="{{  route('job_training_view', $jobTraining->id) }}">
+                                        Back </a>
+                                </button> <button type="button"> <a class="text-white" href="{{ url('TMS') }}">
+                                        Exit </a> </button>
+                            </div>
                         </div>
 
                         <div> <strong>ID.</strong> {{ $document->jobTraining }}</div>
@@ -194,10 +201,7 @@
                             {{ $document->short_description }}
                         </div>
                         <div style="margin-bottom: 5px;  font-weight: bold;">Due Date : {{ $document->due_date }}</div>
-                        <div class="" style="display:flex; justify-content:flex-end">
-                            <button type="button"> <a class="text-white" href="{{ route('job_training_view', $jobTraining->id) }}">
-                                    Exit </a> </button>
-                        </div>
+
                     </div>
     </div>
     </table>
@@ -236,7 +240,7 @@
                     </td>
                     <td>
                         <div>
-                            <strong> Data Field Name :</strong><a href="{{ url('rcms/auditDetailsTrainer',$document->id)}}">{{ $dataDemo->activity_type ? $dataDemo->activity_type : 'Not Applicable' }}</a>
+                            <strong> Data Field Name :</strong><a href="#">{{ $dataDemo->activity_type ? $dataDemo->activity_type : 'Not Applicable' }}</a>
                         </div>
                         <div style="margin-top: 5px;">
                             @if($dataDemo->activity_type == "Activity Log")

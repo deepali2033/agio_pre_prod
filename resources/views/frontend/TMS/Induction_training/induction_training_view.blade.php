@@ -754,4 +754,52 @@ $users = DB::table('users')->get();
         $('#rchars').text(textlen);
     });
 </script>
+
+
+
+<div class="modal fade" id="signature-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">E-Signature</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ url('tms/induction/sendstage', $inductionTraining->id) }}" method="POST" id="signatureModalForm">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3 text-justify">
+                        Please select a meaning and a outcome for this task and enter your username
+                        and password for this task. You are performing an electronic signature,
+                        which is legally binding equivalent of a hand written signature.
+                    </div>
+
+                    <div class="group-input">
+                        <label for="username">Username <span class="text-danger">*</span></label>
+                        <input type="text" name="username" required>
+                    </div>
+
+                    <div class="group-input">
+                        <label for="password">Password <span class="text-danger">*</span></label>
+                        <input type="password" name="password" required>
+                    </div>
+
+                    <div class="group-input">
+                        <label for="comment">Comment</label>
+                        <input type="comment" name="comment">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="signatureModalButton">
+                        <div class="spinner-border spinner-border-sm signatureModalSpinner" style="display: none" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        Submit
+                    </button>
+                    <button type="button" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

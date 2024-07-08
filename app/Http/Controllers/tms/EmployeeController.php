@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\EmployeeAudit;
 use App\Models\EmployeeGrid;
+use App\Models\RecordNumber;
 use App\Models\RoleGroup;
+use App\Models\Training;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -1385,5 +1387,20 @@ class EmployeeController extends Controller
         $document->initiator = User::where('id', $document->initiator_id)->value('name');
 
         return view('frontend.TMS.Employee.employee_audit', compact('audit', 'document', 'employee', 'today'));
+    }
+
+    public function Employee_Child(Request $request, $id)
+    {
+        $employee = Employee::find($id);
+
+
+        if ($request->child_type == 'correspondence') {
+
+            return view('frontend.forms.classroom-training', compact('employee'));
+        } elseif ($request->child_type == 'variation') {
+            return view('frontend.TMS.induction_training.induction_training');
+        } else {
+            return view('frontend.forms.classroom-training');
+        }
     }
 }

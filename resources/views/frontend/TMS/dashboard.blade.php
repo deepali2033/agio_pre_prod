@@ -322,7 +322,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <td>{{ $trainer->trainer_name ? $trainer->trainer_name : 'NA' }}</td>
                                 <td>{{ $trainer->designation ? $trainer->designation : 'NA' }}</td>
                                 <td>{{ $trainer->department_record ? $trainer->department_record->name : 'NA' }}</td>
-                                <!-- <td>{{ $trainer->trainer ? $trainer->trainer: 'NA' }}</td> -->
+                                {{-- <td>{{ $trainer->trainer ? $trainer->trainer: 'NA' }}</td> --}}
                                 <td>{{ $trainer->status }}</td>
 
                                 <td>
@@ -357,7 +357,6 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <th>Location</th>
                                 <th>Start Date of Training</th>
                                 <th>End Date of Training</th>
-
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -367,8 +366,8 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <td>{{ DB::table('employees')->where('id', $job_training->name)->value('employee_name') }}</td>
                                 <td>{{ DB::table('departments')->where('id', $job_training->department)->value('name') }}</td>
                                 <td>{{ $job_training->location}}</td>
-                                @for ($i = 1; $i <= 1; $i++) <td>{{ ($job_training->{"startdate_$i"}) }}</td>
-                                    <td>{{ ($job_training->{"enddate_$i"}) }}</td>
+                                @for ($i = 1; $i <= 1; $i++) <td>{{ \Carbon\Carbon::parse($job_training->{"startdate_$i"})->format('d-M-Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($job_training->{"enddate_$i"})->format('d-M-Y') }}</td>
                                     @endfor
 
                                     <td>
@@ -393,7 +392,6 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <th>Employee ID</th>
                                 <th>Name Of Employee</th>
                                 <th>Department/Location</th>
-
                                 <th>Qualification</th>
                                 <th>Date Of Joining</th>
 
@@ -408,10 +406,11 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <td>{{ $induction->name_employee }}</td>
                                 <td>{{ $induction->department_location }}</td>
                                 <td>{{ $induction->qualification }}</td>
-                                <td>{{ $induction->date_joining }}</td>
+                                <td>{{ \Carbon\Carbon::parse($induction->{"date_joining"})->format('d-M-Y')}}</td>
 
                                 <td> <a href="{{ route('induction_training_view', $induction->id) }}">
-                                        <i style="margin-left: 25px;" class="fa-solid fa-pencil"></i></td>
+                                        <i style="margin-left: 25px;" class="fa-solid fa-pencil"></i>
+                                </td>
                             </tr>
                             @endforeach
 

@@ -153,6 +153,9 @@ $userDetails = DB::table('users')
                         Activate
                     </button>
                     @elseif($employee->stage == 2 && (in_array(4, $userRoleIds) || in_array(18, $userRoleIds)))
+                    <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#child-modal">
+                        Child
+                    </button>
                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
                         Retire
                     </button>
@@ -788,6 +791,92 @@ $userDetails = DB::table('users')
     </form>
 </div>
 </div>
+
+{{-- Child   --}}
+<div class="modal fade" id="child-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Child</h4>
+            </div>
+            <div class="model-body">
+
+                <form action="{{ route('employee.child', $employee->id) }}" method="POST">
+                    @csrf
+                    <!-- Modal body -->
+
+
+
+                    <div class="modal-body">
+                        <div class="group-input">
+                            @if ($employee->stage == 2)
+                            <label style="display: flex;" for="major">
+                                <input type="radio" name="child_type" id="major" value="correspondence">
+                                Training
+                            </label>
+
+
+                            <label style="display: flex;" for="major">
+                                <input type="radio" name="child_type" id="major" value="variation">
+                                Read and Understand
+                            </label>
+
+                            <label for="major">
+                                <input type="radio" name="child_type" id="major" value="renewal">
+                                Classroom
+                            </label>
+                            @else($employee->stage == 3)
+                            <label for="major">
+                                <input type="radio" name="child_type" id="major" value="correspondence">
+                                Correspondence
+                            </label>
+                            <label for="major">
+                                <input type="radio" name="child_type" id="major" value="osur">
+                                PSUR
+                            </label>
+                            @endif
+
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="modal-body">
+                        <div class="group-input">
+                            <label style="  display: flex;     gap: 18px; width: 60px;" for="capa-child">
+                                <input type="radio" name="revision" id="capa-child" value="training-child">
+                                Training
+                            </label>
+                        </div>
+                        <div class="group-input">
+                            <label style=" display: flex;     gap: 16px; width: 60px;" for="root-item">
+                                <input type="radio" name="revision" id="root-item" value="Action-Item">
+                                Read and Understand
+                            </label>
+                        </div>
+                        <div class="group-input">
+                            <label for="root-item">
+                                <input type="radio" name="revision" id="root-item" value="effectiveness-check">
+                                Classroom
+                            </label>
+                        </div>
+                    </div> -->
+
+
+                    <div class="modal-footer">
+                        <button type="submit">Submit</button>
+                        <button type="button" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
 
 <div class="modal fade" id="signature-modal">
     <div class="modal-dialog modal-dialog-centered">

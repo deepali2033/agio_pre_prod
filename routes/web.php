@@ -563,6 +563,9 @@ Route::post('/tms/trainer/sendstage/{id}', [TrainerController::class, 'sendStage
 Route::post('/tms/trainer/rejectStage/{id}', [TrainerController::class, 'rejectStage']);
 Route::post('/tms/job_trainer/sendstage/{id}', [JobTrainingController::class, 'sendStage']);
 
+
+Route::post('/tms/induction/sendstage/{id}', [InductionTrainingController::class, 'sendStage']);
+
 // =======
 Route::post('errata/create{id}', [ErrataController::class, 'create'])->name('errata.create');
 Route::post('errata/store', [ErrataController::class, 'store'])->name('errata.store');

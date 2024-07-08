@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class InductionTrainingController extends Controller
 {
@@ -412,5 +413,39 @@ class InductionTrainingController extends Controller
         $document = Induction_training::where('id', $id)->first();
         $document->Initiation = User::where('id', $document->initiator_id)->value('name');
         return view('frontend.TMS.Induction_training.induction_audit', compact('audit', 'document', 'today', 'inductionTraining'));
+    }
+    public function sendStage(Request $request, $id)
+    {
+        try {
+
+            if ($request->username == Auth::user()->email && Hash::check($request->password, Auth::user()->password)) {
+                $jobTraining = Induction_training::find($id);
+                $lastjobTraining = Induction_training::find($id);
+
+                if ($jobTraining->stage == 1) {
+                    $jobTraining->stage = "2";
+                    $jobTraining->status = "Closed-Retired";
+
+
+                    $history = new InductionTrainingAudit();
+                    $history->induction_id = $id;
+                    $history->activity_type = 'Activity Log';
+                    $history->comment = $request->comment;
+                    $history->user_id = Auth::user()->id;
+                    $history->user_name = Auth::user()->name;
+                    $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+                    $history->change_to = "Closed-Retired";
+                    $history->change_from = $lastjobTraining->status;
+                    $history->save();
+                    $jobTraining->update();
+                    return back();
+                }
+            }
+        } catch (\Throwable $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
