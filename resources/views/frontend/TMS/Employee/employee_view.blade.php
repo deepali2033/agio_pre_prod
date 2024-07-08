@@ -579,7 +579,7 @@ $userDetails = DB::table('users')
                             <div class="col-12">
                                 <div class="group-input">
                                     <label for="Comments">Comments</label>
-                                    <textarea name="comment">{{ $employee->comment }}</textarea>
+                                    <textarea name="comment" maxlength="255">{{ $employee->comment }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -684,7 +684,7 @@ $userDetails = DB::table('users')
                             <div class="col-12">
                                 <div class="group-input">
                                     <label for="External Comments">External Comments</label>
-                                    <textarea name="external_comment">{{ $employee->external_comment }}</textarea>
+                                    <textarea name="external_comment" maxlength="255">{{ $employee->external_comment }}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">

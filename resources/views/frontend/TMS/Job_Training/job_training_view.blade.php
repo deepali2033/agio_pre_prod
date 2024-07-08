@@ -310,10 +310,10 @@ $users = DB::table('users')->get();
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="date" name="startdate_{{ $i }}" value="{{ $jobTraining->{'startdate_' . $i} }}" min="{{\Carbon\Carbon::parse()->format('d-M-Y')}}" class="hide-input" oninput="handleDateInput(this, 'startdate');checkDate('startdate','enddate')">
+                                            <input type="date" name="startdate_{{ $i }}" value="{{ $jobTraining->{'startdate_' . $i} }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="hide-input" oninput="handleDateInput(this, 'startdate');checkDate('startdate','enddate')">
                                         </td>
                                         <td>
-                                            <input type="date" name="enddate_{{ $i }}" value="{{ $jobTraining->{'enddate_' . $i} }}" min="{{ \Carbon\Carbon::now()->format('Y-M-d') }}" class="hide-input" oninput="handleDateInput(this, 'enddate');checkDate('startdate','enddate')">
+                                            <input type="date" name="enddate_{{ $i }}" value="{{ $jobTraining->{'enddate_' . $i} }}" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="hide-input" oninput="handleDateInput(this, 'enddate');checkDate('startdate','enddate')">
                                         </td>
                                         </tr>
                                         @endfor

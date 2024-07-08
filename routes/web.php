@@ -346,6 +346,9 @@ Route::get('induction_training/show/{id}', [InductionTrainingController::class, 
 Route::post('induction_training', [InductionTrainingController::class, 'store'])->name('induction_training.store');
 Route::put('induction_training/{id}', [InductionTrainingController::class, 'update'])->name('induction_training.update');
 
+Route::post('/tms/induction/sendstage/{id}', [InductionTrainingController::class, 'sendStage']);
+
+
 
 //! ============================================
 //!                    RCMS
@@ -564,10 +567,10 @@ Route::post('/tms/trainer/rejectStage/{id}', [TrainerController::class, 'rejectS
 Route::post('/tms/job_trainer/sendstage/{id}', [JobTrainingController::class, 'sendStage']);
 
 
-Route::post('/tms/induction/sendstage/{id}', [InductionTrainingController::class, 'sendStage']);
 
 // =======
 Route::post('errata/create{id}', [ErrataController::class, 'create'])->name('errata.create');
+
 Route::post('errata/store', [ErrataController::class, 'store'])->name('errata.store');
 Route::get('errata/show/{id}', [ErrataController::class, 'show'])->name('errata.show');
 // Route::get('errata/edit/{id}', [ErrataController::class, 'edit'])->name('errata.edit');

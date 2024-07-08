@@ -1335,7 +1335,6 @@ class EmployeeController extends Controller
     {
 
         $employee = Employee::find($id);
-        // dd($employee);
         $employee_grid_data = EmployeeGrid::where(['employee_id' => $id, 'identifier' => 'jobResponsibilites'])->first();
         $external_grid_data = EmployeeGrid::where(['employee_id' => $id, 'identifier' => 'external_training'])->first();
 
