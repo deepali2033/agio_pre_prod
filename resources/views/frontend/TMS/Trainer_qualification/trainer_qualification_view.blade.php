@@ -493,8 +493,8 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Date Due"><b>Date of Initiation</b></label>
-                            <input disabled type="text" value="{{ date('d-M-Y') }}" name="date_of_initiation">
-                            <input type="hidden" value="{{ date('Y-m-d') }}" name="date_of_initiation">
+                            <input disabled type="text" value="{{ date('d-M-Y', strtotime($trainer->date_of_initiation)) }}" name="date_of_initiation">
+                            <input type="hidden" value="{{ date('d-M-Y', strtotime($trainer->date_of_initiation)) }}" name="date_of_initiation">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -519,8 +519,9 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                         <div class="group-input input-date">
                             <label for="Date Due">Due Date</label>
                             <div class="calenderauditee">
-                                <input type="text" name="due_date" id="due_date" readonly placeholder="DD-MM-YYYY" value="{{ $trainer->due_date }}" />
-                                <input type="date" name="due_date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="hide-input" oninput="handleDateInput(this, 'due_date')" value="{{ $trainer->due_date }}" />
+
+                                <input type="hidden" value="{{$due_date}}" name="due_date">
+                                <input disabled type="text" value="{{Helpers::getdateFormat($due_date)}}">
                             </div>
                         </div>
                     </div>

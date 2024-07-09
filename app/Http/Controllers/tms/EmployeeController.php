@@ -753,7 +753,7 @@ class EmployeeController extends Controller
             $validation2->user_name = Auth::user()->name;
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
-            $validation2->change_to =   "Not Applicable";
+            $validation2->change_to = "Not Applicable";
             $validation2->change_from = $lastDocument->status;
             if (is_null($lastDocument->short_description) || $lastDocument->short_description === '') {
                 $validation2->action_name = 'New';

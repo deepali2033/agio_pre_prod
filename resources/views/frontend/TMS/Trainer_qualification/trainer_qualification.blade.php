@@ -420,8 +420,11 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                         <div class="group-input input-date">
                             <label for="Date Due">Due Date <span class="text-danger">*</span></label>
                             <div class="calenderauditee">
-                                <input type="text" name="due_date" id="due_date" readonly placeholder="DD-MM-YYYY" />
-                                <input required type="date" name="due_date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="hide-input" oninput="handleDateInput(this, 'due_date')" />
+                                <!-- <input type="text" name="due_date" id="due_date" readonly placeholder="DD-MM-YYYY" />
+                                <input required type="date" name="due_date" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="hide-input" oninput="handleDateInput(this, 'due_date')" /> -->
+
+                                <input type="hidden" value="{{$due_date}}" name="due_date">
+                                <input disabled type="text" value="{{Helpers::getdateFormat($due_date)}}">
                             </div>
                         </div>
                     </div>
@@ -500,9 +503,6 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                         </select>
                                     </div>
                                 </div> --}}
-
-
-
 
 
                     {{-- <div class="col-lg-6">
@@ -841,8 +841,8 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
 
 
-               
-                            {{-- <div class="col-12">
+
+                {{-- <div class="col-12">
                                 <div class="group-input">
                                     <label for="Inv Attachments">Initial Attachment</label>
                                     <div><small class="text-primary">Please Attach all relevant or supporting
