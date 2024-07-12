@@ -192,10 +192,10 @@
                             </div>
                         </div>
 
-                        <div> <strong>ID.</strong> {{ $document->jobTraining }}</div>
+                        <div> <strong>ID.</strong> {{ $document->id }}</div>
                         <div style="margin-bottom: 5px;  font-weight: bold;"> Originator
                             <!-- :{{ $document->initiator ? $document->initiator : '' }}</div> -->
-                            :{{ $document->name ? $document->name : '' }}
+                            :{{ Auth::user()->name ? Auth::user()->name '' }}
                         </div>
                         <div style="margin-bottom: 5px; font-weight: bold;">Short Description :
                             {{ $document->short_description }}

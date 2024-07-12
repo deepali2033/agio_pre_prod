@@ -134,30 +134,30 @@ class EmployeeController extends Controller
 
         // }
 
-        if (!empty($request->short_description)) {
-            $validation2 = new EmployeeAudit();
-            $validation2->emp_id = $employee->id;
-            $validation2->previous = "Null";
-            $validation2->current = $request->short_description;
-            $validation2->activity_type = 'Short Description';
-            $validation2->user_id = Auth::user()->id;
-            $validation2->user_name = Auth::user()->name;
-            $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+        // if (!empty($request->short_description)) {
+        //     $validation2 = new EmployeeAudit();
+        //     $validation2->emp_id = $employee->id;
+        //     $validation2->previous = "Null";
+        //     $validation2->current = $request->short_description;
+        //     $validation2->activity_type = 'Short Description';
+        //     $validation2->user_id = Auth::user()->id;
+        //     $validation2->user_name = Auth::user()->name;
+        //     $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
 
-            $validation2->change_to =   "Opened";
-            $validation2->change_from = "Initiation";
-            $validation2->action_name = 'Create';
-            // $validation2->comment = "Not Applicable";
-            $validation2->save();
-        }
+        //     $validation2->change_to =   "Opened";
+        //     $validation2->change_from = "Initiation";
+        //     $validation2->action_name = 'Create';
+        //     // $validation2->comment = "Not Applicable";
+        //     $validation2->save();
+        // }
 
 
-        if (!empty($request->assign_to)) {
+        if (!empty($request->assigned_to)) {
             $validation2 = new EmployeeAudit();
             $validation2->emp_id = $employee->id;
             $validation2->activity_type = 'Assign To';
             $validation2->previous = "Null";
-            $validation2->current = $request->assign_to;
+            $validation2->current = $request->assigned_to;
             $validation2->comment = "NA";
             $validation2->user_id = Auth::user()->id;
             $validation2->user_name = Auth::user()->name;
@@ -204,12 +204,12 @@ class EmployeeController extends Controller
             $validation2->save();
         }
 
-        if (!empty($request->emp_id)) {
+        if (!empty($request->employee_id)) {
             $validation2 = new EmployeeAudit();
             $validation2->emp_id = $employee->id;
             $validation2->activity_type = 'Employee ID';
             $validation2->previous = "Null";
-            $validation2->current = $request->emp_id;
+            $validation2->current = $request->employee_id;
             $validation2->comment = "NA";
             $validation2->user_id = Auth::user()->id;
             $validation2->user_name = Auth::user()->name;
