@@ -44,7 +44,7 @@ class InductionTrainingController extends Controller
         $inductionTraining->employee_id = $request->employee_id;
         $inductionTraining->name_employee = $request->name_employee;
         $inductionTraining->department = $request->department;
-        // $inductionTraining->department_location = $request->department_location;
+        $inductionTraining->location = $request->location;
         $inductionTraining->designee = $request->designee;
         $inductionTraining->qualification = $request->qualification;
         $inductionTraining->experience_if_any = $request->experience_if_any;
@@ -65,7 +65,6 @@ class InductionTrainingController extends Controller
             $inductionTraining->$trainingDateKey = $trainingDate;
             $inductionTraining->$remarkKey = $remark;
         }
-
         $inductionTraining->trainee_name = $request->trainee_name;
         $inductionTraining->hr_name = $request->hr_name;
         $inductionTraining->save();
@@ -104,12 +103,12 @@ class InductionTrainingController extends Controller
             $validation2->save();
         }
 
-        if (!empty($request->department_location)) {
+        if (!empty($request->department)) {
             $validation2 = new InductionTrainingAudit();
             $validation2->induction_id = $inductionTraining->id;
-            $validation2->activity_type = 'Department & Location';
+            $validation2->activity_type = 'Department';
             $validation2->previous = "Null";
-            $validation2->current = $request->department_location;
+            $validation2->current = $request->department;
             $validation2->comment = "NA";
             $validation2->user_id = Auth::user()->id;
             $validation2->user_name = Auth::user()->name;
@@ -121,12 +120,30 @@ class InductionTrainingController extends Controller
 
             $validation2->save();
         }
-        if (!empty($request->designation)) {
+
+        if (!empty($request->location)) {
+            $validation2 = new InductionTrainingAudit();
+            $validation2->induction_id = $inductionTraining->id;
+            $validation2->activity_type = 'Location';
+            $validation2->previous = "Null";
+            $validation2->current = $request->location;
+            $validation2->comment = "NA";
+            $validation2->user_id = Auth::user()->id;
+            $validation2->user_name = Auth::user()->name;
+            $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+            $validation2->change_to =   "Opened";
+            $validation2->change_from = "Initiation";
+            $validation2->action_name = 'Create';
+
+            $validation2->save();
+        }
+
+        if (!empty($request->designee)) {
             $validation2 = new InductionTrainingAudit();
             $validation2->induction_id = $inductionTraining->id;
             $validation2->activity_type = 'Designation';
             $validation2->previous = "Null";
-            $validation2->current = $request->designation;
+            $validation2->current = $request->designee;
             $validation2->comment = "NA";
             $validation2->user_id = Auth::user()->id;
             $validation2->user_name = Auth::user()->name;

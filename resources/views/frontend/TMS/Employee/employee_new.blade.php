@@ -196,7 +196,7 @@ $userDetails = DB::table('users')
                             <select name="department" required>
                                 <option value="">-- Select --</option>
                                 @foreach ($departments as $department)
-                                <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                <option value="{{ $department->name }}">{{ $department->name }}</option>
                                 @endforeach
                             </select>
                         </div>

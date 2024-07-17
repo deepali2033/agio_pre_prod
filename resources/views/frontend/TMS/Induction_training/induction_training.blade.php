@@ -126,7 +126,7 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="employee_id">Employee ID <span class="text-danger">*</span></label>
-                                    <input disabled type="text" name="employee_id" id="employee_id" required value="">
+                                    <input type="text" name="employee_id" id="employee_id" required value="">
                                 </div>
                             </div>
 
@@ -136,7 +136,7 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                     <select id="select-state" placeholder="Select..." name="name_employee" required>
                                         <option value="">Select an employee</option>
                                         @foreach ($employees as $employee)
-                                        <option value="{{ $employee->name }}">{{ $employee->employee_name }}</option>
+                                        <option value="{{ $employee->id }}">{{ $employee->employee_name }}</option>
                                         @endforeach
                                     </select>
                                     @error('name')
@@ -147,15 +147,22 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
 
                             <div class="col-lg-6">
                                 <div class="group-input">
-                                    <label for="department_location">Department & Location <span class="text-danger">*</span></label>
+                                    <label for="department_location">Department <span class="text-danger">*</span></label>
                                     <input type="text" name="department" id="department">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="group-input">
+                                    <label for="department_location">Location <span class="text-danger">*</span></label>
+                                    <input type="text" name="location" id="city">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="group-input">
                                     <label for="designation">Designation <span class="text-danger">*</span></label>
-                                    <input type="text" name="designee" id="designee" value="">
+                                    <input type="text" name="designee" id="designee" value="" required>
                                 </div>
                             </div>
 
@@ -169,11 +176,13 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                             .then(data => {
                                                 document.getElementById('employee_id').value = data.employee_id;
                                                 document.getElementById('department').value = data.department;
+                                                document.getElementById('city').value = data.city;
                                                 document.getElementById('designee').value = data.designee;
                                             });
                                     } else {
                                         document.getElementById('employee_id').value = '';
                                         document.getElementById('department').value = '';
+                                        document.getElementById('city').value = '';
                                         document.getElementById('designee').value = '';
                                     }
                                 });
@@ -182,8 +191,9 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
 
                             <div class="col-6">
                                 <div class="group-input">
-                                    <label for="Short Description">Qualification <span class="text-danger">
-                                            <input id="docname" type="text" name="qualification">
+                                    <label for="Short Description">Qualification <span class="text-danger">*</span></label>
+
+                                    <input id="docname" type="text" name="qualification">
                                 </div>
                             </div>
 
@@ -192,8 +202,8 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
 
                             <div class="col-lg-6">
                                 <div class="group-input" id="repeat_nature">
-                                    <label for="repeat_nature">Experience (if any)<span class="text-danger d-none">*</span></label>
-                                    <input type="text" name="experience_if_any">
+                                    <label for="repeat_nature">Experience (if any)<span class="text-danger ">*</span></label>
+                                    <input type="text" name="experience_if_any" required>
                                 </div>
                             </div>
 
@@ -579,14 +589,12 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                             <div class="col-6">
                                 <div class="group-input">
                                     <label for="severity-level">HR Name</label>
-
                                     <select name="hr_name">
-                                        <option value="0">-- Select --</option>
-                                        <option value="hr">HR </option>
-
+                                        <option value="hr" selected>HR</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-6">
                                 <div class="group-input">
                                     <label for="severity-level">Trainee Name</label>

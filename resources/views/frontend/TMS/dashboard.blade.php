@@ -391,7 +391,8 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                             <tr>
                                 <th>Employee ID</th>
                                 <th>Name Of Employee</th>
-                                <th>Department/Location</th>
+                                <th>Department</th>
+                                <th>Location</th>
                                 <th>Qualification</th>
                                 <th>Date Of Joining</th>
 
@@ -404,7 +405,8 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                             <tr>
                                 <td>{{ $induction->employee_id }}</td>
                                 <td>{{ $induction->name_employee }}</td>
-                                <td>{{ $induction->department_location }}</td>
+                                <td>{{ $induction->department }}</td>
+                                <td>{{ $induction->location }}</td>
                                 <td>{{ $induction->qualification }}</td>
                                 <td>{{ \Carbon\Carbon::parse($induction->{"date_joining"})->format('d-M-Y')}}</td>
 
