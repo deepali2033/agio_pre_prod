@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use App\Models\Induction_training;
 use App\Models\InductionTrainingAudit;
+use App\Models\RecordNumber;
 use App\Models\RoleGroup;
 use App\Models\User;
 use Carbon\Carbon;
@@ -16,7 +18,20 @@ class InductionTrainingController extends Controller
     // Method to display the form
     public function index()
     {
-        return view('frontend.TMS.Induction_training.induction_training');
+        $record = ((RecordNumber::first()->value('counter')) + 1);
+        $record = str_pad($record, 4, '0', STR_PAD_LEFT);
+        $currentDate = Carbon::now();
+        $formattedDate = $currentDate->addDays(30);
+        $due_date = $formattedDate->format('Y-m-d');
+        $employees = Employee::all();
+
+        return view('frontend.TMS.Induction_training.induction_training', compact('due_date', 'record', 'employees'));
+    }
+
+    public function getEmployeeDetails($id)
+    {
+        $employee = Employee::find($id);
+        return response()->json($employee);
     }
 
     public function store(Request $request)
@@ -28,8 +43,9 @@ class InductionTrainingController extends Controller
         $inductionTraining->status = 'Opened';
         $inductionTraining->employee_id = $request->employee_id;
         $inductionTraining->name_employee = $request->name_employee;
-        $inductionTraining->department_location = $request->department_location;
-        $inductionTraining->designation = $request->designation;
+        $inductionTraining->department = $request->department;
+        // $inductionTraining->department_location = $request->department_location;
+        $inductionTraining->designee = $request->designee;
         $inductionTraining->qualification = $request->qualification;
         $inductionTraining->experience_if_any = $request->experience_if_any;
         $inductionTraining->date_joining = $request->date_joining;
@@ -183,7 +199,8 @@ class InductionTrainingController extends Controller
     public function edit($id)
     {
         $inductionTraining = Induction_training::find($id);
-        return view('frontend.TMS.Induction_training.induction_training_view', compact('inductionTraining'));
+        $employees = Employee::all();
+        return view('frontend.TMS.Induction_training.induction_training_view', compact('inductionTraining', 'employees'));
     }
 
 
@@ -194,8 +211,9 @@ class InductionTrainingController extends Controller
 
         $inductionTraining->employee_id = $request->employee_id;
         $inductionTraining->name_employee = $request->name_employee;
-        $inductionTraining->department_location = $request->department_location;
-        $inductionTraining->designation = $request->designation;
+        $inductionTraining->department = $request->department;
+        // $inductionTraining->department_location = $request->department_location;
+        $inductionTraining->designee = $request->designee;
         $inductionTraining->qualification = $request->qualification;
         $inductionTraining->experience_if_any = $request->experience_if_any;
         $inductionTraining->date_joining = $request->date_joining;

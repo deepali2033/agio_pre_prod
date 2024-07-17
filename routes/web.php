@@ -347,6 +347,8 @@ Route::post('induction_training', [InductionTrainingController::class, 'store'])
 Route::put('induction_training/{id}', [InductionTrainingController::class, 'update'])->name('induction_training.update');
 
 Route::post('/tms/induction/sendstage/{id}', [InductionTrainingController::class, 'sendStage']);
+Route::get('/employees/{id}', [InductionTrainingController::class, 'getEmployeeDetails']);
+
 
 
 

@@ -99,12 +99,6 @@ class TrainerController extends Controller
         $trainerListGrid->data = $request->trainer_listOfAttachment;
         $trainerListGrid->save();
 
-        // } catch (\Exception $e) {
-        //     $res['status'] = 'error';
-        //     $res['message'] = $e->getMessage();
-
-        // }
-
 
         //Audit Trails 
         if (!empty($request->short_description)) {
@@ -710,7 +704,11 @@ class TrainerController extends Controller
         $trainer_skill = TrainerGrid::where(['trainer_qualification_id' => $id, 'identifier' => 'trainerSkillSet'])->first();
         $trainer_list = TrainerGrid::where(['trainer_qualification_id' => $id, 'identifier' => 'listOfAttachment'])->first();
 
-        return view('frontend.TMS.Trainer_qualification.trainer_qualification_view', compact('trainer', 'trainer_skill', 'trainer_list'));
+        $currentDate = Carbon::now();
+        $formattedDate = $currentDate->addDays(30);
+        $due_date = $formattedDate->format('Y-m-d');
+
+        return view('frontend.TMS.Trainer_qualification.trainer_qualification_view', compact('trainer', 'due_date', 'trainer_skill', 'trainer_list'));
     }
 
     public function sendStage(Request $request, $id)

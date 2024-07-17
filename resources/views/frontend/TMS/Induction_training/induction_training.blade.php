@@ -70,24 +70,26 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                 <input type="hidden" name="parent_type" value="{{ $parent_type }}">
                 @endif
                 <!-- General information content -->
-                <div id="CCForm1" class="inner-block cctabcontent">
+
+                <!-- <div id="CCForm1" class="inner-block cctabcontent">
                     <div class="inner-block-content">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="RLS Record Number">Employee ID <span class="text-danger">*</span></label>
                                     <input type="text" name="employee_id" required value="">
+
                                     {{-- <div class="static">QMS-EMEA/CAPA/{{ date('Y') }}/{{ $record_number }}
                                 </div> --}}
                             </div>
                         </div>
-                        <!-- <div class="col-lg-6">
+                        {{-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="RLS Record Number">Name of Employee <span class="text-danger">*</span></label>
                                         <input  type="text" name="name_employee" id="name_employee"
                                             value="" required>
                                     </div>
-                                </div> -->
+                                </div> --}}
                         <div class="col-lg-6">
                             <div class="group-input">
                                 <label for="select-state">Name of Employee<span class="text-danger">*</span></label>
@@ -111,452 +113,508 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                         </div>
                     </div>
 
-
-
-
-
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Initiator Group Code">Designation <span class="text-danger">*</span></label>
                             <input type="text" name="designation" id="designation" value="">
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-6">
-                        <div class="group-input">
-                            <label for="Short Description">Qualification <span class="text-danger">
-                                    <input id="docname" type="text" name="qualification">
-                        </div>
-                    </div>
+                <div id="CCForm1" class="inner-block cctabcontent">
+                    <div class="inner-block-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="group-input">
+                                    <label for="employee_id">Employee ID <span class="text-danger">*</span></label>
+                                    <input disabled type="text" name="employee_id" id="employee_id" required value="">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="group-input">
+                                    <label for="select-state">Name of Employee<span class="text-danger">*</span></label>
+                                    <select id="select-state" placeholder="Select..." name="name_employee" required>
+                                        <option value="">Select an employee</option>
+                                        @foreach ($employees as $employee)
+                                        <option value="{{ $employee->name }}">{{ $employee->employee_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="group-input">
+                                    <label for="department_location">Department & Location <span class="text-danger">*</span></label>
+                                    <input type="text" name="department" id="department">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="group-input">
+                                    <label for="designation">Designation <span class="text-danger">*</span></label>
+                                    <input type="text" name="designee" id="designee" value="">
+                                </div>
+                            </div>
+
+
+                            <script>
+                                document.getElementById('select-state').addEventListener('change', function() {
+                                    var employeeId = this.value;
+                                    if (employeeId) {
+                                        fetch(`/employees/${employeeId}`)
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                document.getElementById('employee_id').value = data.employee_id;
+                                                document.getElementById('department').value = data.department;
+                                                document.getElementById('designee').value = data.designee;
+                                            });
+                                    } else {
+                                        document.getElementById('employee_id').value = '';
+                                        document.getElementById('department').value = '';
+                                        document.getElementById('designee').value = '';
+                                    }
+                                });
+                            </script>
+
+
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="Short Description">Qualification <span class="text-danger">
+                                            <input id="docname" type="text" name="qualification">
+                                </div>
+                            </div>
 
 
 
 
-                    <div class="col-lg-6">
-                        <div class="group-input" id="repeat_nature">
-                            <label for="repeat_nature">Experience (if any)<span class="text-danger d-none">*</span></label>
-                            <input type="text" name="experience_if_any">
-                        </div>
-                    </div>
+                            <div class="col-lg-6">
+                                <div class="group-input" id="repeat_nature">
+                                    <label for="repeat_nature">Experience (if any)<span class="text-danger d-none">*</span></label>
+                                    <input type="text" name="experience_if_any">
+                                </div>
+                            </div>
 
 
-                    <div class="col-6">
-                        <div class="new-date-data-field">
+                            <div class="col-6">
+                                <div class="new-date-data-field">
 
-                            <div class="group-input input-date">
-                                <label for="repeat_nature">Date of Joining<span class="text-danger d-none">*</span></label>
-                                <div class="calenderauditee">
-                                    <input type="text" id="date_joining" readonly placeholder="DD-MMM-YYYY" />
-                                    <input type="date" name="date_joining" value="" class="hide-input" oninput="handleDateInput(this, 'date_joining')" />
+                                    <div class="group-input input-date">
+                                        <label for="repeat_nature">Date of Joining<span class="text-danger d-none">*</span></label>
+                                        <div class="calenderauditee">
+                                            <input type="text" id="date_joining" readonly placeholder="DD-MMM-YYYY" />
+                                            <input type="date" name="date_joining" value="" class="hide-input" oninput="handleDateInput(this, 'date_joining')" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="col-12">
+                                <div class="group-input">
+                                    <div class="why-why-chart">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">Sr.No.</th>
+                                                    <th style="width: 30%;">Name of Document</th>
+                                                    <th>Document Number</th>
+                                                    <th>Training Date</th>
+                                                    {{-- <th>Trainee Sign/Date </th>
+                                                        <th>HR Sign/Date</th> --}}
+                                                    <th>Remark</th>
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td style="background: #DCD8D8">Introduction of Agio Plant</td>
+
+                                                    <td>
+                                                        <textarea name="document_number_1"></textarea>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_1" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_1" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_1')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <textarea name="remark_1"></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td style="background: #DCD8D8">Personnel Hygiene</td>
+                                                    <td>
+                                                        <textarea name="document_number_2"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="2" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="2" value="" class="hide-input" oninput="handleDateInput(this, '2')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_2"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td style="background: #DCD8D8">Entry Exit Procedure in Factory premises</td>
+                                                    <td>
+                                                        <textarea name="document_number_3"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="3" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="3" value="" class="hide-input" oninput="handleDateInput(this, '3')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_3"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td style="background: #DCD8D8">Good Documentation Practices</td>
+                                                    <td>
+                                                        <textarea name="document_number_4"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_4" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_4" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_4')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <textarea name="remark_4"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td style="background: #DCD8D8">Data Integrity</td>
+                                                    <td>
+                                                        <textarea name="document_number_5"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_5" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_5" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_5')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_5"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td style="background: #77a5d1">Modules</td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 . a</td>
+                                                    <td style="background: #DCD8D8"> GMP</td>
+                                                    <td>
+                                                        <textarea name="document_number_6"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_6" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_6" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_6')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_6"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 . b</td>
+                                                    <td style="background: #DCD8D8"> Documentation</td>
+                                                    <td>
+                                                        <textarea name="document_number_7"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_7" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_7" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_7')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_7"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 .c</td>
+                                                    <td style="background: #DCD8D8"> Process Control</td>
+                                                    <td>
+                                                        <textarea name="document_number_8"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_8" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_8" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_8')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_8"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 . d</td>
+                                                    <td style="background: #DCD8D8">d. Cross Contamination</td>
+                                                    <td>
+                                                        <textarea name="document_number_9"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_9" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_9" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_9')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <textarea name="remark_9"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 . e</td>
+                                                    <td style="background: #DCD8D8"> Sanitization and Hygiene</td>
+                                                    <td>
+                                                        <textarea name="document_number_10"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_10" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_10" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_10')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_10"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 . f</td>
+                                                    <td style="background: #DCD8D8"> Warehousing</td>
+                                                    <td>
+                                                        <textarea name="document_number_11"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_11" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_11" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_11')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_11"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 . g</td>
+                                                    <td style="background: #DCD8D8"> Complaint and Recall</td>
+                                                    <td>
+                                                        <textarea name="document_number_12"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_12" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_12" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_12')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_12"></textarea>
+                                                    </td>
+                                                <tr>
+                                                    <td>6 . h</td>
+                                                    <td style="background: #DCD8D8"> Utilities</td>
+                                                    <td>
+                                                        <textarea name="document_number_13"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_13" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_13" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_13')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <textarea name="remark_13"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>6 . i</td>
+                                                    <td style="background: #DCD8D8"> Water</td>
+                                                    <td>
+                                                        <textarea name="document_number_14"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_14" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_14" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_14')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <textarea name="remark_14"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td> 6 . j</td>
+                                                    <td style="background: #DCD8D8"> Safety Module</td>
+                                                    <td>
+                                                        <textarea name="document_number_15"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="new-date-data-field">
+                                                            <div class="group-input input-date">
+                                                                <div class="calenderauditee">
+                                                                    <input type="text" id="training_date_1" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_1" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_1')" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <textarea name="remark_15"></textarea>
+                                                    </td>
+
+                                                </tr>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="severity-level">HR Name</label>
+
+                                    <select name="hr_name">
+                                        <option value="0">-- Select --</option>
+                                        <option value="hr">HR </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="severity-level">Trainee Name</label>
+
+                                    <select name="trainee_name">
+                                        <option value="0">-- Select --</option>
+                                        <option value="trainee1">trainee 1</option>
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="button-block">
+                            <button type="submit" id="ChangesaveButton" class="saveButton">Save</button>
+                            {{-- <button type="button" id="ChangeNextButton" class="nextButton">Next</button> --}}
+                            <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
+                                    Exit </a> </button>
 
-
-
-
-
-
-                    <div class="col-12">
-                        <div class="group-input">
-                            <div class="why-why-chart">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 5%;">Sr.No.</th>
-                                            <th style="width: 30%;">Name of Document</th>
-                                            <th>Document Number</th>
-                                            <th>Training Date</th>
-                                            {{-- <th>Trainee Sign/Date </th>
-                                                        <th>HR Sign/Date</th> --}}
-                                            <th>Remark</th>
-
-
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td style="background: #DCD8D8">Introduction of Agio Plant</td>
-
-                                            <td>
-                                                <textarea name="document_number_1"></textarea>
-                                            </td>
-
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_1" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_1" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_1')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-
-                                            <td>
-                                                <textarea name="remark_1"></textarea>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td style="background: #DCD8D8">Personnel Hygiene</td>
-                                            <td>
-                                                <textarea name="document_number_2"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="2" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="2" value="" class="hide-input" oninput="handleDateInput(this, '2')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_2"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td style="background: #DCD8D8">Entry Exit Procedure in Factory premises</td>
-                                            <td>
-                                                <textarea name="document_number_3"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="3" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="3" value="" class="hide-input" oninput="handleDateInput(this, '3')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_3"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td style="background: #DCD8D8">Good Documentation Practices</td>
-                                            <td>
-                                                <textarea name="document_number_4"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_4" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_4" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_4')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                            <td>
-                                                <textarea name="remark_4"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td style="background: #DCD8D8">Data Integrity</td>
-                                            <td>
-                                                <textarea name="document_number_5"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_5" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_5" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_5')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_5"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td style="background: #77a5d1">Modules</td>
-
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 . a</td>
-                                            <td style="background: #DCD8D8"> GMP</td>
-                                            <td>
-                                                <textarea name="document_number_6"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_6" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_6" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_6')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_6"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 . b</td>
-                                            <td style="background: #DCD8D8"> Documentation</td>
-                                            <td>
-                                                <textarea name="document_number_7"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_7" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_7" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_7')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_7"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 .c</td>
-                                            <td style="background: #DCD8D8"> Process Control</td>
-                                            <td>
-                                                <textarea name="document_number_8"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_8" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_8" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_8')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_8"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 . d</td>
-                                            <td style="background: #DCD8D8">d. Cross Contamination</td>
-                                            <td>
-                                                <textarea name="document_number_9"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_9" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_9" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_9')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                            <td>
-                                                <textarea name="remark_9"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 . e</td>
-                                            <td style="background: #DCD8D8"> Sanitization and Hygiene</td>
-                                            <td>
-                                                <textarea name="document_number_10"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_10" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_10" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_10')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_10"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 . f</td>
-                                            <td style="background: #DCD8D8"> Warehousing</td>
-                                            <td>
-                                                <textarea name="document_number_11"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_11" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_11" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_11')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_11"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 . g</td>
-                                            <td style="background: #DCD8D8"> Complaint and Recall</td>
-                                            <td>
-                                                <textarea name="document_number_12"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_12" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_12" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_12')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_12"></textarea>
-                                            </td>
-                                        <tr>
-                                            <td>6 . h</td>
-                                            <td style="background: #DCD8D8"> Utilities</td>
-                                            <td>
-                                                <textarea name="document_number_13"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_13" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_13" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_13')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <textarea name="remark_13"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>6 . i</td>
-                                            <td style="background: #DCD8D8"> Water</td>
-                                            <td>
-                                                <textarea name="document_number_14"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_14" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_14" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_14')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </td>
-                                            <td>
-                                                <textarea name="remark_14"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td> 6 . j</td>
-                                            <td style="background: #DCD8D8"> Safety Module</td>
-                                            <td>
-                                                <textarea name="document_number_15"></textarea>
-                                            </td>
-                                            <td>
-                                                <div class="new-date-data-field">
-                                                    <div class="group-input input-date">
-                                                        <div class="calenderauditee">
-                                                            <input type="text" id="training_date_1" readonly placeholder="DD-MMM-YYYY" />
-                                                            <input type="date" name="training_date_1" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_1')" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <textarea name="remark_15"></textarea>
-                                            </td>
-
-                                        </tr>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="group-input">
-                            <label for="severity-level">HR Name</label>
-
-                            <select name="hr_name">
-                                <option value="0">-- Select --</option>
-                                <option value="hr">HR </option>
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="group-input">
-                            <label for="severity-level">Trainee Name</label>
-
-                            <select name="trainee_name">
-                                <option value="0">-- Select --</option>
-                                <option value="trainee1">trainee 1</option>
-
-                            </select>
                         </div>
                     </div>
                 </div>
-                <div class="button-block">
-                    <button type="submit" id="ChangesaveButton" class="saveButton">Save</button>
-                    {{-- <button type="button" id="ChangeNextButton" class="nextButton">Next</button> --}}
-                    <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-                            Exit </a> </button>
 
-                </div>
+
+
             </div>
+        </form>
+
     </div>
-
-
-
-</div>
-</form>
-
-</div>
 </div>
 
 <style>

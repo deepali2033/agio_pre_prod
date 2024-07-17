@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('employee_id')->nullable();
             $table->string('name_employee')->nullable();
-            $table->string('department_location')->nullable();
-            $table->string('designation')->nullable();
+            $table->string('department')->nullable();
+            $table->string('location')->nullable();
+            $table->string('designee')->nullable();
             $table->string('qualification')->nullable();
             $table->string('experience_if_any')->nullable();
             $table->date('date_joining')->nullable();
@@ -28,14 +29,13 @@ return new class extends Migration
                 $table->date("training_date_$i")->nullable();
                 $table->text("remark_$i")->nullable();
             }
-            
+
             // Document Details
             $table->string('trainee_name')->nullable();
             $table->string('hr_name')->nullable();
 
             $table->timestamps();
         });
-
     }
 
     /**

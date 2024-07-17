@@ -150,7 +150,15 @@ $users = DB::table('users')->get();
 
         </div>
 
-        <form action="{{ route('induction_training.update', $inductionTraining->id) }}" method="post" enctype="multipart/form-data">
+        <script>
+            $(document).ready(function() {
+                <?php if (in_array($inductionTraining->stage, [2])) : ?>
+                    $("#target :input").prop("disabled", true);
+                <?php endif; ?>
+            });
+        </script>
+
+        <form id="target" action="{{ route('induction_training.update', $inductionTraining->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div id="step-form">
@@ -180,7 +188,7 @@ $users = DB::table('users')->get();
                         <div class="col-lg-6">
                             <div class="group-input">
                                 <label for="Division Code">Department & Location <span class="text-danger">*</span></label>
-                                <input type="text" name="department_location" maxlength="255" value="{{ $inductionTraining->department_location }}">
+                                <input type="text" name="department" maxlength="255" value="{{ $inductionTraining->department }}">
                                 {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}
                             </div> --}}
                         </div>
@@ -189,7 +197,7 @@ $users = DB::table('users')->get();
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Initiator Group Code">Designation <span class="text-danger">*</span></label>
-                            <input type="text" name="designation" id="designation" maxlength="255" value="{{ $inductionTraining->designation }}">
+                            <input type="text" name="designee" id="designee" maxlength="255" value="{{ $inductionTraining->designee }}">
                         </div>
                     </div>
 
