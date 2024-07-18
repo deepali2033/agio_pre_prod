@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('employee_id')->nullable();
             $table->string('name_employee')->nullable();
-            $table->string('department')->nullable();
-            $table->string('location')->nullable();
+
             $table->string('designee')->nullable();
             $table->string('qualification')->nullable();
             $table->string('experience_if_any')->nullable();

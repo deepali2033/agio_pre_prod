@@ -462,16 +462,16 @@ class InductionTrainingController extends Controller
                     $jobTraining->status = "Closed-Retired";
 
 
-                    $history = new InductionTrainingAudit();
-                    $history->induction_id = $id;
-                    $history->activity_type = 'Activity Log';
-                    $history->comment = $request->comment;
-                    $history->user_id = Auth::user()->id;
-                    $history->user_name = Auth::user()->name;
-                    $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
-                    $history->change_to = "Closed-Retired";
-                    $history->change_from = $lastjobTraining->status;
-                    $history->save();
+                    // $history = new InductionTrainingAudit();
+                    // $history->induction_id = $id;
+                    // $history->activity_type = 'Activity Log';
+                    // $history->comment = $request->comment;
+                    // $history->user_id = Auth::user()->id;
+                    // $history->user_name = Auth::user()->name;
+                    // $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+                    // $history->change_to = "Closed-Retired";
+                    // $history->change_from = $lastjobTraining->status;
+                    // $history->save();
                     $jobTraining->update();
                     return back();
                 }

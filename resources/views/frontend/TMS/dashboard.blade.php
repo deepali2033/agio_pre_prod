@@ -363,7 +363,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                         <tbody>
                             @foreach ($jobTrainings as $job_training)
                             <tr>
-                                <td>{{ DB::table('employees')->where('id', $job_training->name)->value('employee_name') }}</td>
+                                <td>{{ DB::table('job_trainings')->where('id', $job_training->id)->value('name') }}</td>
                                 <td>{{ DB::table('departments')->where('id', $job_training->department)->value('name') }}</td>
                                 <td>{{ $job_training->location}}</td>
                                 @for ($i = 1; $i <= 1; $i++) <td>{{ \Carbon\Carbon::parse($job_training->{"startdate_$i"})->format('d-M-Y') }}</td>

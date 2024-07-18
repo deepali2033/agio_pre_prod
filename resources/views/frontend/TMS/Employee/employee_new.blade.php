@@ -195,12 +195,17 @@ $userDetails = DB::table('users')
                             <label for="Department">Department <span class="text-danger">*</span></label>
                             <select name="department" required>
                                 <option value="">-- Select --</option>
-                                @foreach ($departments as $department)
+                                {{-- @foreach ($departments as $department)
                                 <option value="{{ $department->name }}">{{ $department->name }}</option>
+                                @endforeach --}}
+                                @foreach (Helpers::getDepartments() as $code => $department)
+                                <option value="{{ $code }}">{{ $department }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
+
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Job Title">Job Title <span class="text-danger">*</span></label>

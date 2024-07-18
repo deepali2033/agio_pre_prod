@@ -136,10 +136,10 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                     <select id="select-state" placeholder="Select..." name="name_employee" required>
                                         <option value="">Select an employee</option>
                                         @foreach ($employees as $employee)
-                                        <option value="{{ $employee->id }}">{{ $employee->employee_name }}</option>
+                                        <option value="{{ $employee->id }}" data-name="{{ $employee->employee_name }}">{{ $employee->employee_name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('name')
+                                    @error('employee_id')
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -166,10 +166,11 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                 </div>
                             </div>
 
-
                             <script>
                                 document.getElementById('select-state').addEventListener('change', function() {
-                                    var employeeId = this.value;
+                                    var selectedOption = this.options[this.selectedIndex];
+                                    var employeeId = selectedOption.value;
+
                                     if (employeeId) {
                                         fetch(`/employees/${employeeId}`)
                                             .then(response => response.json())
@@ -180,7 +181,6 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                                 document.getElementById('designee').value = data.designee;
                                             });
                                     } else {
-                                        document.getElementById('employee_id').value = '';
                                         document.getElementById('department').value = '';
                                         document.getElementById('city').value = '';
                                         document.getElementById('designee').value = '';
