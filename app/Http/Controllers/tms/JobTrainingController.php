@@ -152,8 +152,6 @@ class JobTrainingController extends Controller
         $jobTraining->department = $request->input('department');
         $jobTraining->location = $request->input('location');
         $jobTraining->hod = $request->input('hod');
-        // $jobTraining->startdate = $request->input('startdate');
-        // $jobTraining->enddate = $request->input('enddate');
 
         for ($i = 1; $i <= 5; $i++) {
             $jobTraining->{"subject_$i"} = $request->input("subject_$i");
@@ -268,7 +266,7 @@ class JobTrainingController extends Controller
                     $jobTraining->status = "Closed-Retired";
 
                     $history = new JobTrainingAudit();
-                    $history->jobTraining_id = $id;
+                    $history->job_id = $id;
                     $history->activity_type = 'Activity Log';
                     $history->current = $jobTraining->qualified_by;
                     $history->comment = $request->comment;
@@ -277,7 +275,10 @@ class JobTrainingController extends Controller
                     $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                     $history->change_to = "Closed-Retired";
                     $history->change_from = $lastjobTraining->status;
+                    $history->action = 'Retire';
+                    $history->stage = 'Submited';
                     $history->save();
+
                     $jobTraining->update();
                     return back();
                 }

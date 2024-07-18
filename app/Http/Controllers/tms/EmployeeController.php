@@ -1396,6 +1396,19 @@ class EmployeeController extends Controller
                     $employee->activated_by = Auth::user()->name;
                     $employee->activated_on = Carbon::now()->format('d-m-Y');
                     $employee->activated_comment = $request->comment;
+
+                    $history = new EmployeeAudit();
+                    $history->job_id = $id;
+                    $history->activity_type = 'Activity Log';
+                    $history->current = $employee->qualified_by;
+                    $history->comment = $request->comment;
+                    $history->user_id = Auth::user()->id;
+                    $history->user_name = Auth::user()->name;
+                    $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+                    $history->change_to = "Active";
+                    $history->change_from = $lastEmployee->status;
+                    $history->action = 'Retire';
+                    $history->stage = 'Submited';
                     $employee->update();
                     return back();
                 }
@@ -1406,6 +1419,19 @@ class EmployeeController extends Controller
                     $employee->retired_by = Auth::user()->name;
                     $employee->retired_on = Carbon::now()->format('d-m-Y');
                     $employee->retired_comment = $request->comment;
+
+                    $history = new EmployeeAudit();
+                    $history->job_id = $id;
+                    $history->activity_type = 'Activity Log';
+                    $history->current = $employee->qualified_by;
+                    $history->comment = $request->comment;
+                    $history->user_id = Auth::user()->id;
+                    $history->user_name = Auth::user()->name;
+                    $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+                    $history->change_to = "Closed-Retired";
+                    $history->change_from = $lastEmployee->status;
+                    $history->action = 'Retire';
+                    $history->stage = 'Submited';
                     $employee->update();
                     return back();
                 }

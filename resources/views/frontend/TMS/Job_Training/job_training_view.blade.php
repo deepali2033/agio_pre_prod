@@ -489,7 +489,7 @@ $users = DB::table('users')->get();
                 <h4 class="modal-title">E-Signature</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="{{ url('tms/job_trainer/sendstage1', $jobTraining->id) }}" method="POST" id="signatureModalForm">
+            <form action="{{ url('rcms/job_trainer_send', $jobTraining->id) }}" method="POST" id="signatureModalForm">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3 text-justify">

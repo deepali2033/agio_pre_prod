@@ -54,6 +54,8 @@ Route::group(['prefix' => 'rcms'], function () {
         function () {
             Route::resource('CC', CCController::class);
 
+            Route::post('job_trainer_send/{id}', [JobTrainingController::class, 'sendStage']);
+
             Route::get('traineraudittrail/{id}', [TrainerController::class, 'trainerAuditTrial'])->name('trainer.audittrail');
 
             // Route::get('auditDetailsTrainer/{id}', [TrainerController::class, 'auditDetailstrainer'])->name('trainerauditDetails');
@@ -68,7 +70,6 @@ Route::group(['prefix' => 'rcms'], function () {
             // Route::get('auditDetailsEmployee/{id}', [InductionTrainingController::class, 'auditDetailsInduction'])->name('InductionauditDetails');
 
             Route::post('employee_Child/{id}', [EmployeeController::class, 'Employee_Child'])->name('employee.child');
-
 
 
 
@@ -243,6 +244,7 @@ Route::group(['prefix' => 'rcms'], function () {
             /********************* Deviation Routes Ends *******************/
 
             Route::get('action-items-create', [ActionItemController::class, 'showAction']);
+
 
             /********************* Non Conformance Routes Starts *******************/
 

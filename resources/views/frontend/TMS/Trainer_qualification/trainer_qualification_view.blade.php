@@ -380,7 +380,8 @@ $departments = DB::table('departments')->select('id', 'name')->get();
 
                     @endif
                     <button class="button_theme1"> <a class="text-white" href="{{ url('TMS') }}"> Exit
-                        </a> </button>
+                        </a>
+                    </button>
 
 
                 </div>
