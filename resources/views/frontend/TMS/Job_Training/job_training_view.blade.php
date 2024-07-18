@@ -191,10 +191,17 @@ $users = DB::table('users')->get();
                         <label for="Department">Department</label>
                         <select name="department">
                             <option value="">-- Select Dept --</option>
-                            @foreach ($departments as $department)
+                            {{-- @foreach ($departments as $department)
                             <option value="{{ $department->id }}" {{ $department->id == old('department', $jobTraining->department) ? 'selected' : '' }}>
-                                {{ $department->name }}
+                            {{ $department->name }}
                             </option>
+                            @endforeach --}}
+                            @php
+                            $savedDepartmentId = old('department', $jobTraining->department);
+                            @endphp
+
+                            @foreach (Helpers::getDepartments() as $code => $department)
+                            <option value="{{ $code }}" @if ($savedDepartmentId==$code) selected @endif>{{ $department }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -482,7 +489,7 @@ $users = DB::table('users')->get();
                 <h4 class="modal-title">E-Signature</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="{{ url('tms/job_trainer/sendstage', $jobTraining->id) }}" method="POST" id="signatureModalForm">
+            <form action="{{ url('tms/job_trainer/sendstage1', $jobTraining->id) }}" method="POST" id="signatureModalForm">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3 text-justify">

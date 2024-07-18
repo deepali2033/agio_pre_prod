@@ -96,8 +96,12 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                         <label for="Department">Department</label>
                         <select name="department">
                             <option value="">-- Select Dept --</option>
-                            @foreach ($departments as $department)
+                            {{-- @foreach ($departments as $department)
                             <option value="{{ $department->id }}">{{ $department->name }}</option>
+                            @endforeach --}}
+
+                            @foreach (Helpers::getDepartments() as $code => $department)
+                            <option value="{{ $code }}">{{ $department }}</option>
                             @endforeach
                         </select>
                     </div>

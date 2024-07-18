@@ -82,6 +82,7 @@ class EmployeeController extends Controller
         $employee->hod = is_array($request->hod) ? implode(',', $request->hod) : '';
         $employee->designee = is_array($request->designee) ? implode(',', $request->designee) : '';
         $employee->comment = $request->comment;
+        $employee->site_division = $request->site_division;
 
         if ($request->hasFile('file_attachment')) {
             $file = $request->file('file_attachment');
@@ -564,6 +565,24 @@ class EmployeeController extends Controller
             $validation2->save();
         }
 
+        if (!empty($request->site_division)) {
+            $validation2 = new EmployeeAudit();
+            $validation2->emp_id = $employee->id;
+            $validation2->activity_type = 'Site Division/Project';
+            $validation2->previous = "Null";
+            $validation2->current = $request->site_division;
+            $validation2->comment = "NA";
+            $validation2->user_id = Auth::user()->id;
+            $validation2->user_name = Auth::user()->name;
+            $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+
+            $validation2->change_to =   "Opened";
+            $validation2->change_from = "Initiation";
+            $validation2->action_name = 'Create';
+
+            $validation2->save();
+        }
+
         if (!empty($request->file_attachment)) {
             $validation2 = new EmployeeAudit();
             $validation2->emp_id = $employee->id;
@@ -637,7 +656,6 @@ class EmployeeController extends Controller
         $lastDocument = Employee::findOrFail($id);
 
         $employee->division_id = $request->division_id;
-        // dd($request->division_id);
         $employee->assigned_to = $request->assigned_to;
         $employee->start_date = $request->start_date;
         $employee->joining_date = $request->joining_date;
@@ -687,6 +705,7 @@ class EmployeeController extends Controller
         $employee->hod = is_array($request->hod) ? implode(',', $request->hod) : '';
         $employee->designee = is_array($request->designee) ? implode(',', $request->designee) : '';
         $employee->comment = $request->comment;
+        $employee->site_division = $request->site_division;
 
         if ($request->hasFile('file_attachment')) {
             $file = $request->file('file_attachment');
@@ -1250,6 +1269,28 @@ class EmployeeController extends Controller
             $validation2->change_to =   "Not Applicable";
             $validation2->change_from = $lastDocument->status;
             if (is_null($lastDocument->comment) || $lastDocument->comment === '') {
+                $validation2->action_name = 'New';
+            } else {
+                $validation2->action_name = 'Update';
+            }
+
+            $validation2->save();
+        }
+
+        if ($lastDocument->site_division != $request->site_division) {
+            $validation2 = new EmployeeAudit();
+            $validation2->emp_id = $employee->id;
+            $validation2->activity_type = 'Site Division/Project';
+            $validation2->previous = $lastDocument->site_division;
+            $validation2->current = $request->site_division;
+            $validation2->site_division = "NA";
+            $validation2->user_id = Auth::user()->id;
+            $validation2->user_name = Auth::user()->name;
+            $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+
+            $validation2->change_to =   "Not Applicable";
+            $validation2->change_from = $lastDocument->status;
+            if (is_null($lastDocument->site_division) || $lastDocument->site_division === '') {
                 $validation2->action_name = 'New';
             } else {
                 $validation2->action_name = 'Update';

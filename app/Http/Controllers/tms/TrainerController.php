@@ -711,7 +711,7 @@ class TrainerController extends Controller
         return view('frontend.TMS.Trainer_qualification.trainer_qualification_view', compact('trainer', 'due_date', 'trainer_skill', 'trainer_list'));
     }
 
-    public function sendStage(Request $request, $id)
+    public function sendStage1(Request $request, $id)
     {
         try {
 
@@ -722,24 +722,24 @@ class TrainerController extends Controller
                 if ($trainer->stage == 1) {
                     $trainer->stage = "2";
                     $trainer->status = "Pending HOD Review";
-                    $trainer->sbmitted_by = Auth::user()->name;
-                    $trainer->sbmitted_on = Carbon::now()->format('d-m-Y');
-                    $trainer->sbmitted_comment = $request->comment;
+                    // $trainer->sbmitted_by = Auth::user()->name;
+                    // $trainer->sbmitted_on = Carbon::now()->format('d-m-Y');
+                    // $trainer->sbmitted_comment = $request->comment;
 
-                    $history = new TrainerQualificationAuditTrial();
-                    $history->trainer_id = $id;
-                    $history->activity_type = 'Activity Log';
-                    $history->current = $trainer->sbmitted_by;
-                    $history->comment = $request->comment;
-                    $history->user_id = Auth::user()->id;
-                    $history->user_name = Auth::user()->name;
-                    $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
-                    $history->origin_state = $lastEmployee->status;
-                    $history->action = 'submit';
-                    $history->change_to = "Pending HOD Review";
-                    $history->change_from = $lastEmployee->status;
-                    $history->stage = 'Submited';
-                    $history->save();
+                    // $history = new TrainerQualificationAuditTrial();
+                    // $history->trainer_id = $id;
+                    // $history->activity_type = 'Activity Log';
+                    // $history->current = $trainer->sbmitted_by;
+                    // $history->comment = $request->comment;
+                    // $history->user_id = Auth::user()->id;
+                    // $history->user_name = Auth::user()->name;
+                    // $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+                    // $history->origin_state = $lastEmployee->status;
+                    // $history->action = 'submit';
+                    // $history->change_to = "Pending HOD Review";
+                    // $history->change_from = $lastEmployee->status;
+                    // $history->stage = 'Submited';
+                    // $history->save();
 
                     $trainer->update();
                     return back();

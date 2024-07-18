@@ -354,7 +354,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="site_name">Site Division/Project<span class="text-danger">*</span></label>
-                                    <input type="text" id="site_name" name="site_name" required>
+                                    <input type="text" id="site_code" name="site_code" required>
                                 </div>
                             </div>
                             {{-- <div class="col-lg-6">
@@ -481,8 +481,12 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                     <label for="Department">Department</label>
                     <select name="department">
                         <option value="">-- Select --</option>
-                        @foreach ($departments as $department)
+                        {{-- @foreach ($departments as $department)
                         <option value="{{ $department->id }}">{{ $department->name }}</option>
+                        @endforeach --}}
+
+                        @foreach (Helpers::getDepartments() as $code => $department)
+                        <option value="{{ $code }}">{{ $department }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -260,7 +260,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                         <tr>
                             <td><a href="{{ url('employee_view', $employee->id) }}">{{ $employee->employee_id }}</a></td>
                             <td>{{ $employee->employee_name ? $employee->employee_name : 'NA' }}</td>
-                            <td>{{ $employee->department_record ? $employee->department_record->name : 'NA' }}</td>
+                            <td>{{ $employee->department ? $employee->department : 'NA' }}</td>
                             <td>{{ $employee->job_title ? $employee->job_title : 'NA' }}</td>
                             <td>{{ $employee->user_assigned ? $employee->user_assigned->name : 'NA' }}</td>
                             <td>{{ Helpers::getdateFormat($employee->joining_date) }}</td>
@@ -289,7 +289,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                             <tr>
                                 <td><a href="{{ url('trainer_qualification_view', $trainer->id) }}">000{{ $trainer->id }}</a></td>
                                 <td>{{ $trainer->trainer_name ? $trainer->trainer_name : 'NA' }}</td>
-                                <td>{{ $trainer->department_record ? $trainer->department_record->name : 'NA' }}</td>
+                                <td>{{ $trainer->department ? $trainer->department : 'NA' }}</td>
                                 <td>{{ Helpers::getdateFormat($trainer->due_date) }}</td>
                                 <td>{{ $trainer->status }}</td>
                             </tr>
@@ -321,7 +321,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <td><a href="{{ url('trainer_qualification_view', $trainer->id) }}">000{{ $trainer->id }}</a></td>
                                 <td>{{ $trainer->trainer_name ? $trainer->trainer_name : 'NA' }}</td>
                                 <td>{{ $trainer->designation ? $trainer->designation : 'NA' }}</td>
-                                <td>{{ $trainer->department_record ? $trainer->department_record->name : 'NA' }}</td>
+                                <td>{{ $trainer->department ? $trainer->department : 'NA' }}</td>
                                 {{-- <td>{{ $trainer->trainer ? $trainer->trainer: 'NA' }}</td> --}}
                                 <td>{{ $trainer->status }}</td>
 
@@ -364,7 +364,8 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                             @foreach ($jobTrainings as $job_training)
                             <tr>
                                 <td>{{ DB::table('job_trainings')->where('id', $job_training->id)->value('name') }}</td>
-                                <td>{{ DB::table('departments')->where('id', $job_training->department)->value('name') }}</td>
+                                {{-- <td>{{ DB::table('departments')->where('id', $job_training->department)->value('name') }}</td> --}}
+                                <td>{{$job_training->department}}</td>
                                 <td>{{ $job_training->location}}</td>
                                 @for ($i = 1; $i <= 1; $i++) <td>{{ \Carbon\Carbon::parse($job_training->{"startdate_$i"})->format('d-M-Y') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($job_training->{"enddate_$i"})->format('d-M-Y') }}</td>
