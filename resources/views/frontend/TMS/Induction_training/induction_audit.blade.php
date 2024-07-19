@@ -185,7 +185,7 @@
                             <div class="heading-new">
                                 Audit Trail
                             </div>
-                            <div class="d-flex" style="gap:15px; margin-right: 20px;"><button type="button"> <a class="text-white" href="{{ route('induction_training_view',$inductionTraining->id) }}">
+                            <div class="d-flex" style="gap:15px; margin-right: 20px;"><button type="button"> <a class="text-white" href="{{ route('induction_training_view', $inductionTraining->id) }}">
                                         Back </a>
                                 </button> <button type="button"> <a class="text-white" href="{{ url('TMS') }}">
                                         Exit </a> </button>
@@ -195,7 +195,7 @@
                         <div> <strong>ID.</strong> {{ $document->id }}</div>
                         <div style="margin-bottom: 5px;  font-weight: bold;"> Originator
                             <!-- :{{ $document->initiator ? $document->initiator : '' }}</div> -->
-                            :{{ $document->name ? $document->name : '' }}
+                            :{{ Auth::user()->name ? Auth::user()->name : '' }}
                         </div>
                         <div style="margin-bottom: 5px; font-weight: bold;">Short Description :
                             {{ $document->short_description }}

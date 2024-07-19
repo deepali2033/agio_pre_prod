@@ -103,6 +103,7 @@ $userDetails = DB::table('users')
         target.value = formattedDate;
     }
 </script>
+
 <div class="form-field-head">
     <div class="pr-id">
         Manage Employee
@@ -122,8 +123,6 @@ $userDetails = DB::table('users')
             <button type="button">Change Project</button>
         </div> --}}
 </div>
-
-
 
 
 {{-- ======================================
@@ -147,12 +146,14 @@ $userDetails = DB::table('users')
                         <a class="text-white" href="{{ route('audittrail', $employee->id) }}"> Audit Trail
                         </a>
                     </button>
-
-                    @if ($employee->stage == 1 && (in_array(3, $userRoleIds) || in_array(18, $userRoleIds)))
+                    <!-- <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
+                        Activate
+                    </button> -->
+                    @if ($employee->stage == 1)
                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
                         Activate
                     </button>
-                    @elseif($employee->stage == 2 && (in_array(4, $userRoleIds) || in_array(18, $userRoleIds)))
+                    @elseif($employee->stage == 2)
                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#child-modal">
                         Child
                     </button>
@@ -161,7 +162,8 @@ $userDetails = DB::table('users')
                     </button>
                     @endif
                     <button class="button_theme1"> <a class="text-white" href="{{ url('TMS') }}"> Exit
-                        </a> </button>
+                        </a>
+                    </button>
 
 
                 </div>
@@ -198,7 +200,6 @@ $userDetails = DB::table('users')
 
                 </div>
                 {{-- @endif --}}
-                {{-- ---------------------------------------------------------------------------------------- --}}
             </div>
         </div>
         <!-- Tab links -->
@@ -322,6 +323,23 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="group-input">
+                            <label for="qualification">Qualification<span class="text-danger">*</span></label>
+                            <input type="text" name="qualification" value="{{$employee->qualification}}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="group-input">
+                            <label for="Experience">Experience (No. of Years)</label>
+                            <select name="experience" id="experience">
+                                <option>Select </option>
+                                @for ($experience = 1; $experience <= 70; $experience++) <option value="{{ $experience }}" @if ($experience==$employee->experience) selected @endif>{{ $experience }}</option>
+                                    @endfor
+                            </select>
+                        </div>
+                    </div>
+
 
                     @php
                     $savedJobTitle = old('job_title', $employee->job_title);
@@ -543,6 +561,43 @@ $userDetails = DB::table('users')
                             <a href="{{ asset('upload/' . $employee->specimen_signature) }}" target="_blank">{{ $employee->specimen_signature }}</a>
                         </div>
                     </div>
+
+                    <div class="col-6">
+                        <div class="group-input">
+                            <label for="Facility Name">HOD </label>
+                            <select multiple name="hod[]" placeholder="Select HOD" data-search="false" data-silent-initial-value-set="true" id="hod">
+                                @foreach ($userDetails as $userRole)
+                                <option value="{{ $userRole->id }}" @if ($userRole->id == $employee->hod) selected @endif>{{ $userRole->name }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                    </div>
+                    {{-- <option value="{{ $userRole->id }}" {{ strpos($employee->designee, $userRole->id) !== false ? 'selected' : '' }}>{{ $userRole->name }}</option> --}}
+                    <div class="col-6">
+                        <div class="group-input">
+                            <label for="Facility Name">Designee </label>
+                            <select multiple name="designee[]" placeholder="Select Designee Name" data-search="false" data-silent-initial-value-set="true" id="designee">
+                                <option value="QA Head" {{ strpos($employee->designee, 'QA Head') !== false ? 'selected' : '' }}>QA Head</option>
+                                <option value="QC Head" {{ strpos($employee->designee, "QC Head") !== false ? 'selected' : '' }}>QC Head</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="group-input">
+                            <label for="Comments">Comments</label>
+                            <textarea name="comment" maxlength="255">{{ $employee->comment }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="group-input">
+                            <label for="File Attachment">File Attachment</label>
+                            <input type="file" id="myfile" name="file_attachment" value="{{ $employee->file_attachment }}">
+                            <a href="{{ asset('upload/' . $employee->file_attachment) }}" target="_blank">{{ $employee->file_attachment }}</a>
+                        </div>
+                    </div>
+
                     <div class="pt-2 group-input">
                         <label for="audit-agenda-grid">
                             Job Responsibilities
@@ -580,41 +635,7 @@ $userDetails = DB::table('users')
                             </table>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="group-input">
-                            <label for="Facility Name">HOD </label>
-                            <select multiple name="hod[]" placeholder="Select HOD" data-search="false" data-silent-initial-value-set="true" id="hod">
-                                @foreach ($userDetails as $userRole)
-                                <option value="{{ $userRole->id }}" @if ($userRole->id == $employee->hod) selected @endif>{{ $userRole->name }}</option>
-                                @endforeach
 
-                            </select>
-                        </div>
-                    </div>
-                    {{-- <option value="{{ $userRole->id }}" {{ strpos($employee->designee, $userRole->id) !== false ? 'selected' : '' }}>{{ $userRole->name }}</option> --}}
-                    <div class="col-6">
-                        <div class="group-input">
-                            <label for="Facility Name">Designee </label>
-                            <select multiple name="designee[]" placeholder="Select Designee Name" data-search="false" data-silent-initial-value-set="true" id="designee">
-                                <option value="QA Head" {{ strpos($employee->designee, 'QA Head') !== false ? 'selected' : '' }}>QA Head</option>
-                                <option value="QC Head" {{ strpos($employee->designee, "QC Head") !== false ? 'selected' : '' }}>QC Head</option>
-
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="group-input">
-                            <label for="Comments">Comments</label>
-                            <textarea name="comment" maxlength="255">{{ $employee->comment }}</textarea>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="group-input">
-                            <label for="File Attachment">File Attachment</label>
-                            <input type="file" id="myfile" name="file_attachment" value="{{ $employee->file_attachment }}">
-                            <a href="{{ asset('upload/' . $employee->file_attachment) }}" target="_blank">{{ $employee->file_attachment }}</a>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="button-block">

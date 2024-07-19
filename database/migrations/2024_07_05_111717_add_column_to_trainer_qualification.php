@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('trainer_qualifications', function (Blueprint $table) {
             $table->string('hod')->nullable();
+            $table->string('experience')->nullable();
         });
     }
 

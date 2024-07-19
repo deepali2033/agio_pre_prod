@@ -26,7 +26,6 @@ class EmployeeController extends Controller
             'body' => [],
         ];
 
-
         // return $request->all();
         // try {
         $employee = new Employee();
@@ -40,6 +39,8 @@ class EmployeeController extends Controller
         $employee->employee_name = $request->employee_name;
         $employee->gender = $request->gender;
         $employee->department = $request->department;
+        $employee->qualification = $request->qualification;
+        $employee->experience = $request->experience;
         $employee->job_title = $request->job_title;
 
         if ($request->hasFile('attached_cv')) {
@@ -663,6 +664,8 @@ class EmployeeController extends Controller
         $employee->employee_name = $request->employee_name;
         $employee->gender = $request->gender;
         $employee->department = $request->department;
+        $employee->qualification = $request->qualification;
+        $employee->experience = $request->experience;
         $employee->job_title = $request->job_title;
 
         if ($request->hasFile('attached_cv')) {
@@ -1432,6 +1435,7 @@ class EmployeeController extends Controller
                     $history->change_from = $lastEmployee->status;
                     $history->action = 'Retire';
                     $history->stage = 'Submited';
+
                     $employee->update();
                     return back();
                 }

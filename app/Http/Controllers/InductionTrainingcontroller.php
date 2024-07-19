@@ -36,19 +36,38 @@ class InductionTrainingController extends Controller
 
     public function store(Request $request)
     {
+
         $inductionTraining = new Induction_training();
 
 
         $inductionTraining->stage = '1';
         $inductionTraining->status = 'Opened';
         $inductionTraining->employee_id = $request->employee_id;
-        $inductionTraining->name_employee = $request->name_employee;
+        $inductionTraining->name_employee = $request->employee_name;
         $inductionTraining->department = $request->department;
         $inductionTraining->location = $request->location;
         $inductionTraining->designee = $request->designee;
         $inductionTraining->qualification = $request->qualification;
         $inductionTraining->experience_if_any = $request->experience_if_any;
         $inductionTraining->date_joining = $request->date_joining;
+
+        $inductionTraining->training_date_1 = $request->training_date_1;
+        $inductionTraining->training_date_2 = $request->training_date_2;
+        $inductionTraining->training_date_3 = $request->training_date_3;
+        $inductionTraining->training_date_4 = $request->training_date_4;
+        $inductionTraining->training_date_5 = $request->training_date_5;
+        $inductionTraining->training_date_6 = $request->training_date_6;
+        $inductionTraining->training_date_7 = $request->training_date_7;
+        $inductionTraining->training_date_8 = $request->training_date_8;
+        $inductionTraining->training_date_9 = $request->training_date_9;
+        $inductionTraining->training_date_10 = $request->training_date_10;
+        $inductionTraining->training_date_11 = $request->training_date_11;
+        $inductionTraining->training_date_12 = $request->training_date_12;
+        $inductionTraining->training_date_13 = $request->training_date_13;
+        $inductionTraining->training_date_14 = $request->training_date_14;
+        $inductionTraining->training_date_15 = $request->training_date_15;
+        // $inductionTraining->training_date_16 = $request->training_date_16;
+
 
         // Handle looping through the document fields
         for ($i = 1; $i <= 16; $i++) {
@@ -197,7 +216,7 @@ class InductionTrainingController extends Controller
             $validation2->induction_id = $inductionTraining->id;
             $validation2->activity_type = 'Date of Joining';
             $validation2->previous = "Null";
-            $validation2->current = $request->date_joining;
+            $validation2->current = \Carbon\Carbon::parse($request->date_joining)->format('d-M-Y');
             $validation2->comment = "NA";
             $validation2->user_id = Auth::user()->id;
             $validation2->user_name = Auth::user()->name;
@@ -234,6 +253,22 @@ class InductionTrainingController extends Controller
         $inductionTraining->qualification = $request->qualification;
         $inductionTraining->experience_if_any = $request->experience_if_any;
         $inductionTraining->date_joining = $request->date_joining;
+
+        $inductionTraining->training_date_1 = $request->training_date_1;
+        $inductionTraining->training_date_2 = $request->training_date_2;
+        $inductionTraining->training_date_3 = $request->training_date_3;
+        $inductionTraining->training_date_4 = $request->training_date_4;
+        $inductionTraining->training_date_5 = $request->training_date_5;
+        $inductionTraining->training_date_6 = $request->training_date_6;
+        $inductionTraining->training_date_7 = $request->training_date_7;
+        $inductionTraining->training_date_8 = $request->training_date_8;
+        $inductionTraining->training_date_9 = $request->training_date_9;
+        $inductionTraining->training_date_10 = $request->training_date_10;
+        $inductionTraining->training_date_11 = $request->training_date_11;
+        $inductionTraining->training_date_12 = $request->training_date_12;
+        $inductionTraining->training_date_13 = $request->training_date_13;
+        $inductionTraining->training_date_14 = $request->training_date_14;
+        $inductionTraining->training_date_15 = $request->training_date_15;
 
         // Handle looping through the document fields
         for ($i = 1; $i <= 16; $i++) {
@@ -381,8 +416,8 @@ class InductionTrainingController extends Controller
         if ($lastdocument->date_joining != $inductionTraining->date_joining) {
             $validation2 = new InductionTrainingAudit();
             $validation2->induction_id = $inductionTraining->id;
-            $validation2->previous = $lastdocument->date_joining;
-            $validation2->current = $inductionTraining->date_joining;
+            $validation2->previous = \Carbon\Carbon::parse($lastdocument->date_joining)->format('d-M-Y');
+            $validation2->current = \Carbon\Carbon::parse($inductionTraining->date_joining)->format('d-M-Y');
             $validation2->activity_type = 'Date of Joining';
             $validation2->user_id = Auth::user()->id;
             $validation2->user_name = Auth::user()->name;

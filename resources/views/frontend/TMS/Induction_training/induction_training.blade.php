@@ -69,56 +69,7 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                 <input type="hidden" name="parent_id" value="{{ $parent_id }}">
                 <input type="hidden" name="parent_type" value="{{ $parent_type }}">
                 @endif
-                <!-- General information content -->
-
-                <!-- <div id="CCForm1" class="inner-block cctabcontent">
-                    <div class="inner-block-content">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="group-input">
-                                    <label for="RLS Record Number">Employee ID <span class="text-danger">*</span></label>
-                                    <input type="text" name="employee_id" required value="">
-
-                                    {{-- <div class="static">QMS-EMEA/CAPA/{{ date('Y') }}/{{ $record_number }}
-                                </div> --}}
-                            </div>
-                        </div>
-                        {{-- <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="RLS Record Number">Name of Employee <span class="text-danger">*</span></label>
-                                        <input  type="text" name="name_employee" id="name_employee"
-                                            value="" required>
-                                    </div>
-                                </div> --}}
-                        <div class="col-lg-6">
-                            <div class="group-input">
-                                <label for="select-state">Name of Employee<span class="text-danger">*</span></label>
-                                <select id="select-state" placeholder="Select..." name="name_employee" required>
-                                    <option value="">Select an employee</option>
-                                    @foreach ($employees as $data)
-                                    <option value="{{ $data->id }}">{{ $data->employee_name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('name')
-                                <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="group-input">
-                                <label for="Division Code">Department & Location <span class="text-danger">*</span></label>
-                                <input type="text" name="department_location">
-                                {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}
-                            </div> --}}
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="group-input">
-                            <label for="Initiator Group Code">Designation <span class="text-danger">*</span></label>
-                            <input type="text" name="designation" id="designation" value="">
-                        </div>
-                    </div> -->
+                {{-- General information content --}}
 
                 <div id="CCForm1" class="inner-block cctabcontent">
                     <div class="inner-block-content">
@@ -126,7 +77,7 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="employee_id">Employee ID <span class="text-danger">*</span></label>
-                                    <input type="text" name="employee_id" id="employee_id" required value="">
+                                    <input type="text" name="employee_id" id="employee_id" required readonly>
                                 </div>
                             </div>
 
@@ -148,21 +99,48 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="department_location">Department <span class="text-danger">*</span></label>
-                                    <input type="text" name="department" id="department">
+                                    <input type="text" name="department" id="department" readonly>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="department_location">Location <span class="text-danger">*</span></label>
-                                    <input type="text" name="location" id="city">
+                                    <input type="text" name="location" id="city" readonly>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="designation">Designation <span class="text-danger">*</span></label>
-                                    <input type="text" name="designee" id="designee" value="" required>
+                                    <input type="text" name="designee" id="designee" required readonly>
+                                </div>
+                            </div>
+                            <input type="hidden" name="employee_name" id="employee_name">
+
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="Short Description">Qualification <span class="text-danger">*</span></label>
+                                    <input id="qualification" type="text" name="qualification" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="group-input" id="repeat_nature">
+                                    <label for="repeat_nature">Experience (if any)<span class="text-danger ">*</span></label>
+                                    <input type="text" name="experience_if_any" id="experience" required readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="new-date-data-field">
+                                    <div class="group-input input-date">
+                                        <label for="repeat_nature">Date of Joining<span class="text-danger d-none">*</span></label>
+                                        <div class="calenderauditee">
+                                            <input type="text" id="date_joining_display" readonly placeholder="DD-MMM-YYYY" />
+                                            <input type="date" name="date_joining" id="date_joining" class="hide-input" oninput="handleDateInput(this, 'date_joining_display')" readonly />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -170,6 +148,7 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                 document.getElementById('select-state').addEventListener('change', function() {
                                     var selectedOption = this.options[this.selectedIndex];
                                     var employeeId = selectedOption.value;
+                                    var employeeName = selectedOption.getAttribute('data-name');
 
                                     if (employeeId) {
                                         fetch(`/employees/${employeeId}`)
@@ -179,50 +158,35 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                                 document.getElementById('department').value = data.department;
                                                 document.getElementById('city').value = data.city;
                                                 document.getElementById('designee').value = data.designee;
+                                                document.getElementById('experience').value = data.experience;
+                                                document.getElementById('qualification').value = data.qualification;
+                                                document.getElementById('date_joining').value = data.joining_date;
+                                                document.getElementById('date_joining_display').value = formatDate(data.joining_date);
                                             });
+                                        document.getElementById('employee_name').value = employeeName;
                                     } else {
+                                        document.getElementById('employee_id').value = '';
                                         document.getElementById('department').value = '';
                                         document.getElementById('city').value = '';
                                         document.getElementById('designee').value = '';
+                                        document.getElementById('experience').value = '';
+                                        document.getElementById('qualification').value = '';
+                                        document.getElementById('employee_name').value = '';
+                                        document.getElementById('date_joining').value = '';
+                                        document.getElementById('date_joining_display').value = '';
                                     }
                                 });
+
+                                function formatDate(dateString) {
+                                    const date = new Date(dateString);
+                                    const options = {
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: '2-digit'
+                                    };
+                                    return date.toLocaleDateString('en-GB', options).replace(/ /g, '-');
+                                }
                             </script>
-
-
-                            <div class="col-6">
-                                <div class="group-input">
-                                    <label for="Short Description">Qualification <span class="text-danger">*</span></label>
-
-                                    <input id="docname" type="text" name="qualification">
-                                </div>
-                            </div>
-
-
-
-
-                            <div class="col-lg-6">
-                                <div class="group-input" id="repeat_nature">
-                                    <label for="repeat_nature">Experience (if any)<span class="text-danger ">*</span></label>
-                                    <input type="text" name="experience_if_any" required>
-                                </div>
-                            </div>
-
-
-                            <div class="col-6">
-                                <div class="new-date-data-field">
-
-                                    <div class="group-input input-date">
-                                        <label for="repeat_nature">Date of Joining<span class="text-danger d-none">*</span></label>
-                                        <div class="calenderauditee">
-                                            <input type="text" id="date_joining" readonly placeholder="DD-MMM-YYYY" />
-                                            <input type="date" name="date_joining" value="" class="hide-input" oninput="handleDateInput(this, 'date_joining')" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
 
 
 
@@ -239,20 +203,15 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                                     {{-- <th>Trainee Sign/Date </th>
                                                         <th>HR Sign/Date</th> --}}
                                                     <th>Remark</th>
-
-
-
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>1</td>
                                                     <td style="background: #DCD8D8">Introduction of Agio Plant</td>
-
                                                     <td>
                                                         <textarea name="document_number_1"></textarea>
                                                     </td>
-
                                                     <td>
                                                         <div class="new-date-data-field">
                                                             <div class="group-input input-date">
@@ -263,7 +222,6 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                                             </div>
                                                         </div>
                                                     </td>
-
 
                                                     <td>
                                                         <textarea name="remark_1"></textarea>
@@ -279,13 +237,12 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                                         <div class="new-date-data-field">
                                                             <div class="group-input input-date">
                                                                 <div class="calenderauditee">
-                                                                    <input type="text" id="2" readonly placeholder="DD-MMM-YYYY" />
-                                                                    <input type="date" name="2" value="" class="hide-input" oninput="handleDateInput(this, '2')" />
+                                                                    <input type="text" id="training_date_2" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_2" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_2')" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </td>
-
                                                     <td>
                                                         <textarea name="remark_2"></textarea>
                                                     </td>
@@ -301,8 +258,8 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                                         <div class="new-date-data-field">
                                                             <div class="group-input input-date">
                                                                 <div class="calenderauditee">
-                                                                    <input type="text" id="3" readonly placeholder="DD-MMM-YYYY" />
-                                                                    <input type="date" name="3" value="" class="hide-input" oninput="handleDateInput(this, '3')" />
+                                                                    <input type="text" id="training_date_3" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_3" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_3')" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -569,8 +526,8 @@ $employees = DB::table('employees')->select('id', 'employee_name')->get();
                                                         <div class="new-date-data-field">
                                                             <div class="group-input input-date">
                                                                 <div class="calenderauditee">
-                                                                    <input type="text" id="training_date_1" readonly placeholder="DD-MMM-YYYY" />
-                                                                    <input type="date" name="training_date_1" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_1')" />
+                                                                    <input type="text" id="training_date_15" readonly placeholder="DD-MMM-YYYY" />
+                                                                    <input type="date" name="training_date_15" value="" class="hide-input" oninput="handleDateInput(this, 'training_date_15')" />
                                                                 </div>
                                                             </div>
                                                         </div>

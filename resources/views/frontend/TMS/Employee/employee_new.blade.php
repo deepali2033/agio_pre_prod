@@ -189,6 +189,13 @@ $userDetails = DB::table('users')
             </select>
         </div>
     </div>
+
+    <div class="col-lg-6">
+        <div class="group-input">
+            <label for="qualification">Qualification<span class="text-danger">*</span></label>
+            <input type="text" name="qualification" required>
+        </div>
+    </div>
     <div class="col-lg-6">
         <div class="group-input">
             <label for="Department">Department <span class="text-danger">*</span></label>
@@ -227,6 +234,19 @@ $userDetails = DB::table('users')
             </select>
         </div>
     </div>
+
+    <div class="col-lg-6">
+        <div class="group-input">
+            <label for="Experience">Experience (No. of Years)<span class="text-danger">*</span></label>
+            <select name="experience" id="Experience" required>
+                <option value="">Select </option>
+                @for ($i = 1; $i <= 70; $i++) <option value="{{ $i }}">{{ $i }}</option>
+                    @endfor
+            </select>
+        </div>
+    </div>
+
+
     <div class="col-lg-6">
         <div class="group-input">
             <label for="Attached CV">Attached CV</label>
@@ -367,6 +387,7 @@ $userDetails = DB::table('users')
             loadCountries();
         });
     </script>
+
     <div class="col-lg-6">
         <div class="group-input">
             <label for="Site Name">Site Name</label>
@@ -416,33 +437,7 @@ $userDetails = DB::table('users')
             <input type="file" id="myfile" name="specimen_signature">
         </div>
     </div>
-    <div class="group-input">
-        <label for="audit-agenda-grid">
-            Job Responsibilities
-            <button type="button" name="audit-agenda-grid" id="ObservationAdd">+</button>
-            <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
-                (Launch Instruction)
-            </span>
-        </label>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="job-responsibilty-table" style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th style="width: 5%;">Sr No.</th>
-                        <th>Job Responsibilities </th>
-                        <th>Remarks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input disabled type="text" name="jobResponsibilities[0][serial]" value="1"></td>
-                        <td><input type="text" name="jobResponsibilities[0][job]"></td>
-                        <td><input type="text" name="jobResponsibilities[0][remarks]"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+
     <div class="col-6">
         <div class="group-input">
             <label for="Facility Name">HOD </label>
@@ -478,9 +473,41 @@ $userDetails = DB::table('users')
     </div>
 </div>
 
+<div class="col-12 sub-head">
+    Job Responsibilities
+</div>
+<div class="group-input">
+    <label for="audit-agenda-grid">
+        Job Responsibilities
+        <button type="button" name="audit-agenda-grid" id="ObservationAdd">+</button>
+        <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
+            (Launch Instruction)
+        </span>
+    </label>
+    <div class="table-responsive">
+        <table class="table table-bordered" id="job-responsibilty-table" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">Sr No.</th>
+                    <th>Job Responsibilities </th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input disabled type="text" name="jobResponsibilities[0][serial]" value="1"></td>
+                    <td><input type="text" name="jobResponsibilities[0][job]"></td>
+                    <td><input type="text" name="jobResponsibilities[0][remarks]"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div class="button-block">
     <button type="submit" id="ChangesaveButton01" class="saveButton">Save</button>
     <button type="button" id="ChangeNextButton" class="nextButton">Next</button>
+    <button type="button" class="backButton" onclick="previousStep()">Back</button>
     <button type="button"> <a href="{{ url('TMS') }}" class="text-white">
             Exit </a> </button>
 </div>
@@ -589,12 +616,35 @@ $userDetails = DB::table('users')
         </div>
         <div class="button-block">
             <button type="submit" id="ChangesaveButton02" class="saveButton">Save</button>
+            <button type="button" class="backButton" onclick="previousStep()">Back</button>
             <button type="button" id="ChangeNextButton" class="nextButton">Next</button>
             <button type="button"> <a href="{{ url('TMS') }}" class="text-white">
                     Exit </a> </button>
         </div>
     </div>
 </div>
+
+<script>
+    function previousStep() {
+        // Check if there is a previous step
+        if (currentStep > 0) {
+            // Hide current step
+            steps[currentStep].style.display = "none";
+
+            // Show previous step
+            steps[currentStep - 1].style.display = "block";
+
+            // Add active class to previous button
+            stepButtons[currentStep - 1].classList.add("active");
+
+            // Remove active class from current button
+            stepButtons[currentStep].classList.remove("active");
+
+            // Update current step
+            currentStep--;
+        }
+    }
+</script>
 <!-- Activity Log content -->
 <div id="CCForm6" class="inner-block cctabcontent">
     <div class="inner-block-content">

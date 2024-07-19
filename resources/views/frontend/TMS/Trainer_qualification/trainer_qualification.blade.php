@@ -514,7 +514,7 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                                             <option value="high">High Priority</option>
                                         </select>
                                     </div>
-                                </div> --}}
+            </div> --}}
 
 
             {{-- <div class="col-lg-6">
