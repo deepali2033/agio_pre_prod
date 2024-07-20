@@ -296,7 +296,7 @@ $users = DB::table('users')->get();
                             <input type="text" name="reference_document_no_{{ $i }}" value="{{ $jobTraining->{'reference_document_no_' . $i} }}">
                         </td>
                         {{-- <td>
-                                            <select name="trainee_name_{{ $i }}" id="">
+                        <select name="trainee_name_{{ $i }}" id="">
                         <option value="">-- Select --</option>
                         @foreach ($trainers as $trainer)
                         <option value="{{ $trainer->id }}" {{ $jobTraining->{'trainee_name_' . $i} == $trainer->id ? 'selected' : '' }}>{{ $trainer->name }}</option>

@@ -845,16 +845,16 @@ $userDetails = DB::table('users')
                 </div>
             </div>
         </div>
-        {{-- <div class="button-block">
-                        <button type="submit" class="saveButton">Save</button>
-                        <a href="/rcms/qms-dashboard">
-                            <button type="button" class="backButton">Back</button>
-                        </a>
-                        <button type="submit">Submit</button>
-                        <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-        Exit </a> </button>
-    </div> --}}
-</div>
+        <div class="button-block">
+            {{-- <button type="submit" class="saveButton">Save</button>
+            <a href="/rcms/qms-dashboard"> --}}
+            {{-- <button type="button" class="backButton">Back</button> --}}
+            </a>
+            <button type="submit">Submit</button>
+            <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
+                    Exit </a> </button>
+        </div>
+    </div>
 </div>
 </form>
 </div>
@@ -874,9 +874,6 @@ $userDetails = DB::table('users')
                 <form action="{{ route('employee.child', $employee->id) }}" method="POST">
                     @csrf
                     <!-- Modal body -->
-
-
-
                     <div class="modal-body">
                         <div class="group-input">
                             @if ($employee->stage == 2)

@@ -260,7 +260,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                         <tr>
                             <td><a href="{{ url('employee_view', $employee->id) }}">{{ $employee->employee_id }}</a></td>
                             <td>{{ $employee->employee_name ? $employee->employee_name : 'NA' }}</td>
-                            <td>{{ $employee->department ? $employee->department : 'NA' }}</td>
+                            <td>{{Helpers::getFullDepartmentName($employee->department) ? Helpers::getFullDepartmentName($employee->department) : 'NA' }}</td>
                             <td>{{ $employee->job_title ? $employee->job_title : 'NA' }}</td>
                             <td>{{ $employee->user_assigned ? $employee->user_assigned->name : 'NA' }}</td>
                             <td>{{ Helpers::getdateFormat($employee->joining_date) }}</td>

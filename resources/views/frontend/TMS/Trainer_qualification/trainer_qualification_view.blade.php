@@ -365,11 +365,11 @@ $departments = DB::table('departments')->select('id', 'name')->get();
                         </a>
                     </button>
 
-                    @if ($trainer->stage == 1 && (in_array(3, $userRoleIds) || in_array(18, $userRoleIds)))
+                    @if ($trainer->stage == 1)
                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
                         Submit
                     </button>
-                    @elseif($trainer->stage == 2 && (in_array(4, $userRoleIds) || in_array(18, $userRoleIds)))
+                    @elseif($trainer->stage == 2)
 
                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#signature-modal">
                         Qualified

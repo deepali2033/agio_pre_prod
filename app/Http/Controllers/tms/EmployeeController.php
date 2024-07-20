@@ -1236,6 +1236,7 @@ class EmployeeController extends Controller
             $validation2->save();
         }
 
+
         if ($lastDocument->designee != $request->designee) {
             $validation2 = new EmployeeAudit();
             $validation2->emp_id = $employee->id;
@@ -1257,6 +1258,7 @@ class EmployeeController extends Controller
 
             $validation2->save();
         }
+
 
         if ($lastDocument->comment != $request->comment) {
             $validation2 = new EmployeeAudit();
@@ -1280,13 +1282,14 @@ class EmployeeController extends Controller
             $validation2->save();
         }
 
+
         if ($lastDocument->site_division != $request->site_division) {
             $validation2 = new EmployeeAudit();
             $validation2->emp_id = $employee->id;
             $validation2->activity_type = 'Site Division/Project';
             $validation2->previous = $lastDocument->site_division;
             $validation2->current = $request->site_division;
-            $validation2->site_division = "NA";
+            $validation2->comment = "NA";
             $validation2->user_id = Auth::user()->id;
             $validation2->user_name = Auth::user()->name;
             $validation2->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
