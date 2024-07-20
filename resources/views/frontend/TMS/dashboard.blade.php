@@ -289,7 +289,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                             <tr>
                                 <td><a href="{{ url('trainer_qualification_view', $trainer->id) }}">000{{ $trainer->id }}</a></td>
                                 <td>{{ $trainer->trainer_name ? $trainer->trainer_name : 'NA' }}</td>
-                                <td>{{ $trainer->department ? $trainer->department : 'NA' }}</td>
+                                <td>{{ Helpers::getFullDepartmentName($trainer->department) ? Helpers::getFullDepartmentName($trainer->department) : 'NA' }}</td>
                                 <td>{{ Helpers::getdateFormat($trainer->due_date) }}</td>
                                 <td>{{ $trainer->status }}</td>
                             </tr>
@@ -321,7 +321,7 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                                 <td><a href="{{ url('trainer_qualification_view', $trainer->id) }}">000{{ $trainer->id }}</a></td>
                                 <td>{{ $trainer->trainer_name ? $trainer->trainer_name : 'NA' }}</td>
                                 <td>{{ $trainer->designation ? $trainer->designation : 'NA' }}</td>
-                                <td>{{ $trainer->department ? $trainer->department : 'NA' }}</td>
+                                <td>{{ Helpers::getFullDepartmentName($trainer->department) ? Helpers::getFullDepartmentName($trainer->department) : 'NA' }}</td>
                                 {{-- <td>{{ $trainer->trainer ? $trainer->trainer: 'NA' }}</td> --}}
                                 <td>{{ $trainer->status }}</td>
 

@@ -258,6 +258,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-6 new-date-data-field">
                         <div class="group-input input-date">
                             <label for="Joining Date">Joining Date</label>
@@ -267,9 +268,6 @@ $userDetails = DB::table('users')
                             </div>
                         </div>
                     </div>
-
-
-
 
 
                     <div class="col-lg-6 new-date-data-field">
@@ -288,12 +286,14 @@ $userDetails = DB::table('users')
                             <input type="text" name="employee_id" value="{{ $employee->employee_id }}">
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="employee_name">Employee Name</label>
                             <input type="text" name="employee_name" value="{{ $employee->employee_name }}">
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Gender">Gender</label>
@@ -304,6 +304,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Department">Department</label>
@@ -323,6 +324,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="qualification">Qualification<span class="text-danger">*</span></label>
@@ -374,6 +376,7 @@ $userDetails = DB::table('users')
                             <a href="{{ asset('upload/' . $employee->attached_cv) }}" target="_blank">{{ $employee->attached_cv }}</a>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Certification/Qualification">Certification/Qualification</label>
@@ -381,6 +384,7 @@ $userDetails = DB::table('users')
                             <a href="{{ asset('upload/' . $employee->certification) }}" target="_blank">{{ $employee->certification }}</a>
                         </div>
                     </div>
+
                     <div class="pt-2 col-12 sub-head">
                         Employee Information
                     </div>
@@ -399,6 +403,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Country">Country</label>
@@ -407,6 +412,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="City">State</label>
@@ -415,6 +421,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="State/District">City</label>
@@ -423,6 +430,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <script>
                         var config = {
                             cUrl: 'https://api.countrystatecity.in/v1',
@@ -509,6 +517,7 @@ $userDetails = DB::table('users')
                             loadCountries();
                         });
                     </script>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Site Name">Site Name</label>
@@ -526,6 +535,7 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <div class="group-input">
@@ -534,18 +544,21 @@ $userDetails = DB::table('users')
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Floor">Floor</label>
                             <input type="text" name="floor" value="{{ $employee->floor }}">
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="group-input">
                             <label for="Room">Room</label>
                             <input type="text" name="room" value="{{ $employee->room }}">
                         </div>
                     </div>
+
                     <div class="col-6">
                         <div class="group-input">
                             <label for="Picture">Picture</label>
@@ -573,7 +586,9 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     {{-- <option value="{{ $userRole->id }}" {{ strpos($employee->designee, $userRole->id) !== false ? 'selected' : '' }}>{{ $userRole->name }}</option> --}}
+
                     <div class="col-6">
                         <div class="group-input">
                             <label for="Facility Name">Designee </label>
@@ -584,12 +599,14 @@ $userDetails = DB::table('users')
                             </select>
                         </div>
                     </div>
+
                     <div class="col-12">
                         <div class="group-input">
                             <label for="Comments">Comments</label>
                             <textarea name="comment" maxlength="255">{{ $employee->comment }}</textarea>
                         </div>
                     </div>
+
                     <div class="col-12">
                         <div class="group-input">
                             <label for="File Attachment">File Attachment</label>
@@ -598,6 +615,9 @@ $userDetails = DB::table('users')
                         </div>
                     </div>
 
+                    <div class="col-12 sub-head">
+                        Job Responsibilities
+                    </div>
                     <div class="pt-2 group-input">
                         <label for="audit-agenda-grid">
                             Job Responsibilities
@@ -620,8 +640,8 @@ $userDetails = DB::table('users')
                                     @foreach ($employee_grid_data->data as $index => $employee_grid)
                                     <tr>
                                         <td><input disabled type="text" name="jobResponsibilities[{{ $loop->index }}][serial]" value="{{ $loop->index+1 }}"></td>
-                                        <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][job]" value=" {{ array_key_exists('job', $employee_grid) ? $employee_grid['job'] : '' }}"></td>
-                                        <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][remarks]" value=" {{ array_key_exists('remarks', $employee_grid) ? $employee_grid['remarks'] : '' }}"></td>
+                                        <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][job]" value="{{ array_key_exists('job', $employee_grid) ? $employee_grid['job'] : '' }}"></td>
+                                        <td><input type="text" name="jobResponsibilities[{{ $loop->index }}][remarks]" value="{{ array_key_exists('remarks', $employee_grid) ? $employee_grid['remarks'] : '' }}"></td>
                                     </tr>
                                     @endforeach
                                     @else
@@ -644,7 +664,8 @@ $userDetails = DB::table('users')
                     <button type="button" class="cctablinks " onclick="openCity(event, 'CCForm2')">Next</button>
 
                     <button type="button"> <a href="{{ url('TMS') }}" class="text-white">
-                            Exit </a> </button>
+                            Exit </a>
+                    </button>
                 </div>
 
             </div>
