@@ -731,9 +731,9 @@
                                     Reported By <span class="text-danger"></span>
                                 </label>
                                 <select id="select-state" placeholder="Select..." name="analyst_sign_date_gi" {{ $data->stage == 0 || $data->stage == 10 ? "disabled" : "" }}>
-                                    {{-- <option value="">Select a value</option> --}}
+                                    <option value="">Select a value</option>
                                     @foreach ($users as $key=> $value)
-                                        <option  @if ($data->analyst_sign_date_gi == $value->id) selected @endif  value="{{ $value->name }}">{{ $value->name }}</option>
+                                        <option  @if ($data->analyst_sign_date_gi == $value->name) selected @endif  value="{{ $value->name }}">{{ $value->name }}</option>
                                     @endforeach
                                 </select>
                                 <input type="hidden" id="analyst_sign_date_gi_changed" name="analyst_sign_date_gi_changed" value="0">
@@ -749,9 +749,9 @@
                                     Section Head Name <span class="text-danger"></span>
                                 </label>
                                 <select id="select-state" placeholder="Select..." name="section_sign_date_gi" {{ $data->stage == 0 || $data->stage == 10 ? "disabled" : "" }} onchange="markFieldAsChanged('section_sign_date_gi_changed')">
-                                    {{-- <option value="">Select a value</option> --}}
+                                    <option value="">Select a value</option>
                                     @foreach ($users as $key => $value)
-                                        <option @if ($data->section_sign_date_gi == $value->id) selected @endif value="{{ $value->name }}">{{ $value->name }}</option>
+                                        <option @if ($data->section_sign_date_gi == $value->name) selected @endif value="{{ $value->name }}">{{ $value->name }}</option>
                                     @endforeach
                                 </select>
                                 <input type="hidden" id="section_sign_date_gi_changed" name="section_sign_date_gi_changed" value="0">
