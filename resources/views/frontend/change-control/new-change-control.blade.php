@@ -626,7 +626,7 @@
 
                                         </div>
                                     </div>
-                            </div>
+                            <!-- </div> -->
                             <div class="button-block">
                                 <button type="submit" class="saveButton">Save</button>
                                 <button type="button" class="backButton" onclick="previousStep()">Back</button>
@@ -841,9 +841,9 @@
                         <div class="inner-block-content">
                             <div class="row">
 
-                                <div class="sub-head">
+                                <!-- <div class="sub-head">
                                     RA Review
-                                </div>
+                                </div> -->
                                 <script>
                                     $(document).ready(function() {
                                         $('.ra_review').hide();
@@ -861,7 +861,7 @@
                                     });
                                 </script>
 
-                                <div class="col-lg-6">
+                                <!-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="RA Review"> RA Review</label>
                                         <select name="RA_Review" id="RA_Review" disabled>
@@ -871,7 +871,7 @@
                                             <option value='na'>NA</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 @php
                                     $division = DB::table('q_m_s_divisions')
                                         ->where('name', Helpers::getDivisionName(session()->get('division')))
@@ -3139,7 +3139,7 @@
                                                 <div class="group-input">
                                                     <label for="RA notification">QA/CQA Head Approval Person
                                                     <select name="QA_CQA_person" class="RA_person"
-                                                        id="RA_person">
+                                                        id="RA_person" disabled>
                                                         <option value="">-- Select --</option>
                                                         @foreach ($users as $user)
                                                             <option value="{{ $user->name }}" @if ($user->name) selected @endif>
@@ -3151,25 +3151,26 @@
 
                                         <div class="group-input">
                                             <label for="qa-eval-comments">QA Final Review Comments</label>
-                                            <textarea name="qa_final_comments" ></textarea>
+                                            <textarea name="qa_final_comments" readonly></textarea>
                                         </div>
 
                                         <div class="col-lg-12">
-                                <div class="group-input">
-                                    <label for="qa-eval-attach">QA Final Review Attachments</label>
-                                    <div><small class="text-primary">Please Attach all relevant or supporting
-                                            documents</small>
-                                    </div>
-                                    <div class="file-attachment-field">
-                                        <div class="file-attachment-list" id="qa_final_attach"></div>
-                                        <div class="add-btn">
-                                            <div>Add</div>
-                                            <input type="file" id="myfile" name="qa_final_attach[]" disabled
-                                                oninput="addMultipleFiles(this, 'qa_final_attach')" multiple>
+                                            <div class="group-input">
+                                                <label for="qa-eval-attach">QA Final Review Attachments</label>
+                                                <div><small class="text-primary">Please Attach all relevant or supporting
+                                                        documents</small>
+                                                </div>
+                                                <div class="file-attachment-field">
+                                                    <div class="file-attachment-list" id="qa_final_attach"></div>
+                                                    <div class="add-btn">
+                                                        <div>Add</div>
+                                                        <input type="file" id="myfile" name="qa_final_attach[]" disabled
+                                                            oninput="addMultipleFiles(this, 'qa_final_attach')" multiple>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                                         <div class="button-block">
                                             <button type="submit" class="saveButton">Save</button>
                                             <button type="button" class="backButton" onclick="previousStep()">Back</button>
@@ -3180,7 +3181,7 @@
                                         </div>
                                     </div>
                                 </div> 
-                                </div> 
+                                <!-- </div>  -->
 
                                 <div id="CCForm15" class="inner-block cctabcontent">
                                     <div class="inner-block-content">
@@ -3192,12 +3193,12 @@
                                                         <label for="RA feedback">RA Comment</label>
                                                         <div><small class="text-primary">Please insert "NA" in the data field if it
                                                                 does not require completion</small></div>
-                                                        <textarea class="tiny" name="RA_feedback" id="summernote-18"></textarea>
+                                                        <textarea class="tiny" name="RA_feedback" id="summernote-18" readonly></textarea>
                                                     </div>
                                                 </div>
 
                                       
-                                            <div class="col-lg-12">
+                                        <div class="col-lg-12">
                                             <div class="group-input">
                                                 <label for="qa-eval-attach">RA Attachments</label>
                                                 <div><small class="text-primary">Please Attach all relevant or supporting
@@ -3212,9 +3213,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                            </div>
-
                                         </div>
+
+                                        <!-- </div> -->
                                         <div class="button-block">
                                             <button type="submit" class="saveButton">Save</button>
                                             <button type="button" class="backButton" onclick="previousStep()">Back</button>
@@ -3251,7 +3252,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                         <!-- <div class="sub-head">
                             Training Information
                         </div>
@@ -3275,6 +3276,7 @@
                                     Exit </a> </button>
 
                         </div>
+                    </div>
                     </div>
 
                     <div id="CCForm9" class="inner-block cctabcontent">
@@ -3386,7 +3388,7 @@
                                     <textarea name="due_date_extension"></textarea>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                         <div class="button-block">
                             <button type="submit" class="saveButton">Save</button>
                             <button type="button" class="backButton" onclick="previousStep()">Back</button>
@@ -3396,7 +3398,8 @@
 
                         </div>
                     </div>
-
+                </div>
+</div>
 
                     <div id="CCForm3" class="inner-block cctabcontent">
                         <div class="inner-block-content">
@@ -3423,7 +3426,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                         <!-- <div class="sub-head">
                             Training Information
                         </div>
@@ -3479,7 +3482,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                         <!-- <div class="sub-head">
                             Training Information
                         </div>
@@ -3504,7 +3507,7 @@
 
                         </div>
                     </div>
-
+                </div>
 
                 <div id="CCForm6" class="inner-block cctabcontent">
                         <div class="inner-block-content">
@@ -3531,7 +3534,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                         <!-- <div class="sub-head">
                             Training Information
                         </div>
@@ -3555,6 +3558,7 @@
                                     Exit </a> </button>
 
                         </div>
+                    </div>
                     </div>
 
                     <!-- <div id="CCForm6" class="inner-block cctabcontent">
@@ -3694,7 +3698,7 @@
                         </div>
                     </div> -->
 
-                <div id="" class="inner-block cctabcontent">
+                <!-- <div id="" class="inner-block cctabcontent">
                     <div class="inner-block-content">
                         <div class="sub-head">
                             Feedback
@@ -3803,7 +3807,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div id="CCForm7" class="inner-block cctabcontent">
                         <div class="inner-block-content">
@@ -3830,7 +3834,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
 
                         <div class="button-block">
                             <button type="submit" class="saveButton">Save</button>
@@ -3872,7 +3876,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
 
                         <div class="button-block">
                             <button type="submit" class="saveButton">Save</button>
