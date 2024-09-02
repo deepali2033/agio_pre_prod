@@ -2368,12 +2368,16 @@ class CCController extends Controller
     public function show($id)
     {
         $data = CC::find($id);
-        $cftReviewerIds = explode(',', $data->reviewer_person_value);
+        // $cftReviewerIds = explode(',', $data->cft_reviewer);
         $cc_lid = $data->id;
         $data->originator = User::where('id', $data->initiator_id)->value('name');
         $division = CC::where('c_c_s.id', $id)->leftjoin('q_m_s_divisions', 'q_m_s_divisions.id', 'c_c_s.division_id')->first(['name']);
         // $documentDetail = Docdetail::where(['cc_id' => $id, 'identifier' => "DocumentDetail"])->first();
         // $productDetailGrid = json_decode($documentDetail->data, true);
+        $pre = CC::all();
+        $cft = User::all();
+        $previousRelated = []; 
+        $cftReviewerIds = [];
 
         $affetctedDocumnetDetail = Docdetail::where(['cc_id' => $id, 'identifier' => "AffectedDocDetail"])->first();
         $affetctedDocumnetGrid = json_decode($affetctedDocumnetDetail->data, true);
@@ -2392,8 +2396,8 @@ class CCController extends Controller
         $closure = ChangeClosure::where('cc_id', $id)->first();
         $hod = User::get();
         $cft = User::get();
-        $pre = CC::all();        
-        $previousRelated = explode(',', $data->related_records);
+        // $pre = CC::all();        
+        // $previousRelated = explode(',', $data->related_records);
 
         $preRiskAssessment = RiskManagement::all();
         $due_date_extension = $data->due_date_extension;
@@ -2425,17 +2429,33 @@ class CCController extends Controller
             "cc_lid",
             "pre",
             "previousRelated"
+        
         ));
     }
 
     public function update(Request $request, $id)
     {
+
         // dd($request->all());
         $lastDocument = CC::find($id);
         $openState = CC::find($id);
         $cc_cfts = CcCft::find($id);
         $lastCft = CcCft::where('cc_id', $openState->id)->first();
         $Cft = CcCft::where('cc_id', $id)->first();
+
+        // if ($request->has('cft_reviewer') && is_array($request->cft_reviewer)) {
+        //     $cftReviewerString = implode(',', $request->cft_reviewer);
+        // } else {
+        //     $cftReviewerString = null;
+        // }
+    
+        // $openState->cft_reviewer = $cftReviewerString;
+        // $openState->save();
+        $openState->cft_reviewer = implode(',', $request->input('cft_reviewer', []));
+        $openState->save();
+
+    // $cftReviewers = $request->input('cft_reviewer', []);
+
 
         $cc_cfts->hod_assessment_comments = $request->hod_assessment_comments;
         $cc_cfts->intial_update_comments = $request->intial_update_comments;
@@ -2494,7 +2514,7 @@ class CCController extends Controller
             }
             $Cft->qa_final_attach = json_encode($files);
         }
-$Cft->update();
+        $Cft->update();
         // $impactassement   =  table_cc_impactassement::where('cc_id', $id)->find($id);
 
         // $impactassement->cc_id = $openState->id;
@@ -2571,16 +2591,16 @@ $Cft->update();
         $openState->short_description = $request->short_description;
         $openState->assign_to = $request->assign_to;
         $openState->due_date = $request->due_date;
-        //dd($request->related_records)
+        // dd($request->related_records);
         if ($request->related_records) {
             $openState->related_records = implode(',', $request->related_records);
         }
         $openState->Microbiology = $request->Microbiology;
-        if (is_array($request->reviewer_person_value)) {
-            $openState->reviewer_person_value = implode(',', $request->reviewer_person_value);
-        } else {
-            $openState->reviewer_person_value = $request->reviewer_person_value; // or handle it as you need
-        }
+        // if (is_array($request->reviewer_person_value)) {
+        //     $openState->reviewer_person_value = implode(',', $request->reviewer_person_value);
+        // } else {
+        //     $openState->reviewer_person_value = $request->reviewer_person_value; // or handle it as you need
+        // }
 
         if($openState->stage == 3){
             $initiationDate = Carbon::createFromFormat('Y-m-d', $lastDocument->intiation_date);
@@ -2617,13 +2637,15 @@ $Cft->update();
         // $openState->train_comments = $request->train_comments;
 
         $openState->Microbiology = $request->Microbiology;
-        if (is_array($request->reviewer_person_value)) {
-            $openState->reviewer_person_value = implode(',', $request->reviewer_person_value);
-        } else {
-            $openState->reviewer_person_value = $request->reviewer_person_value; // or handle it as you need
-        }
+        // if (is_array($request->reviewer_person_value)) {
+        //     $openState->reviewer_person_value = implode(',', $request->reviewer_person_value);
+        // } else {
+        //     $openState->reviewer_person_value = $request->reviewer_person_value; // or handle it as you need
+        // }
        // $reviewers = is_array($request->reviewer_person_value) ? $request->reviewer_person_value : explode(',', $request->reviewer_person_value);
         //$openState->reviewer_person_value = implode(',', $reviewers);
+
+        // $openState->cft_reviewer = $cftReviewerString;
 
 
         $openState->goup_review = $request->goup_review;

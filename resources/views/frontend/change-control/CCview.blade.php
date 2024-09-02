@@ -1472,13 +1472,13 @@ Designee Approval</div>
                                             {{--  <input type="text" id="test1" name="test1" class="form-control" >  --}}
                                             {{--  <input type="text" id="test2" name="test2" class="form-control" >  --}}
 
-                                            <div class="col-lg-6">
+                                            <!-- <div class="col-lg-6">
                                                 <div class="group-input">
                                                     <label for="Microbiology-Person">CFT Reviewer Person</label>
-                                                    <select multiple name="reviewer_person_value[]"
+                                                    <select multiple name="cft_reviewer[]"
                                                         placeholder="Select CFT Reviewers" data-search="false"
-                                                        data-silent-initial-value-set="true" id="reviewer_person_value"  {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>
-                                                        <!-- <option value="">-- Select --</option> -->
+                                                        data-silent-initial-value-set="true" id="cft_reviewer">
+                                                        
                                                         @foreach ($cft as $data1)
                                                             @if (Helpers::checkUserRolesMicrobiology_Person($data1))
                                                                 @if (in_array($data1->id, $cftReviewerIds))
@@ -1492,9 +1492,69 @@ Designee Approval</div>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> -->
+                                            {{-- <div class="col-lg-6">
+                                                <div class="group-input">
+                                                    <label for="Microbiology-Person">CFT Reviewer Person</label>
+                                                    <select multiple name="cft_reviewer[]"
+                                                        placeholder="Select CFT Reviewers" data-search="false"
+                                                        data-silent-initial-value-set="true" id="test1"  {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>
+                                                        @foreach ($cft as $data1)
+                                                            @if (Helpers::checkUserRolesMicrobiology_Person($data1))
+                                                                @if (in_array($data1->id, $cftReviewerIds))
+                                                                    <option value="{{ $data1->id }}" {{ in_array($data1->id, $cftReviewerIds) ? 'selected' : '' }}>
+                                                                        {{ $data1->name }}</option>
+                                                                @else
+                                                                    <option value="{{ $data1->id }}">
+                                                                        {{ $data1->name }}</option>
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div> --}}
 
-                                            {{--  <div class="col-12">
+
+<!-- Include VirtualSelect CSS -->
+<link rel="stylesheet" href="https://unpkg.com/virtual-select/dist/virtual-select.min.css">
+
+<div class="col-12">
+    <div class="group-input">
+        <label for="cft_reviewer">CFT Reviewer Person</label>
+        <select multiple id="" name="cft_reviewer[]">
+            @foreach ($users as $value)
+                <option value="{{ $value->id }}" {{ in_array($value->id, explode(',', $data->cft_reviewer)) ? 'selected' : '' }}>
+                    {{ $value->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+<!-- Include VirtualSelect JS -->
+<script src="https://unpkg.com/virtual-select/dist/virtual-select.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    VirtualSelect.init({
+        ele: '#cft_reviewer',
+        multiple: true, // Enable multiple selection
+        search: true, // Enable search functionality
+        placeholder: 'Select...', // Placeholder text
+        silentInitialValueSet: true // To prevent console warnings for initial value set
+    });
+
+    VirtualSelect.init({
+        ele: '#related_records',
+        multiple: true, // Enable multiple selection
+        search: true, // Enable search functionality
+        placeholder: 'Select Reference Records', // Placeholder text
+        silentInitialValueSet: true // To prevent console warnings for initial value set
+    });
+});
+</script>
+
+                                          {{--  <div class="col-12">
                                                 <div class="group-input">
                                                     <label for="cft_reviewer">Related Records</label>
                                                     <select{{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}
@@ -1543,11 +1603,11 @@ Designee Approval</div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-12">
+                                            <!-- <div class="col-12">
                                                 <div class="group-input">
                                                     <label for="related_records">Related Records</label>
                                                     <select{{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}
-                                                        multiple id="related_records" name="related_records[]"
+                                                        multiple id="" name="related_records[]"
                                                         placeholder="Select Reference Records" data-search="false"
                                                         data-silent-initial-value-set="true">
                                                         @foreach ($pre as $prix)
@@ -1557,7 +1617,21 @@ Designee Approval</div>
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> -->
+
+                                            <div class="col-12">
+    <div class="group-input">
+        <label for="related_records">Related Records</label>
+        <select{{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? ' disabled' : '' }}
+                multiple id="" name="related_records[]">
+            @foreach ($pre as $prix)
+                <option value="{{ $prix->id }}" {{ in_array($prix->id, $previousRelated) ? 'selected' : '' }}>
+                    {{ Helpers::getDivisionName($prix->division_id) }}/Change-Control/{{ Helpers::year($prix->created_at) }}/{{ Helpers::record($prix->record) }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</div>
 
                                          @if ($data->qa_head)
                                                 @foreach (json_decode($data->qa_head) as $file)
@@ -9754,7 +9828,7 @@ Designee Approval</div>
 
     <script>
         VirtualSelect.init({
-            ele: '#related_records, #reviewer_person_value, #risk_assessment_related_record, #concerned_department_review'
+            ele: '#related_recordsn,  #risk_assessment_related_record, #concerned_department_review'
         });
 
         function openCity(evt, cityName) {
@@ -9823,6 +9897,9 @@ Designee Approval</div>
                 currentStep--;
             }
         }
+        VirtualSelect.init({
+            ele: '#related_recordsn, #cft_reviewer, #risk_assessment_related_record, #concerned_department_review'
+        });
     </script>
 
     <script>
